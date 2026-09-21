@@ -92,7 +92,10 @@
         }
       </div>
       @if (game.status !== 'finished' && game.round.activePlayerId !== facade.playerId()) {
-        <button class="primary" [disabled]="busy()" (click)="advance()">{{ i18n.text('game.next') }}</button>
+        <div class="next-round-action">
+          <button class="primary" [disabled]="busy()" (click)="advance()">{{ i18n.text('game.next') }}</button>
+          <small>{{ i18n.text('game.nextAutomatically') }} {{ nextRoundSeconds() }}s</small>
+        </div>
       } @else if (game.status !== 'finished') {
         <div class="waiting-status waiting-status--spaced" role="status">
           <span class="waiting-status__pulse" aria-hidden="true"></span>
