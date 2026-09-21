@@ -1,0 +1,28 @@
+<article class="cosmic-card" [class.cosmic-card--selected]="selected()" [class.cosmic-card--winner]="winner()">
+  @if (winner()) {
+    <span class="winner-badge" [attr.aria-label]="i18n.text('game.winningCard')"
+      >✦ {{ i18n.text('game.winningCard') }}</span
+    >
+  }
+  <div class="image">
+    <img [src]="imageSource()" [alt]="card().commonName" loading="lazy" /><span>{{ card().catalogName }}</span>
+  </div>
+  <div class="content">
+    @if (ownerLabel()) {
+      <small class="owner">{{ ownerLabel() }}</small>
+    }
+    <h3>{{ card().commonName }}</h3>
+    <p>{{ objectTypeLabel() }} · {{ card().constellation }}</p>
+    <dl>
+      @for (item of card().attributes; track item.id) {
+        <div>
+          <dt>{{ i18n.text(item.labelKey) }}</dt>
+          <dd>{{ item.isApproximate && item.value !== null ? '≈ ' : '' }}{{ format(item) }}</dd>
+        </div>
+      }
+    </dl>
+    @if (attribute()) {
+      <strong class="highlight">{{ highlightedValue() }}</strong>
+    }
+  </div>
+</article>

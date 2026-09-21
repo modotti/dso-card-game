@@ -1,0 +1,55 @@
+<section class="hero">
+  <div class="nebula" aria-hidden="true">
+    <span class="card card--one"></span><span class="card card--two"></span><span class="card card--three"></span>
+  </div>
+  <div class="content">
+    <p class="eyebrow">{{ i18n.text('home.eyebrow') }}</p>
+    <h1>
+      {{ i18n.text('home.title.before') }}<br /><em>{{ i18n.text('home.title.accent') }}</em>
+    </h1>
+    <p class="description">{{ i18n.text('home.description') }}</p>
+
+    @if (!intent()) {
+      <div class="actions">
+        <button class="button button--primary" type="button" (click)="choose('create')">
+          {{ i18n.text('home.create') }} <span>↗</span>
+        </button>
+        <button class="button button--ghost" type="button" (click)="choose('join')">
+          {{ i18n.text('home.join') }}
+        </button>
+      </div>
+    } @else {
+      <form [formGroup]="form" (ngSubmit)="submit()" class="entry-form">
+        <label
+          >{{ i18n.text('home.name')
+          }}<input
+            formControlName="displayName"
+            autocomplete="nickname"
+            [placeholder]="i18n.text('home.namePlaceholder')"
+        /></label>
+        @if (intent() === 'join') {
+          <label
+            >{{ i18n.text('home.code')
+            }}<input
+              formControlName="roomCode"
+              autocomplete="off"
+              inputmode="text"
+              maxlength="6"
+              (input)="normalizeCode()"
+              [placeholder]="i18n.text('home.codePlaceholder')"
+          /></label>
+        }
+        @if (errorKey(); as key) {
+          <p class="error" role="alert">{{ i18n.text(key) }}</p>
+        }
+        <div class="form-actions">
+          <button class="back" type="button" (click)="back()">← {{ i18n.text('home.back') }}</button>
+          <button class="button button--primary" type="submit" [disabled]="submitting()">
+            {{ i18n.text(intent() === 'create' ? 'home.submitCreate' : 'home.submitJoin') }} <span>↗</span>
+          </button>
+        </div>
+      </form>
+    }
+    <p class="promise"><span></span>{{ i18n.text('home.fast') }}</p>
+  </div>
+</section>

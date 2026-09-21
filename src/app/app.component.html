@@ -1,0 +1,14 @@
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Deep Space Duel home">
+      <span class="brand__orbit" aria-hidden="true"></span>
+      <span>DEEP SPACE <strong>DUEL</strong></span>
+    </a>
+    <div class="language" role="group" [attr.aria-label]="i18n.text('language.label')">
+      <button type="button" [class.active]="i18n.language() === 'en'" (click)="i18n.setLanguage('en')">EN</button>
+      <span aria-hidden="true">/</span>
+      <button type="button" [class.active]="i18n.language() === 'pt-BR'" (click)="i18n.setLanguage('pt-BR')">PT</button>
+    </div>
+  </header>
+  <main><router-outlet /></main>
+</div>

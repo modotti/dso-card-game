@@ -1,0 +1,156 @@
+<section class="game">
+  @if (facade.loading()) {
+    <p class="center">Loading deep space…</p>
+  } @else if (facade.error()) {
+    <div class="center">
+      <p>{{ facade.error() }}</p>
+      <button (click)="leave()">{{ i18n.text('game.exit') }}</button>
+    </div>
+  } @else if (facade.game(); as game) {
+    <header class="game__header">
+      <div>
+        <span>{{ i18n.text('game.round') }}</span
+        ><strong>{{ game.round.number }} / {{ game.rules.roundsToPlay }}</strong>
+      </div>
+      <div class="score">
+        <small>{{ i18n.text('game.score') }}</small>
+        @for (player of game.players; track player.id) {
+          <span [class.me]="player.id === facade.playerId()"
+            >{{ player.displayName }} <b>{{ player.score }}</b></span
+          >
+        }
+      </div>
+      <button class="exit" (click)="leave()">{{ i18n.text('game.exit') }}</button>
+    </header>
+
+    @if (game.round.status !== 'resolved') {
+      <div class="action-timer" [class.action-timer--urgent]="secondsRemaining() <= 10" role="timer">
+        <span>{{ i18n.text(isMyAction() ? 'game.yourTimeRemaining' : 'game.opponentTimeRemaining') }}</span>
+        <strong>{{ secondsRemaining() }}s</strong>
+        <small>{{ i18n.text(isMyAction() ? 'game.autoChoiceYours' : 'game.autoChoiceOpponent') }}</small>
+      </div>
+    }
+
+    @if (game.round.status === 'choosing_attribute') {
+      @if (facade.isActivePlayer()) {
+        <div class="action-required" role="status">
+          <i aria-hidden="true">!</i>{{ i18n.text('game.actionRequired') }}
+        </div>
+      }
+      <div class="stage">
+        <p class="turn">{{ i18n.text(facade.isActivePlayer() ? 'game.yourTurn' : 'game.opponentTurn') }}</p>
+        @if (facade.isActivePlayer()) {
+          <h1>{{ i18n.text('game.chooseAttribute') }}</h1>
+          <div class="attributes">
+            @for (attribute of game.availableAttributes; track attribute.id) {
+              <button [disabled]="busy()" (click)="chooseAttribute(attribute.id)">
+                {{ i18n.text(attribute.labelKey) }}
+              </button>
+            }
+          </div>
+        } @else {
+          <h1>{{ i18n.text('game.waitAttribute') }}</h1>
+          <div class="waiting-status" role="status">
+            <span class="waiting-status__pulse" aria-hidden="true"></span>
+            {{ i18n.text('game.waitingOpponent') }}
+          </div>
+        }
+      </div>
+    } @else if (game.round.status === 'choosing_cards') {
+      @if (!facade.hasSelected()) {
+        <div class="action-required" role="status">
+          <i aria-hidden="true">!</i>{{ i18n.text('game.actionRequired') }}
+        </div>
+      }
+      <div class="stage">
+        <p class="announced">{{ attributeLabel(game.round.attribute) }}</p>
+        <h1>{{ i18n.text(facade.hasSelected() ? 'game.waitCard' : 'game.chooseCard') }}</h1>
+        @if (facade.hasSelected()) {
+          <div class="waiting-status" role="status">
+            <span class="waiting-status__pulse" aria-hidden="true"></span>
+            {{ i18n.text('game.waitingOpponent') }}
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="stage">
+        <p class="announced">{{ attributeLabel(game.round.attribute) }}</p>
+        <h1>
+          {{
+            game.round.isTie ? i18n.text('game.tie') : i18n.text('game.winner') + ': ' + playerName(game.round.winnerId)
+          }}
+        </h1>
+      </div>
+      <div class="reveal">
+        @for (selection of game.round.revealedCards; track selection.playerId) {
+          <app-game-card
+            [card]="selection.card"
+            [attribute]="game.round.attribute"
+            [ownerLabel]="playerName(selection.playerId)"
+            [winner]="selection.playerId === game.round.winnerId"
+          />
+        }
+      </div>
+      @if (game.status !== 'finished' && game.round.activePlayerId !== facade.playerId()) {
+        <button class="primary" [disabled]="busy()" (click)="advance()">{{ i18n.text('game.next') }}</button>
+      } @else if (game.status !== 'finished') {
+        <div class="waiting-status waiting-status--spaced" role="status">
+          <span class="waiting-status__pulse" aria-hidden="true"></span>
+          {{ i18n.text('game.waitNext') }}
+        </div>
+      }
+    }
+
+    @if (game.round.status !== 'resolved') {
+      <section class="hand-area">
+        <div class="hand-area__header">
+          <h2>{{ i18n.text('game.yourHand') }}</h2>
+          <span class="hand-counter" aria-live="polite" [attr.aria-label]="i18n.text('game.handPosition')">
+            {{ currentCardIndex() }} / {{ game.hand.length }}
+          </span>
+        </div>
+        <div class="hand" (scroll)="updateCarouselIndex($event)">
+          @for (card of game.hand; track card.id) {
+            <button
+              class="card"
+              [class.card--preview]="game.round.status === 'choosing_attribute'"
+              [class.selected]="selectedCard() === card.id"
+              [class.card--unavailable]="!isCompatible(card)"
+              [disabled]="
+                game.round.status !== 'choosing_cards' || facade.hasSelected() || !isCompatible(card) || busy()
+              "
+              (click)="selectCard(card)"
+            >
+              <app-game-card [card]="card" [attribute]="game.round.attribute" [selected]="selectedCard() === card.id" />
+              @if (selectedCard() === card.id && !facade.hasSelected()) {
+                <span class="card-confirm">
+                  {{ busy() ? '…' : i18n.text('game.confirm') }}
+                </span>
+              }
+            </button>
+          }
+        </div>
+      </section>
+    }
+
+    @if (showFinalModal()) {
+      <div class="modal-backdrop">
+        <section class="final-modal" role="dialog" aria-modal="true" [attr.aria-label]="i18n.text('game.finished')">
+          <p>{{ i18n.text('game.finished') }}</p>
+          <h2>
+            @if (game.players[0].score === game.players[1].score) {
+              {{ i18n.text('game.tie') }}
+            } @else {
+              {{ i18n.text('game.finalWinner') }}:
+              {{ playerName(game.players[0].score > game.players[1].score ? game.players[0].id : game.players[1].id) }}
+            }
+          </h2>
+          <div class="final-actions">
+            <button class="secondary" (click)="leave()">{{ i18n.text('game.home') }}</button>
+            <button class="primary" (click)="createGame()">{{ i18n.text('game.newGame') }}</button>
+          </div>
+        </section>
+      </div>
+    }
+  }
+</section>

@@ -1,0 +1,61 @@
+<section class="lobby-page">
+  <div class="radar" aria-hidden="true"></div>
+  @if (facade.error()) {
+    <div class="panel error-panel">
+      <p>{{ i18n.text('lobby.error.generic') }}</p>
+      <button class="link" type="button" (click)="leave()">← {{ i18n.text('home.back') }}</button>
+    </div>
+  } @else {
+    <div class="lobby-head">
+      <div>
+        <p class="eyebrow">{{ i18n.text('lobby.eyebrow') }}</p>
+        <h1>{{ i18n.text(facade.isReady() ? 'lobby.readyTitle' : 'lobby.title') }}</h1>
+        <p>{{ i18n.text(facade.isReady() ? 'lobby.readyDescription' : 'lobby.description') }}</p>
+      </div>
+      <span class="status" [class.status--error]="facade.connection() === 'error'"
+        ><i></i>{{ i18n.text('lobby.connection.' + facade.connection()) }}</span
+      >
+    </div>
+
+    <div class="room-code">
+      <span>{{ code }}</span>
+      <button type="button" (click)="copyInvite()">{{ i18n.text(copied() ? 'lobby.copied' : 'lobby.copy') }}</button>
+    </div>
+
+    <div class="panel">
+      <h2>{{ i18n.text('lobby.players') }}</h2>
+      <div class="seats">
+        @for (player of facade.lobby()?.players ?? []; track player.id) {
+          <article class="seat seat--filled">
+            <span class="avatar">{{ player.displayName.charAt(0).toUpperCase() }}</span>
+            <div>
+              <strong>{{ player.displayName }}</strong>
+              @if (player.id === facade.currentPlayerId()) {
+                <small>{{ i18n.text('lobby.you') }}</small>
+              }
+            </div>
+            <b>0{{ player.seat }}</b>
+          </article>
+        }
+        @if ((facade.lobby()?.players?.length ?? 0) < 2) {
+          <article class="seat seat--empty">
+            <span class="pulse"></span>
+            <div>
+              <strong>{{ i18n.text('lobby.waiting') }}</strong>
+            </div>
+            <b>02</b>
+          </article>
+        }
+      </div>
+    </div>
+
+    <div class="footer-actions">
+      <button class="link" type="button" (click)="leave()">← {{ i18n.text('lobby.leave') }}</button>
+      @if (facade.isReady()) {
+        <button class="start" type="button" (click)="startPlaceholder()" disabled>
+          {{ i18n.text('lobby.readyTitle') }}
+        </button>
+      }
+    </div>
+  }
+</section>
