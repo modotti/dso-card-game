@@ -16,14 +16,36 @@ export type AnalyticsProperties = Readonly<Record<string, string | number | bool
 
 export interface AnalyticsConfig {
   readonly enabled: boolean;
-  readonly posthogKey: string;
-  readonly posthogHost: string;
+  readonly umamiWebsiteId: string;
+  readonly umamiHostUrl: string;
 }
 
 interface AnalyticsClient {
-  init(key: string, config: Record<string, unknown>): unknown;
-  capture(eventName: string, properties?: Record<string, string | number | boolean>): unknown;
+  track(payload: (properties: Record<string, unknown>) => Record<string, unknown>): unknown;
   identify(distinctId: string): unknown;
+}
+
+type AnalyticsClientLoader = (config: AnalyticsConfig) => Promise<AnalyticsClient>;
+
+function loadUmami(config: AnalyticsConfig): Promise<AnalyticsClient> {
+  const analyticsWindow = window as Window & { umami?: AnalyticsClient };
+  if (analyticsWindow.umami) return Promise.resolve(analyticsWindow.umami);
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `${config.umamiHostUrl.replace(/\/$/, '')}/script.js`;
+    script.dataset['websiteId'] = config.umamiWebsiteId;
+    script.dataset['autoTrack'] = 'false';
+    script.dataset['doNotTrack'] = 'true';
+    script.dataset['excludeSearch'] = 'true';
+    script.dataset['excludeHash'] = 'true';
+    script.addEventListener('load', () =>
+      analyticsWindow.umami ? resolve(analyticsWindow.umami) : reject(new Error('UMAMI_NOT_AVAILABLE')),
+    );
+    script.addEventListener('error', () => reject(new Error('UMAMI_LOAD_FAILED')));
+    document.head.appendChild(script);
+  });
 }
 
 export const ANALYTICS_CONFIG = new InjectionToken<AnalyticsConfig>('ANALYTICS_CONFIG', {
@@ -31,9 +53,9 @@ export const ANALYTICS_CONFIG = new InjectionToken<AnalyticsConfig>('ANALYTICS_C
   factory: () => environment.analytics,
 });
 
-export const ANALYTICS_CLIENT_LOADER = new InjectionToken<() => Promise<AnalyticsClient>>('ANALYTICS_CLIENT_LOADER', {
+export const ANALYTICS_CLIENT_LOADER = new InjectionToken<AnalyticsClientLoader>('ANALYTICS_CLIENT_LOADER', {
   providedIn: 'root',
-  factory: () => () => import('posthog-js/dist/module.slim').then((module) => module.default),
+  factory: () => loadUmami,
 });
 
 const allowedProperties: Readonly<Record<AnalyticsEvent, readonly string[]>> = {
@@ -52,31 +74,11 @@ const allowedProperties: Readonly<Record<AnalyticsEvent, readonly string[]>> = {
 export class AnalyticsService {
   private readonly config = inject(ANALYTICS_CONFIG);
   private readonly loadClient = inject(ANALYTICS_CLIENT_LOADER);
-  private readonly active = this.config.enabled && this.config.posthogKey.trim().length > 0;
+  private readonly active = this.config.enabled && this.config.umamiWebsiteId.trim().length > 0;
   private readonly client: Promise<AnalyticsClient | null> | null;
 
   constructor() {
-    this.client = this.active
-      ? this.loadClient()
-          .then((client) => {
-            client.init(this.config.posthogKey, {
-              api_host: this.config.posthogHost,
-              autocapture: false,
-              capture_pageview: false,
-              capture_pageleave: false,
-              capture_dead_clicks: false,
-              capture_exceptions: false,
-              capture_performance: false,
-              disable_surveys: true,
-              disable_session_recording: true,
-              person_profiles: 'identified_only',
-              persistence: 'localStorage',
-              property_denylist: ['$current_url', '$pathname', '$referrer', '$referring_domain'],
-            });
-            return client;
-          })
-          .catch(() => null)
-      : null;
+    this.client = this.active ? this.loadClient(this.config).catch(() => null) : null;
   }
 
   identify(playerId: string): void {
@@ -87,12 +89,23 @@ export class AnalyticsService {
   track(eventName: AnalyticsEvent, properties: AnalyticsProperties = {}): void {
     if (!this.active) return;
     const sanitized = this.sanitize(eventName, properties);
-    void this.client?.then((client) => client?.capture(eventName, sanitized)).catch(() => undefined);
+    void this.client
+      ?.then((client) =>
+        client?.track((defaults) => ({
+          ...defaults,
+          url: '/',
+          referrer: '',
+          title: 'Deep Space Duel',
+          name: eventName,
+          data: sanitized,
+        })),
+      )
+      .catch(() => undefined);
   }
 
   trackOnce(eventName: AnalyticsEvent, uniqueKey: string, properties: AnalyticsProperties = {}): void {
     if (!this.active) return;
-    const storageKey = `dsd-analytics:${eventName}:${uniqueKey}`;
+    const storageKey = `dsd-umami-analytics:${eventName}:${uniqueKey}`;
     try {
       if (localStorage.getItem(storageKey)) return;
       this.track(eventName, properties);

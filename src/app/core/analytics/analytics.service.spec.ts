@@ -4,19 +4,17 @@ import { ANALYTICS_CLIENT_LOADER, ANALYTICS_CONFIG, AnalyticsService, type Analy
 describe('AnalyticsService', () => {
   const enabledConfig: AnalyticsConfig = {
     enabled: true,
-    posthogKey: 'phc_test',
-    posthogHost: 'https://us.i.posthog.com',
+    umamiWebsiteId: 'website-test',
+    umamiHostUrl: 'https://cloud.umami.is',
   };
   let client: {
-    init: jasmine.Spy;
-    capture: jasmine.Spy;
+    track: jasmine.Spy;
     identify: jasmine.Spy;
   };
 
   function configure(config: AnalyticsConfig): AnalyticsService {
     client = {
-      init: jasmine.createSpy('init'),
-      capture: jasmine.createSpy('capture'),
+      track: jasmine.createSpy('track'),
       identify: jasmine.createSpy('identify'),
     };
     TestBed.configureTestingModule({
@@ -30,7 +28,7 @@ describe('AnalyticsService', () => {
 
   afterEach(() => TestBed.resetTestingModule());
 
-  it('forwards allowed events and properties to PostHog', fakeAsync(() => {
+  it('forwards allowed events and properties to Umami without exposing the route', fakeAsync(() => {
     const service = configure(enabledConfig);
 
     service.track('game_completed', {
@@ -41,11 +39,22 @@ describe('AnalyticsService', () => {
     });
     flushMicrotasks();
 
-    expect(client.capture).toHaveBeenCalledOnceWith('game_completed', {
-      game_id: 'game-1',
-      game_mode: 'multiplayer',
-      rounds_played: 4,
-      result: 'win',
+    expect(client.track).toHaveBeenCalledTimes(1);
+    const transform = client.track.calls.mostRecent().args[0] as (
+      defaults: Record<string, unknown>,
+    ) => Record<string, unknown>;
+    expect(transform({ hostname: 'game.example', url: '/game/SECRET' })).toEqual({
+      hostname: 'game.example',
+      url: '/',
+      referrer: '',
+      title: 'Deep Space Duel',
+      name: 'game_completed',
+      data: {
+        game_id: 'game-1',
+        game_mode: 'multiplayer',
+        rounds_played: 4,
+        result: 'win',
+      },
     });
   }));
 
@@ -55,9 +64,8 @@ describe('AnalyticsService', () => {
     service.identify('player-1');
     service.track('app_opened');
 
-    expect(client.init).not.toHaveBeenCalled();
     expect(client.identify).not.toHaveBeenCalled();
-    expect(client.capture).not.toHaveBeenCalled();
+    expect(client.track).not.toHaveBeenCalled();
   });
 
   it('drops private and unknown properties before capture', fakeAsync(() => {
@@ -72,7 +80,10 @@ describe('AnalyticsService', () => {
     });
     flushMicrotasks();
 
-    expect(client.capture).toHaveBeenCalledOnceWith('game_started', {
+    const transform = client.track.calls.mostRecent().args[0] as (
+      defaults: Record<string, unknown>,
+    ) => Record<string, unknown>;
+    expect(transform({})['data']).toEqual({
       game_id: 'game-1',
       game_mode: 'cpu',
     });

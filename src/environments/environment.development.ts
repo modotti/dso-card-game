@@ -4,7 +4,7 @@ export const environment = {
   supabasePublishableKey: 'sb_publishable_7vOyVELDyH7QEIBsqyfEwQ_Dj9sMZP8',
   analytics: {
     enabled: false,
-    posthogKey: '',
-    posthogHost: 'https://us.i.posthog.com',
+    umamiWebsiteId: '',
+    umamiHostUrl: 'https://cloud.umami.is',
   },
 } as const;

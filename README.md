@@ -29,9 +29,9 @@ The publishable key is expected to be present in the browser. Authorization is e
 
 ## Product analytics
 
-Production analytics uses the official `posthog-js` SDK through `AnalyticsService`. Development analytics is disabled in `environment.development.ts`, and Session Replay, autocapture, automatic pageviews, surveys, performance capture, and exception capture are disabled.
+Production analytics uses the official Umami tracker through `AnalyticsService`. Development analytics is disabled in `environment.development.ts`, and automatic pageviews, click tracking, path tracking, and performance tracking are disabled.
 
-To enable analytics in production, copy the PostHog **Project API key** into `environment.analytics.posthogKey` in `src/environments/environment.ts`. Keep `posthogHost` as `https://us.i.posthog.com` for a US Cloud project or change it to `https://eu.i.posthog.com` for an EU Cloud project. A PostHog Project API key is intended for browser-side ingestion; never place a PostHog personal API key in this repository.
+To enable analytics in production, create a Website in Umami and copy its **Website ID** into `environment.analytics.umamiWebsiteId` in `src/environments/environment.ts`. Keep `umamiHostUrl` as `https://cloud.umami.is` for Umami Cloud or replace it with the origin of a self-hosted instance. No Umami account token or API key belongs in the browser application.
 
 ## Current architecture
 
