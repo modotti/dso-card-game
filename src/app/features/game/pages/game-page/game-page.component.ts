@@ -31,6 +31,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   private resolvingTimeout = false;
   private lastResolutionAttempt = 0;
   private finalModalScheduled = false;
+  private previousRoundNumber: number | null = null;
 
   constructor() {
     effect(() => {
@@ -66,6 +67,16 @@ export class GamePageComponent implements OnInit, OnDestroy {
       const interval = setInterval(tick, 250);
       tick();
       onCleanup(() => clearInterval(interval));
+    });
+    effect(() => {
+      const roundNumber = this.facade.game()?.round.number;
+      if (roundNumber === undefined) return;
+      if (this.previousRoundNumber !== null && roundNumber !== this.previousRoundNumber) {
+        this.selectedCard.set(null);
+        this.currentCardIndex.set(1);
+        requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+      this.previousRoundNumber = roundNumber;
     });
   }
 
