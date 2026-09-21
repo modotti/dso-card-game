@@ -1,5 +1,5 @@
 import type { OnInit } from '@angular/core';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnalyticsService } from '../../../../core/analytics/analytics.service';
@@ -29,6 +29,7 @@ export class HomePageComponent implements OnInit {
   protected readonly intent = signal<Intent | null>(null);
   protected readonly submitting = signal(false);
   protected readonly errorKey = signal<TranslationKey | null>(null);
+  protected readonly showHowToPlay = signal(false);
   protected readonly form = new FormGroup({
     displayName: new FormControl(localStorage.getItem('dsd-display-name') ?? '', {
       nonNullable: true,
@@ -58,6 +59,10 @@ export class HomePageComponent implements OnInit {
   }
   normalizeCode(): void {
     this.form.controls.roomCode.setValue(normalizeRoomCode(this.form.controls.roomCode.value));
+  }
+  @HostListener('document:keydown.escape')
+  closeHowToPlay(): void {
+    this.showHowToPlay.set(false);
   }
 
   async submit(): Promise<void> {

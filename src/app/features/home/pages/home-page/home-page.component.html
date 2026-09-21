@@ -58,6 +58,69 @@
         </div>
       </form>
     }
-    <p class="promise"><span></span>{{ i18n.text('home.fast') }}</p>
+    <div class="home-footer">
+      <p class="promise"><span></span>{{ i18n.text('home.fast') }}</p>
+      <button class="how-to-play" type="button" (click)="showHowToPlay.set(true)">
+        {{ i18n.text('home.howToPlay') }}
+      </button>
+    </div>
   </div>
 </section>
+
+@if (showHowToPlay()) {
+  <div class="rules-backdrop" (click)="closeHowToPlay()">
+    <section
+      class="rules-modal"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="i18n.text('rules.title')"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        class="rules-modal__close"
+        type="button"
+        (click)="closeHowToPlay()"
+        [attr.aria-label]="i18n.text('rules.close')"
+      >
+        ×
+      </button>
+      <p class="eyebrow">{{ i18n.text('rules.eyebrow') }}</p>
+      <h2>{{ i18n.text('rules.title') }}</h2>
+      <p class="rules-intro">{{ i18n.text('rules.intro') }}</p>
+      <ol>
+        <li>
+          <span>01</span>
+          <div>
+            <strong>{{ i18n.text('rules.attribute.title') }}</strong>
+            <p>{{ i18n.text('rules.attribute.body') }}</p>
+          </div>
+        </li>
+        <li>
+          <span>02</span>
+          <div>
+            <strong>{{ i18n.text('rules.card.title') }}</strong>
+            <p>{{ i18n.text('rules.card.body') }}</p>
+          </div>
+        </li>
+        <li>
+          <span>03</span>
+          <div>
+            <strong>{{ i18n.text('rules.score.title') }}</strong>
+            <p>{{ i18n.text('rules.score.body') }}</p>
+          </div>
+        </li>
+        <li>
+          <span>04</span>
+          <div>
+            <strong>{{ i18n.text('rules.clouds.title') }}</strong>
+            <p>{{ i18n.text('rules.clouds.body') }}</p>
+          </div>
+        </li>
+      </ol>
+      <p class="rules-tip">{{ i18n.text('rules.tip') }}</p>
+      <button class="button button--primary rules-modal__action" type="button" (click)="closeHowToPlay()">
+        {{ i18n.text('rules.gotIt') }}
+      </button>
+    </section>
+  </div>
+}
