@@ -223,6 +223,15 @@
   font-weight: 600;
   cursor: pointer;
 }
+.next-round-action {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+.next-round-action small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
 .reveal {
   display: grid;
   grid-template-columns: 1fr 1fr;

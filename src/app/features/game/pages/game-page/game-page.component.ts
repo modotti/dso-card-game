@@ -23,6 +23,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   protected readonly currentCardIndex = signal(1);
   protected readonly busy = signal(false);
   protected readonly secondsRemaining = signal(0);
+  protected readonly nextRoundSeconds = signal(0);
   protected readonly showFinalModal = signal(false);
   private readonly code = this.route.snapshot.paramMap.get('code') ?? '';
   private timer?: ReturnType<typeof setInterval>;
@@ -41,6 +42,30 @@ export class GamePageComponent implements OnInit, OnDestroy {
         this.finalModalScheduled = false;
         this.showFinalModal.set(false);
       }
+    });
+    effect((onCleanup) => {
+      const game = this.facade.game();
+      const canAdvance =
+        game?.round.status === 'resolved' &&
+        game.status !== 'finished' &&
+        game.round.activePlayerId !== this.facade.playerId();
+      if (!canAdvance) {
+        this.nextRoundSeconds.set(0);
+        return;
+      }
+
+      const deadline = Date.now() + 5000;
+      const tick = (): void => {
+        const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+        this.nextRoundSeconds.set(remaining);
+        if (remaining === 0 && !this.busy()) {
+          clearInterval(interval);
+          void this.advance().catch(() => undefined);
+        }
+      };
+      const interval = setInterval(tick, 250);
+      tick();
+      onCleanup(() => clearInterval(interval));
     });
   }
 
