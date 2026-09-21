@@ -125,6 +125,12 @@ export class GamePageComponent implements OnInit, OnDestroy {
   createGame(): void {
     void this.router.navigate(['/'], { queryParams: { action: 'create' } });
   }
+  async playAgain(): Promise<void> {
+    await this.run(async () => {
+      const code = await this.facade.createCpuRematch();
+      window.location.assign(`/game/${code}`);
+    });
+  }
   attributeLabel(value: string | null): string {
     if (!value) return '';
     const definition = this.facade.game()?.availableAttributes.find((attribute) => attribute.id === value);

@@ -61,6 +61,11 @@ export class GameFacade {
     await this.repository.playCpuTurn(id);
     await this.refresh();
   }
+  async createCpuRematch(): Promise<string> {
+    const player = this.game()?.players.find((item) => item.id === this.playerId() && !item.isCpu);
+    if (!player) throw new Error('PLAYER_NOT_FOUND');
+    return this.repository.createCpuGame(player.displayName);
+  }
   async disconnect(): Promise<void> {
     if (this.channel) await this.repository.unsubscribe(this.channel);
   }

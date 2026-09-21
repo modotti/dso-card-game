@@ -150,7 +150,13 @@
           </h2>
           <div class="final-actions">
             <button class="secondary" (click)="leave()">{{ i18n.text('game.home') }}</button>
-            <button class="primary" (click)="createGame()">{{ i18n.text('game.newGame') }}</button>
+            @if (facade.cpuPlayer()) {
+              <button class="primary" [disabled]="busy()" (click)="playAgain()">
+                {{ i18n.text('game.playAgain') }}
+              </button>
+            } @else {
+              <button class="primary" (click)="createGame()">{{ i18n.text('game.newGame') }}</button>
+            }
           </div>
         </section>
       </div>
