@@ -5,24 +5,32 @@
     >
   }
   <div class="image">
-    <img [src]="imageSource()" [alt]="card().commonName" loading="lazy" /><span>{{ card().catalogName }}</span>
+    <img [src]="imageSource()" [alt]="cardName()" loading="lazy" /><span>{{ card().catalogName }}</span>
   </div>
   <div class="content">
     @if (ownerLabel()) {
       <small class="owner">{{ ownerLabel() }}</small>
     }
-    <h3>{{ card().commonName }}</h3>
-    <p>{{ objectTypeLabel() }} · {{ card().constellation }}</p>
+    <h3>{{ cardName() }}</h3>
+    @if (card().effectKey === 'cancel_round') {
+      <p>{{ i18n.text('objectType.special_effect') }}</p>
+      <div class="effect-description">
+        <strong>{{ i18n.text('card.clouds.effect') }}</strong>
+        <span>{{ i18n.text('card.clouds.description') }}</span>
+      </div>
+    } @else {
+      <p>{{ objectTypeLabel() }} · {{ card().constellation }}</p>
     <dl>
       @for (item of card().attributes; track item.id) {
         <div [class.attribute--highlighted]="item.id === attribute()">
           <dt>{{ i18n.text(item.labelKey) }}</dt>
           <dd>{{ item.isApproximate && item.value !== null ? '≈ ' : '' }}{{ format(item) }}</dd>
         </div>
+        }
+      </dl>
+      @if (attribute()) {
+        <strong class="highlight">{{ highlightedValue() }}</strong>
       }
-    </dl>
-    @if (attribute()) {
-      <strong class="highlight">{{ highlightedValue() }}</strong>
     }
   </div>
 </article>

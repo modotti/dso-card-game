@@ -16,7 +16,12 @@ export class GameCardComponent {
   readonly winner = input(false);
   protected readonly i18n = inject(TranslationService);
   protected imageSource(): string {
-    return `/assets/cards/${this.card().id}.jpg`;
+    return this.card().effectKey === 'cancel_round'
+      ? '/assets/cards/clouds.jpg'
+      : `/assets/cards/${this.card().id}.jpg`;
+  }
+  protected cardName(): string {
+    return this.card().effectKey === 'cancel_round' ? this.i18n.text('card.clouds.name') : this.card().commonName;
   }
   protected objectTypeLabel(): string {
     return this.i18n.text(`objectType.${this.card().objectType}`);

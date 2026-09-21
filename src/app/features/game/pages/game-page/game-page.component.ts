@@ -139,6 +139,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
   isCompatible(card: GameCard): boolean {
     return (
+      card.effectKey === 'cancel_round' ||
       !this.facade.game()?.round.attribute ||
       card.attributes.some(
         (attribute) => attribute.id === this.facade.game()?.round.attribute && attribute.value !== null,
