@@ -16,6 +16,7 @@ export class GameFacade {
   readonly error = signal<string | null>(null);
   readonly isActivePlayer = computed(() => this.game()?.round.activePlayerId === this.playerId());
   readonly hasSelected = computed(() => this.game()?.round.selectedPlayerIds.includes(this.playerId() ?? '') ?? false);
+  readonly cpuPlayer = computed(() => this.game()?.players.find((player) => player.isCpu) ?? null);
   async connect(code: string): Promise<void> {
     this.code = code;
     try {
@@ -53,6 +54,17 @@ export class GameFacade {
     if (!id) return;
     await this.repository.resolveExpired(id);
     await this.refresh();
+  }
+  async playCpuTurn(): Promise<void> {
+    const id = this.game()?.id;
+    if (!id) return;
+    await this.repository.playCpuTurn(id);
+    await this.refresh();
+  }
+  async createCpuRematch(): Promise<string> {
+    const player = this.game()?.players.find((item) => item.id === this.playerId() && !item.isCpu);
+    if (!player) throw new Error('PLAYER_NOT_FOUND');
+    return this.repository.createCpuGame(player.displayName);
   }
   async disconnect(): Promise<void> {
     if (this.channel) await this.repository.unsubscribe(this.channel);

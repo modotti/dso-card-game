@@ -24,6 +24,11 @@ export class LobbyFacade {
     return this.repository.create(displayName);
   }
 
+  async createCpu(displayName: string): Promise<RoomResult> {
+    this.currentPlayerId.set(await this.auth.ensurePlayerIdentity());
+    return this.repository.createCpu(displayName);
+  }
+
   async join(code: string, displayName: string): Promise<RoomResult> {
     this.currentPlayerId.set(await this.auth.ensurePlayerIdentity());
     return this.repository.join(code, displayName);

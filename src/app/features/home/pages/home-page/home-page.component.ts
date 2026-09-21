@@ -9,7 +9,7 @@ import { SupabaseService } from '../../../../core/supabase/supabase.service';
 import { normalizeRoomCode } from '../../../lobby/domain/lobby.models';
 import { LobbyFacade } from '../../../lobby/state/lobby.facade';
 
-type Intent = 'create' | 'join';
+type Intent = 'create' | 'join' | 'cpu';
 
 @Component({
   selector: 'app-home-page',
@@ -72,12 +72,15 @@ export class HomePageComponent implements OnInit {
     const displayName = this.form.controls.displayName.value.trim();
     localStorage.setItem('dsd-display-name', displayName);
     try {
+      const intent = this.intent();
       const result =
-        this.intent() === 'create'
+        intent === 'create'
           ? await this.facade.create(displayName)
-          : await this.facade.join(normalizeRoomCode(this.form.controls.roomCode.value), displayName);
-      this.analytics.track(this.intent() === 'create' ? 'game_created' : 'game_joined');
-      await this.router.navigate(['/lobby', result.code]);
+          : intent === 'cpu'
+            ? await this.facade.createCpu(displayName)
+            : await this.facade.join(normalizeRoomCode(this.form.controls.roomCode.value), displayName);
+      this.analytics.track(intent === 'join' ? 'game_joined' : intent === 'cpu' ? 'cpu_game_created' : 'game_created');
+      await this.router.navigate([intent === 'cpu' ? '/game' : '/lobby', result.code]);
     } catch {
       this.errorKey.set('home.error.generic');
       this.submitting.set(false);

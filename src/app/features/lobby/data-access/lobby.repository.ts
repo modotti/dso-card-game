@@ -21,6 +21,13 @@ export class LobbyRepository {
     return { gameId: row.game_id, code: row.room_code };
   }
 
+  async createCpu(displayName: string): Promise<RoomResult> {
+    const { data, error } = await this.supabase.client.rpc('create_cpu_game', { player_name: displayName });
+    if (error) throw error;
+    const row = this.firstRow(data);
+    return { gameId: row.game_id, code: row.room_code };
+  }
+
   async join(code: string, displayName: string): Promise<RoomResult> {
     const { data, error } = await this.supabase.client.rpc('join_game', {
       requested_code: code,

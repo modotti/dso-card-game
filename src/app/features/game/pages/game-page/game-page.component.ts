@@ -46,10 +46,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
     });
     effect((onCleanup) => {
       const game = this.facade.game();
-      const canAdvance =
-        game?.round.status === 'resolved' &&
-        game.status !== 'finished' &&
-        game.round.activePlayerId !== this.facade.playerId();
+      const canAdvance = game?.round.status === 'resolved' && game.status !== 'finished' && this.canAdvanceRound();
       if (!canAdvance) {
         this.nextRoundSeconds.set(0);
         return;
@@ -68,15 +65,17 @@ export class GamePageComponent implements OnInit, OnDestroy {
       tick();
       onCleanup(() => clearInterval(interval));
     });
-    effect(() => {
-      const roundNumber = this.facade.game()?.round.number;
-      if (roundNumber === undefined) return;
-      if (this.previousRoundNumber !== null && roundNumber !== this.previousRoundNumber) {
-        this.selectedCard.set(null);
-        this.currentCardIndex.set(1);
-        requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-      this.previousRoundNumber = roundNumber;
+    effect((onCleanup) => {
+      const game = this.facade.game();
+      const cpu = this.facade.cpuPlayer();
+      const cpuMustPlay =
+        !!game &&
+        !!cpu &&
+        ((game.round.status === 'choosing_attribute' && game.round.activePlayerId === cpu.id) ||
+          (game.round.status === 'choosing_cards' && !game.round.selectedPlayerIds.includes(cpu.id)));
+      if (!cpuMustPlay) return;
+      const cpuTimer = setTimeout(() => void this.facade.playCpuTurn().catch(() => undefined), 1200);
+      onCleanup(() => clearTimeout(cpuTimer));
     });
   }
 
@@ -127,6 +126,12 @@ export class GamePageComponent implements OnInit, OnDestroy {
   createGame(): void {
     void this.router.navigate(['/'], { queryParams: { action: 'create' } });
   }
+  async playAgain(): Promise<void> {
+    await this.run(async () => {
+      const code = await this.facade.createCpuRematch();
+      window.location.assign(`/game/${code}`);
+    });
+  }
   attributeLabel(value: string | null): string {
     if (!value) return '';
     const definition = this.facade.game()?.availableAttributes.find((attribute) => attribute.id === value);
@@ -162,6 +167,10 @@ export class GamePageComponent implements OnInit, OnDestroy {
     if (game.round.status === 'choosing_attribute') return this.facade.isActivePlayer();
     if (game.round.status === 'choosing_cards') return !this.facade.hasSelected();
     return false;
+  }
+  canAdvanceRound(): boolean {
+    const game = this.facade.game();
+    return !!game && (!!this.facade.cpuPlayer() || game.round.activePlayerId !== this.facade.playerId());
   }
   private async run(action: () => Promise<void>): Promise<void> {
     this.busy.set(true);
