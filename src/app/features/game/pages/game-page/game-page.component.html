@@ -86,7 +86,10 @@
         </h1>
       </div>
       <div class="reveal">
-        @for (selection of game.round.revealedCards; track selection.playerId) {
+        @for (
+          selection of orderedRevealedCards(game.round.revealedCards, game.round.winnerId);
+          track selection.playerId
+        ) {
           <app-game-card
             [card]="selection.card"
             [attribute]="game.round.attribute"
@@ -109,7 +112,7 @@
     }
 
     @if (game.round.status !== 'resolved') {
-      <section class="hand-area">
+      <section class="hand-area" id="player-hand">
         <div class="hand-area__header">
           <h2>{{ i18n.text('game.yourHand') }}</h2>
           <span class="hand-counter" aria-live="polite" [attr.aria-label]="i18n.text('game.handPosition')">
@@ -152,6 +155,15 @@
               {{ playerName(game.players[0].score > game.players[1].score ? game.players[0].id : game.players[1].id) }}
             }
           </h2>
+          <div class="final-score" [attr.aria-label]="i18n.text('game.finalScore')">
+            <small>{{ i18n.text('game.finalScore') }}</small>
+            @for (player of game.players; track player.id) {
+              <div [class.final-score__winner]="isFinalWinner(player.id)">
+                <span>{{ player.displayName }}</span
+                ><strong>{{ player.score }}</strong>
+              </div>
+            }
+          </div>
           <div class="final-actions">
             <button class="secondary" (click)="leave()">{{ i18n.text('game.home') }}</button>
             @if (facade.cpuPlayer()) {

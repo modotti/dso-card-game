@@ -20,12 +20,12 @@
       </div>
     } @else {
       <p>{{ objectTypeLabel() }} · {{ card().constellation }}</p>
-    <dl>
-      @for (item of card().attributes; track item.id) {
-        <div [class.attribute--highlighted]="item.id === attribute()">
-          <dt>{{ i18n.text(item.labelKey) }}</dt>
-          <dd>{{ item.isApproximate && item.value !== null ? '≈ ' : '' }}{{ format(item) }}</dd>
-        </div>
+      <dl>
+        @for (item of card().attributes; track item.id) {
+          <div [class.attribute--highlighted]="item.id === attribute()">
+            <dt>{{ i18n.text(item.labelKey) }}</dt>
+            <dd>{{ item.isApproximate && item.value !== null ? '≈ ' : '' }}{{ format(item) }}</dd>
+          </div>
         }
       </dl>
       @if (attribute()) {
