@@ -5,13 +5,16 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:production": "ng build --configuration production",
     "test": "ng test --watch=false",
     "lint": "eslint \"src/**/*.ts\"",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "private": true,
-  "engines": { "node": ">=20.19 <21 || >=22.12 <23 || >=24 <25" },
+  "engines": {
+    "node": ">=20.19 <21 || >=22.12 <23 || >=24 <25"
+  },
   "dependencies": {
     "@angular/common": "^20.3.13",
     "@angular/compiler": "^20.3.13",

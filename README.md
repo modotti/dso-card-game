@@ -22,6 +22,7 @@ The publishable key is expected to be present in the browser. Authorization is e
 
 - `npm start` — development server
 - `npm run build` — production build
+- `npm run build:production` — explicit production build used by hosting
 - `npm test` — unit tests
 - `npm run lint` — TypeScript lint
 - `npm run format` — format project files
@@ -38,4 +39,15 @@ Anonymous authentication is created only after the player confirms Create or Joi
 
 ## Deployment
 
-The Angular build is static and includes a Cloudflare Pages SPA redirect. Build with `npm run build` and publish `dist/dso-card-game`.
+The Angular build is static and includes a Cloudflare Pages SPA fallback in `src/_redirects`, so direct access to routes such as `/join/:code`, `/lobby/:code`, and `/game/:code` works correctly.
+
+Cloudflare Pages configuration:
+
+- Production branch: `main`
+- Framework preset: `Angular`
+- Build command: `npm run build:production`
+- Build output directory: `dist/dso-card-game`
+- Root directory: `/` (repository root)
+- Node.js version: `20.20.2` (declared in `.nvmrc`)
+
+No Pages Functions, Workers, KV, R2, custom domain, or paid service is required. The Supabase URL and publishable browser key are compiled into the client intentionally; never add a `service_role` key or another private credential.
