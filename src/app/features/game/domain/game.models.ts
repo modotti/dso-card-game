@@ -13,6 +13,8 @@ export interface CardAttributeValue extends AttributeDefinition {
 }
 export interface GameCard {
   readonly id: string;
+  readonly kind: 'astronomical' | 'effect';
+  readonly effectKey: string | null;
   readonly catalogName: string;
   readonly commonName: string;
   readonly objectType: string;
@@ -37,6 +39,7 @@ export interface GameRound {
   readonly attribute: string | null;
   readonly winnerId: string | null;
   readonly isTie: boolean;
+  readonly isCancelled: boolean;
   readonly actionDeadline: string | null;
   readonly selectedPlayerIds: readonly string[];
   readonly revealedCards: readonly RevealedCard[];

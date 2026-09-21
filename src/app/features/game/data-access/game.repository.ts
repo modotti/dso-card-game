@@ -40,6 +40,7 @@ export class GameRepository {
         attribute: round['attribute'] as GameView['round']['attribute'],
         winnerId: round['winnerId'] as string | null,
         isTie: Boolean(round['isTie']),
+        isCancelled: Boolean(round['isCancelled']),
         actionDeadline: round['actionDeadline'] as string | null,
         selectedPlayerIds: round['selectedPlayerIds'] as string[],
         revealedCards: (round['revealedCards'] as Array<{ playerId: string; card: RawCard }>).map((item) => ({
@@ -105,6 +106,8 @@ export class GameRepository {
   }
   private readonly mapCard = (raw: RawCard): GameCard => ({
     id: String(raw['id']),
+    kind: raw['kind'] as GameCard['kind'],
+    effectKey: (raw['effect_key'] as string | null) ?? null,
     catalogName: String(raw['catalog_name']),
     commonName: String(raw['common_name']),
     objectType: String(raw['object_type']),

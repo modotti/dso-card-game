@@ -77,7 +77,11 @@
         <p class="announced">{{ attributeLabel(game.round.attribute) }}</p>
         <h1>
           {{
-            game.round.isTie ? i18n.text('game.tie') : i18n.text('game.winner') + ': ' + playerName(game.round.winnerId)
+            game.round.isCancelled
+              ? i18n.text('game.roundCancelled')
+              : game.round.isTie
+                ? i18n.text('game.tie')
+                : i18n.text('game.winner') + ': ' + playerName(game.round.winnerId)
           }}
         </h1>
       </div>

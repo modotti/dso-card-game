@@ -111,6 +111,24 @@ dd {
   margin-top: 16px;
   text-align: right;
 }
+.effect-description {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 18px;
+  border: 1px solid rgba(92, 225, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(92, 225, 255, 0.08);
+}
+.effect-description strong {
+  color: var(--cyan);
+  font: 600 1rem var(--display);
+}
+.effect-description span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
 @media (max-width: 500px) {
   .image {
     height: 235px;
