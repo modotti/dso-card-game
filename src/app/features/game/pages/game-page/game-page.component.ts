@@ -45,10 +45,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
     });
     effect((onCleanup) => {
       const game = this.facade.game();
-      const canAdvance =
-        game?.round.status === 'resolved' &&
-        game.status !== 'finished' &&
-        game.round.activePlayerId !== this.facade.playerId();
+      const canAdvance = game?.round.status === 'resolved' && game.status !== 'finished' && this.canAdvanceRound();
       if (!canAdvance) {
         this.nextRoundSeconds.set(0);
         return;
@@ -66,6 +63,18 @@ export class GamePageComponent implements OnInit, OnDestroy {
       const interval = setInterval(tick, 250);
       tick();
       onCleanup(() => clearInterval(interval));
+    });
+    effect((onCleanup) => {
+      const game = this.facade.game();
+      const cpu = this.facade.cpuPlayer();
+      const cpuMustPlay =
+        !!game &&
+        !!cpu &&
+        ((game.round.status === 'choosing_attribute' && game.round.activePlayerId === cpu.id) ||
+          (game.round.status === 'choosing_cards' && !game.round.selectedPlayerIds.includes(cpu.id)));
+      if (!cpuMustPlay) return;
+      const cpuTimer = setTimeout(() => void this.facade.playCpuTurn().catch(() => undefined), 1200);
+      onCleanup(() => clearTimeout(cpuTimer));
     });
   }
 
@@ -151,6 +160,10 @@ export class GamePageComponent implements OnInit, OnDestroy {
     if (game.round.status === 'choosing_attribute') return this.facade.isActivePlayer();
     if (game.round.status === 'choosing_cards') return !this.facade.hasSelected();
     return false;
+  }
+  canAdvanceRound(): boolean {
+    const game = this.facade.game();
+    return !!game && (!!this.facade.cpuPlayer() || game.round.activePlayerId !== this.facade.playerId());
   }
   private async run(action: () => Promise<void>): Promise<void> {
     this.busy.set(true);

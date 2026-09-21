@@ -16,6 +16,7 @@ export class GameFacade {
   readonly error = signal<string | null>(null);
   readonly isActivePlayer = computed(() => this.game()?.round.activePlayerId === this.playerId());
   readonly hasSelected = computed(() => this.game()?.round.selectedPlayerIds.includes(this.playerId() ?? '') ?? false);
+  readonly cpuPlayer = computed(() => this.game()?.players.find((player) => player.isCpu) ?? null);
   async connect(code: string): Promise<void> {
     this.code = code;
     try {
@@ -52,6 +53,12 @@ export class GameFacade {
     const id = this.game()?.id;
     if (!id) return;
     await this.repository.resolveExpired(id);
+    await this.refresh();
+  }
+  async playCpuTurn(): Promise<void> {
+    const id = this.game()?.id;
+    if (!id) return;
+    await this.repository.playCpuTurn(id);
     await this.refresh();
   }
   async disconnect(): Promise<void> {

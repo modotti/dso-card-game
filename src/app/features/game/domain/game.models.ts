@@ -24,6 +24,7 @@ export interface GamePlayer {
   readonly displayName: string;
   readonly seat: number;
   readonly score: number;
+  readonly isCpu: boolean;
 }
 export interface RevealedCard {
   readonly playerId: string;

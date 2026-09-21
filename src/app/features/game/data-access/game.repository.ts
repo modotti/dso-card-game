@@ -60,6 +60,10 @@ export class GameRepository {
     const { error } = await this.supabase.client.rpc('advance_round', { target_game_id: gameId });
     if (error) throw error;
   }
+  async playCpuTurn(gameId: string): Promise<void> {
+    const { error } = await this.supabase.client.rpc('play_cpu_turn', { target_game_id: gameId });
+    if (error) throw error;
+  }
   async resolveExpired(gameId: string): Promise<void> {
     const { error } = await this.supabase.client.rpc('resolve_expired_action', { target_game_id: gameId });
     if (error) throw error;

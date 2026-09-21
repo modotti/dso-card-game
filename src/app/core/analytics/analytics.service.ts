@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 export type AnalyticsEvent =
   | 'landing_view'
   | 'game_created'
+  | 'cpu_game_created'
   | 'game_joined'
   | 'game_started'
   | 'game_completed'

@@ -42,6 +42,7 @@ h1 em {
 .actions,
 .form-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
 }
@@ -73,6 +74,10 @@ h1 em {
   color: var(--text);
   background: rgba(255, 255, 255, 0.025);
   border-color: var(--line);
+}
+.button--cpu {
+  border-color: rgba(92, 225, 255, 0.34);
+  color: var(--cyan);
 }
 .button:disabled {
   opacity: 0.55;
