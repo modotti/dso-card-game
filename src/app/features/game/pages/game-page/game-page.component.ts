@@ -31,6 +31,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   private resolvingTimeout = false;
   private lastResolutionAttempt = 0;
   private finalModalScheduled = false;
+  private previousRoundNumber: number | null = null;
 
   constructor() {
     effect(() => {

@@ -430,7 +430,7 @@
     scroll-snap-type: inline mandatory;
     scrollbar-width: none;
     padding: 10px 0 26px;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
   }
   .hand::-webkit-scrollbar {
     display: none;
