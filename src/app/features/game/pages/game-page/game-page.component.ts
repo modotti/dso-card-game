@@ -187,10 +187,9 @@ export class GamePageComponent implements OnInit, OnDestroy {
     return this.facade.game()?.players.find((player) => player.id === id)?.displayName ?? '';
   }
   orderedRevealedCards(cards: readonly RevealedCard[], winnerId: string | null): readonly RevealedCard[] {
-    if (!winnerId) return cards;
-    return [...cards].sort(
-      (first, second) => Number(second.playerId === winnerId) - Number(first.playerId === winnerId),
-    );
+    const priority = (selection: RevealedCard): number =>
+      selection.card.effectKey === 'cancel_round' ? 2 : selection.playerId === winnerId ? 1 : 0;
+    return [...cards].sort((first, second) => priority(second) - priority(first));
   }
   isFinalWinner(playerId: string): boolean {
     const players = this.facade.game()?.players;
