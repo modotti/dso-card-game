@@ -2,7 +2,7 @@ import type { OnDestroy, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from '../../../../core/i18n/translation.service';
-import type { AttributeDefinition, CardAttributeValue, GameCard } from '../../domain/game.models';
+import type { AttributeDefinition, CardAttributeValue, GameCard, RevealedCard } from '../../domain/game.models';
 import { GameFacade } from '../../state/game.facade';
 import { GameCardComponent } from '../../ui/game-card/game-card.component';
 
@@ -32,6 +32,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   private lastResolutionAttempt = 0;
   private finalModalScheduled = false;
   private previousRoundNumber: number | null = null;
+  private previousRoundStatus: string | null = null;
 
   constructor() {
     effect(() => {
@@ -76,6 +77,29 @@ export class GamePageComponent implements OnInit, OnDestroy {
       if (!cpuMustPlay) return;
       const cpuTimer = setTimeout(() => void this.facade.playCpuTurn().catch(() => undefined), 1200);
       onCleanup(() => clearTimeout(cpuTimer));
+    });
+    effect(() => {
+      const round = this.facade.game()?.round;
+      if (!round) return;
+      const roundChanged = this.previousRoundNumber !== null && this.previousRoundNumber !== round.number;
+      const statusChanged = this.previousRoundStatus !== null && this.previousRoundStatus !== round.status;
+      const movedToCardChoice =
+        !roundChanged && this.previousRoundStatus === 'choosing_attribute' && round.status === 'choosing_cards';
+      this.previousRoundNumber = round.number;
+      this.previousRoundStatus = round.status;
+      if (!roundChanged && !statusChanged) return;
+      if (roundChanged) {
+        this.selectedCard.set(null);
+        this.currentCardIndex.set(1);
+      }
+      if (!window.matchMedia('(max-width: 500px)').matches) return;
+      requestAnimationFrame(() => {
+        if (movedToCardChoice) {
+          document.getElementById('player-hand')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
     });
   }
 
@@ -161,6 +185,18 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
   playerName(id: string | null): string {
     return this.facade.game()?.players.find((player) => player.id === id)?.displayName ?? '';
+  }
+  orderedRevealedCards(cards: readonly RevealedCard[], winnerId: string | null): readonly RevealedCard[] {
+    const priority = (selection: RevealedCard): number =>
+      selection.card.effectKey === 'cancel_round' ? 2 : selection.playerId === winnerId ? 1 : 0;
+    return [...cards].sort((first, second) => priority(second) - priority(first));
+  }
+  isFinalWinner(playerId: string): boolean {
+    const players = this.facade.game()?.players;
+    if (!players || players.length < 2 || players[0].score === players[1].score) return false;
+    return (
+      players.find((player) => player.id === playerId)?.score === Math.max(...players.map((player) => player.score))
+    );
   }
   isMyAction(): boolean {
     const game = this.facade.game();

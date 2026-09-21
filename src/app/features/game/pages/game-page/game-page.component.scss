@@ -1,5 +1,5 @@
 .game {
-  width: min(1080px, calc(100% - 96px));
+  width: min(1280px, calc(100% - 96px));
   margin: auto;
   min-height: calc(100dvh - 84px);
   padding: 42px 0 110px;
@@ -142,8 +142,11 @@
 }
 .hand {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+.hand-area {
+  scroll-margin-top: 20px;
 }
 .hand-area__header {
   display: flex;
@@ -275,6 +278,38 @@
   font: 500 2rem var(--display);
   margin: 10px 0 0;
 }
+.final-score {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 26px;
+}
+.final-score > small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.final-score > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+}
+.final-score strong {
+  color: var(--text);
+  font: 600 1.5rem var(--display);
+}
+.final-score__winner {
+  border-color: rgba(92, 225, 255, 0.5) !important;
+  color: var(--cyan) !important;
+  background: rgba(92, 225, 255, 0.07);
+}
 .final-actions {
   display: flex;
   justify-content: center;
@@ -390,6 +425,11 @@
     grid-template-columns: 1fr;
   }
 }
+@media (min-width: 801px) and (max-width: 1100px) {
+  .hand {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 @media (max-width: 500px) {
   .game {
     width: calc(100% - 40px);
@@ -463,5 +503,8 @@
   }
   .final-actions button {
     width: 100%;
+  }
+  .final-score {
+    grid-template-columns: 1fr;
   }
 }
