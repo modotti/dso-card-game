@@ -27,6 +27,12 @@ The publishable key is expected to be present in the browser. Authorization is e
 - `npm run lint` — TypeScript lint
 - `npm run format` — format project files
 
+## Product analytics
+
+Production analytics uses the official `posthog-js` SDK through `AnalyticsService`. Development analytics is disabled in `environment.development.ts`, and Session Replay, autocapture, automatic pageviews, surveys, performance capture, and exception capture are disabled.
+
+To enable analytics in production, copy the PostHog **Project API key** into `environment.analytics.posthogKey` in `src/environments/environment.ts`. Keep `posthogHost` as `https://us.i.posthog.com` for a US Cloud project or change it to `https://eu.i.posthog.com` for an EU Cloud project. A PostHog Project API key is intended for browser-side ingestion; never place a PostHog personal API key in this repository.
+
 ## Current architecture
 
 - `core`: application-wide infrastructure such as auth, Supabase, analytics, and translations.

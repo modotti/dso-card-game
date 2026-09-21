@@ -1,5 +1,7 @@
+import type { OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AnalyticsService } from './core/analytics/analytics.service';
 import { TranslationService } from './core/i18n/translation.service';
 
 @Component({
@@ -10,6 +12,11 @@ import { TranslationService } from './core/i18n/translation.service';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   protected readonly i18n = inject(TranslationService);
+  private readonly analytics = inject(AnalyticsService);
+
+  ngOnInit(): void {
+    this.analytics.track('app_opened');
+  }
 }

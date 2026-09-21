@@ -1,7 +1,6 @@
 import type { OnDestroy, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AnalyticsService } from '../../../../core/analytics/analytics.service';
 import { TranslationService } from '../../../../core/i18n/translation.service';
 import { normalizeRoomCode } from '../../domain/lobby.models';
 import { LobbyFacade } from '../../state/lobby.facade';
@@ -18,7 +17,6 @@ export class LobbyPageComponent implements OnInit, OnDestroy {
   protected readonly i18n = inject(TranslationService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly analytics = inject(AnalyticsService);
   protected readonly copied = signal(false);
   protected readonly code = normalizeRoomCode(this.route.snapshot.paramMap.get('code') ?? '');
   private readonly gameRedirect = effect(() => {
@@ -43,8 +41,5 @@ export class LobbyPageComponent implements OnInit, OnDestroy {
 
   leave(): void {
     void this.router.navigate(['/']);
-  }
-  startPlaceholder(): void {
-    this.analytics.track('game_started', { roomCode: this.code });
   }
 }

@@ -11,12 +11,12 @@ export class GameRepository {
     const { error } = await this.supabase.client.rpc('start_ready_game', { requested_code: code });
     if (error && error.message !== 'PLAYERS_NOT_READY') throw error;
   }
-  async createCpuGame(displayName: string): Promise<string> {
+  async createCpuGame(displayName: string): Promise<{ readonly gameId: string; readonly code: string }> {
     const { data, error } = await this.supabase.client.rpc('create_cpu_game', { player_name: displayName });
     if (error) throw error;
-    const row = (Array.isArray(data) ? data[0] : data) as { room_code?: string } | null;
-    if (!row?.room_code) throw new Error('CPU_GAME_CREATION_FAILED');
-    return row.room_code;
+    const row = (Array.isArray(data) ? data[0] : data) as { game_id?: string; room_code?: string } | null;
+    if (!row?.game_id || !row.room_code) throw new Error('CPU_GAME_CREATION_FAILED');
+    return { gameId: row.game_id, code: row.room_code };
   }
   async get(code: string): Promise<GameView> {
     const { data, error } = await this.supabase.client.rpc('get_game_state', { requested_code: code });
