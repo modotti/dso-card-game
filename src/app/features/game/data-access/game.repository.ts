@@ -27,8 +27,22 @@ export class GameRepository {
       id: String(raw['id']),
       code: String(raw['code']),
       status: raw['status'] as GameView['status'],
+      matchNumber: Number(raw['matchNumber'] ?? 1),
+      sessionDraws: Number(raw['sessionDraws'] ?? 0),
+      rematch: {
+        requestedPlayerIds:
+          ((raw['rematch'] as Record<string, unknown> | undefined)?.['requestedPlayerIds'] as string[]) ?? [],
+        expiresAt: ((raw['rematch'] as Record<string, unknown> | undefined)?.['expiresAt'] as string | null) ?? null,
+      },
       rules: raw['rules'] as GameView['rules'],
-      players: raw['players'] as GameView['players'],
+      players: (raw['players'] as Array<Record<string, unknown>>).map((player) => ({
+        id: String(player['id']),
+        displayName: String(player['displayName']),
+        seat: Number(player['seat']),
+        score: Number(player['score']),
+        isCpu: Boolean(player['isCpu']),
+        sessionWins: Number(player['sessionWins'] ?? 0),
+      })),
       availableAttributes: (raw['availableAttributes'] as Array<Record<string, unknown>>).map((attribute) =>
         this.mapAttribute(attribute),
       ),
@@ -74,6 +88,14 @@ export class GameRepository {
   }
   async resolveExpired(gameId: string): Promise<void> {
     const { error } = await this.supabase.client.rpc('resolve_expired_action', { target_game_id: gameId });
+    if (error) throw error;
+  }
+  async requestRematch(gameId: string): Promise<void> {
+    const { error } = await this.supabase.client.rpc('request_rematch', { target_game_id: gameId });
+    if (error) throw error;
+  }
+  async cancelRematch(gameId: string): Promise<void> {
+    const { error } = await this.supabase.client.rpc('cancel_rematch', { target_game_id: gameId });
     if (error) throw error;
   }
   subscribe(gameId: string, onChange: () => void): RealtimeChannel {

@@ -66,6 +66,18 @@ export class GameFacade {
     if (!player) throw new Error('PLAYER_NOT_FOUND');
     return this.repository.createCpuGame(player.displayName);
   }
+  async requestRematch(): Promise<void> {
+    const id = this.game()?.id;
+    if (!id) return;
+    await this.repository.requestRematch(id);
+    await this.refresh();
+  }
+  async cancelRematch(): Promise<void> {
+    const id = this.game()?.id;
+    if (!id) return;
+    await this.repository.cancelRematch(id);
+    await this.refresh();
+  }
   async disconnect(): Promise<void> {
     if (this.channel) await this.repository.unsubscribe(this.channel);
   }

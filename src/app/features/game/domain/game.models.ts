@@ -35,6 +35,11 @@ export interface GamePlayer {
   readonly seat: number;
   readonly score: number;
   readonly isCpu: boolean;
+  readonly sessionWins: number;
+}
+export interface RematchState {
+  readonly requestedPlayerIds: readonly string[];
+  readonly expiresAt: string | null;
 }
 export interface RevealedCard {
   readonly playerId: string;
@@ -56,6 +61,9 @@ export interface GameView {
   readonly id: string;
   readonly code: string;
   readonly status: 'in_progress' | 'finished';
+  readonly matchNumber: number;
+  readonly sessionDraws: number;
+  readonly rematch: RematchState;
   readonly rules: { readonly handSize: number; readonly roundsToPlay: number; readonly actionTimeoutSeconds: number };
   readonly players: readonly GamePlayer[];
   readonly availableAttributes: readonly AttributeDefinition[];
