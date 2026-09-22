@@ -26,6 +26,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   protected readonly busy = signal(false);
   protected readonly secondsRemaining = signal(0);
   protected readonly nextRoundSeconds = signal(0);
+  protected readonly rematchSeconds = signal(0);
   protected readonly showFinalModal = signal(false);
   private readonly code = this.route.snapshot.paramMap.get('code') ?? '';
   private timer?: ReturnType<typeof setInterval>;
@@ -42,7 +43,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
       const playerId = this.facade.playerId();
       if (!game || !playerId) return;
       const gameMode = this.gameMode();
-      const eventIdentity = `${game.id}:${playerId}`;
+      const eventIdentity = `${game.id}:${game.matchNumber}:${playerId}`;
       this.analytics.trackOnce('game_started', eventIdentity, {
         game_id: game.id,
         game_mode: gameMode,
@@ -203,6 +204,32 @@ export class GamePageComponent implements OnInit, OnDestroy {
       window.location.assign(`/game/${rematch.code}`);
     });
   }
+  async requestRematch(): Promise<void> {
+    const game = this.facade.game();
+    if (!game) return;
+    this.analytics.track('rematch_requested', {
+      game_id: game.id,
+      match_number: game.matchNumber,
+      game_mode: 'multiplayer',
+    });
+    await this.run(() => this.facade.requestRematch());
+  }
+  async cancelRematch(): Promise<void> {
+    await this.run(() => this.facade.cancelRematch());
+  }
+  hasRequestedRematch(): boolean {
+    const playerId = this.facade.playerId();
+    return (
+      this.rematchSeconds() > 0 && !!playerId && !!this.facade.game()?.rematch.requestedPlayerIds.includes(playerId)
+    );
+  }
+  opponentRequestedRematch(): boolean {
+    const playerId = this.facade.playerId();
+    return (
+      this.rematchSeconds() > 0 &&
+      !!this.facade.game()?.rematch.requestedPlayerIds.some((requestedId) => requestedId !== playerId)
+    );
+  }
   attributeLabel(value: string | null): string {
     if (!value) return '';
     const definition = this.facade.game()?.availableAttributes.find((attribute) => attribute.id === value);
@@ -284,7 +311,12 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   private async updateTimer(): Promise<void> {
-    const deadline = this.facade.game()?.round.actionDeadline;
+    const game = this.facade.game();
+    const rematchDeadline = game?.rematch.expiresAt;
+    this.rematchSeconds.set(
+      rematchDeadline ? Math.max(0, Math.ceil((new Date(rematchDeadline).getTime() - Date.now()) / 1000)) : 0,
+    );
+    const deadline = game?.round.actionDeadline;
     if (!deadline) {
       this.secondsRemaining.set(0);
       return;

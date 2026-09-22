@@ -164,6 +164,23 @@
               </div>
             }
           </div>
+          @if (!facade.cpuPlayer()) {
+            <div class="final-score session-score" [attr.aria-label]="i18n.text('game.sessionScore')">
+              <small>{{ i18n.text('game.sessionScore') }}</small>
+              @for (player of game.players; track player.id) {
+                <div>
+                  <span>{{ player.displayName }}</span
+                  ><strong>{{ player.sessionWins }}</strong>
+                </div>
+              }
+              @if (game.sessionDraws > 0) {
+                <div>
+                  <span>{{ i18n.text('game.sessionDraws') }}</span
+                  ><strong>{{ game.sessionDraws }}</strong>
+                </div>
+              }
+            </div>
+          }
           <div class="final-actions">
             <button class="secondary" (click)="leave()">{{ i18n.text('game.home') }}</button>
             @if (facade.cpuPlayer()) {
@@ -171,9 +188,23 @@
                 {{ i18n.text('game.playAgain') }}
               </button>
             } @else {
-              <button class="primary" (click)="createGame()">{{ i18n.text('game.newGame') }}</button>
+              @if (hasRequestedRematch()) {
+                <button class="secondary" [disabled]="busy()" (click)="cancelRematch()">
+                  {{ i18n.text('game.cancelRematch') }}
+                </button>
+              } @else {
+                <button class="primary" [disabled]="busy()" (click)="requestRematch()">
+                  {{ i18n.text(opponentRequestedRematch() ? 'game.acceptRematch' : 'game.requestRematch') }}
+                </button>
+              }
             }
           </div>
+          @if (!facade.cpuPlayer() && (hasRequestedRematch() || opponentRequestedRematch())) {
+            <p class="rematch-status">
+              {{ i18n.text(hasRequestedRematch() ? 'game.waitingRematch' : 'game.opponentRequestedRematch') }}
+              <strong>{{ rematchSeconds() }}s</strong>
+            </p>
+          }
         </section>
       </div>
     }
