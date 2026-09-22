@@ -11,6 +11,13 @@ export interface CardAttributeValue extends AttributeDefinition {
   readonly value: number | null;
   readonly isApproximate: boolean;
 }
+export interface GameCardImage {
+  readonly id: string;
+  readonly src: string;
+  readonly collectionName: string;
+  readonly photographerName: string;
+  readonly photographerHandle: string | null;
+}
 export interface GameCard {
   readonly id: string;
   readonly kind: 'astronomical' | 'effect';
@@ -19,6 +26,7 @@ export interface GameCard {
   readonly commonName: string;
   readonly objectType: string;
   readonly constellation: string;
+  readonly image: GameCardImage | null;
   readonly attributes: readonly CardAttributeValue[];
 }
 export interface GamePlayer {

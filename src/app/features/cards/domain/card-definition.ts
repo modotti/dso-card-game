@@ -1,6 +1,9 @@
 export interface CardImageReference {
+  readonly id: string;
   readonly src: string;
   readonly credit: string;
+  readonly photographerHandle?: string;
+  readonly collectionName: string;
   readonly license?: string;
 }
 

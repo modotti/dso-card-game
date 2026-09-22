@@ -1,72 +1,162 @@
 [
   {
-    "cardId": "m31",
-    "asset": "/assets/cards/m31.jpg",
-    "credit": "NASA/JPL-Caltech",
-    "nasaId": "PIA04921",
-    "source": "https://images.nasa.gov/details/PIA04921"
-  },
-  {
-    "cardId": "m42",
-    "asset": "/assets/cards/m42.jpg",
-    "credit": "NASA/JPL-Caltech",
-    "nasaId": "PIA04227",
-    "source": "https://images.nasa.gov/details/PIA04227"
-  },
-  {
-    "cardId": "m8",
-    "asset": "/assets/cards/m8.jpg",
-    "credit": "NASA/ESA/Hubble",
-    "nasaId": "GSFC_20171208_Archive_e001955",
-    "source": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001955"
-  },
-  {
+    "id": "first-light-m16",
     "cardId": "m16",
+    "collectionName": "First Light Collection",
     "asset": "/assets/cards/m16.jpg",
-    "credit": "NASA/JPL-Caltech/WISE",
-    "nasaId": "PIA25433",
-    "source": "https://images.nasa.gov/details/PIA25433"
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
   },
   {
-    "cardId": "m45",
-    "asset": "/assets/cards/m45.jpg",
-    "credit": "NASA/JPL-Caltech",
-    "nasaId": "PIA09262",
-    "source": "https://images.nasa.gov/details/PIA09262"
+    "id": "first-light-sl17",
+    "cardId": "sl17",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/sl17.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
   },
   {
-    "cardId": "m51",
-    "asset": "/assets/cards/m51.jpg",
-    "credit": "NASA/JPL-Caltech",
-    "nasaId": "PIA04230",
-    "source": "https://images.nasa.gov/details/PIA04230"
+    "id": "first-light-ngc5139",
+    "cardId": "ngc5139",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc5139.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
   },
   {
-    "cardId": "m57",
-    "asset": "/assets/cards/m57.jpg",
-    "credit": "NASA/ESA/Hubble",
-    "nasaId": "GSFC_20171208_Archive_e001464",
-    "source": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001464"
+    "id": "first-light-ngc6334",
+    "cardId": "ngc6334",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc6334.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
   },
   {
-    "cardId": "m104",
-    "asset": "/assets/cards/m104.jpg",
-    "credit": "NASA/JPL-Caltech",
-    "nasaId": "PIA15426",
-    "source": "https://images.nasa.gov/details/PIA15426"
+    "id": "first-light-m7",
+    "cardId": "m7",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m7.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
   },
   {
+    "id": "first-light-m6",
+    "cardId": "m6",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m6.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
+  },
+  {
+    "id": "first-light-m11",
+    "cardId": "m11",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m11.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
+  },
+  {
+    "id": "first-light-sh2-308",
+    "cardId": "sh2-308",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/sh2-308.jpg",
+    "photographer": "Erly Alexandrino da Silva Neto",
+    "handle": "@erlyneto"
+  },
+  {
+    "id": "first-light-ngc5128",
+    "cardId": "ngc5128",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc5128.jpg",
+    "photographer": "Erly Alexandrino da Silva Neto",
+    "handle": "@erlyneto"
+  },
+  {
+    "id": "first-light-ngc3324",
+    "cardId": "ngc3324",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc3324.jpg",
+    "photographer": "Erly Alexandrino da Silva Neto",
+    "handle": "@erlyneto"
+  },
+  {
+    "id": "first-light-ic2944",
+    "cardId": "ic2944",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ic2944.jpg",
+    "photographer": "Erly Alexandrino da Silva Neto",
+    "handle": "@erlyneto"
+  },
+  {
+    "id": "first-light-ngc2736",
+    "cardId": "ngc2736",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc2736.jpg",
+    "photographer": "Tiago Rocha",
+    "handle": "@astro_scient"
+  },
+  {
+    "id": "first-light-m33",
+    "cardId": "m33",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m33.jpg",
+    "photographer": "Tiago Rocha",
+    "handle": "@astro_scient"
+  },
+  {
+    "id": "first-light-ngc7000",
+    "cardId": "ngc7000",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc7000.jpg",
+    "photographer": "Tiago Rocha",
+    "handle": "@astro_scient"
+  },
+  {
+    "id": "first-light-ngc6188",
+    "cardId": "ngc6188",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc6188.jpg",
+    "photographer": "Tiago Rocha",
+    "handle": "@astro_scient"
+  },
+  {
+    "id": "first-light-cg4",
+    "cardId": "cg4",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/cg4.jpg",
+    "photographer": "Dilan Rosa",
+    "handle": "@dilannn.e"
+  },
+  {
+    "id": "first-light-ic4592",
+    "cardId": "ic4592",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ic4592.jpg",
+    "photographer": "Dilan Rosa",
+    "handle": "@dilannn.e"
+  },
+  {
+    "id": "first-light-ngc6357",
+    "cardId": "ngc6357",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc6357.jpg",
+    "photographer": "Thiago Gonçalves",
+    "handle": "@astro_bah"
+  },
+  {
+    "id": "first-light-ngc246",
+    "cardId": "ngc246",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc246.jpg",
+    "photographer": "Thiago Gonçalves",
+    "handle": "@astro_bah"
+  },
+  {
+    "id": "first-light-ngc253",
     "cardId": "ngc253",
+    "collectionName": "First Light Collection",
     "asset": "/assets/cards/ngc253.jpg",
-    "credit": "NASA/JPL-Caltech",
-    "nasaId": "PIA13440",
-    "source": "https://images.nasa.gov/details/PIA13440"
-  },
-  {
-    "cardId": "ngc7293",
-    "asset": "/assets/cards/ngc7293.jpg",
-    "credit": "NASA/JPL-Caltech",
-    "nasaId": "PIA15658",
-    "source": "https://images.nasa.gov/details/PIA15658"
+    "photographer": "Thiago Gonçalves",
+    "handle": "@astro_bah"
   }
 ]
