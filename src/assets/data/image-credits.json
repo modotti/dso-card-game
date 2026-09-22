@@ -158,5 +158,29 @@
     "asset": "/assets/cards/ngc253.jpg",
     "photographer": "Thiago Gonçalves",
     "handle": "@astro_bah"
+  },
+  {
+    "id": "first-light-m8",
+    "cardId": "m8",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m8.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
+  },
+  {
+    "id": "first-light-m42",
+    "cardId": "m42",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m42.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
+  },
+  {
+    "id": "first-light-ngc3372",
+    "cardId": "ngc3372",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc3372.jpg",
+    "photographer": "Tiago Rocha",
+    "handle": "@astro_scient"
   }
 ]

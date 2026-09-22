@@ -238,5 +238,41 @@
     "apparentSizeArcmin": 27.5,
     "physicalSizeLightYears": 90000,
     "sourceUrl": "https://science.nasa.gov/missions/webb/nasas-webb-delivers-unprecedented-look-into-heart-of-sculptor-galaxy/"
+  },
+  {
+    "id": "m8",
+    "catalogName": "M8",
+    "commonName": "Lagoon Nebula",
+    "objectType": "emission_nebula",
+    "constellation": "Sagittarius",
+    "distanceLightYears": 5200,
+    "apparentMagnitude": 6,
+    "apparentSizeArcmin": 90,
+    "physicalSizeLightYears": 110,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-8/"
+  },
+  {
+    "id": "m42",
+    "catalogName": "M42",
+    "commonName": "Orion Nebula",
+    "objectType": "emission_nebula",
+    "constellation": "Orion",
+    "distanceLightYears": 1500,
+    "apparentMagnitude": 4,
+    "apparentSizeArcmin": 85,
+    "physicalSizeLightYears": 24,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-42/"
+  },
+  {
+    "id": "ngc3372",
+    "catalogName": "NGC 3372",
+    "commonName": "Carina Nebula",
+    "objectType": "emission_nebula",
+    "constellation": "Carina",
+    "distanceLightYears": 7500,
+    "apparentMagnitude": 4.8,
+    "apparentSizeArcmin": 120,
+    "physicalSizeLightYears": 300,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-92/"
   }
 ]
