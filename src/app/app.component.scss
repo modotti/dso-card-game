@@ -65,6 +65,40 @@
 .language button.active {
   color: var(--text);
 }
+.site-footer {
+  position: relative;
+  z-index: 5;
+  width: min(1180px, calc(100% - 40px));
+  margin: auto;
+  padding: 22px 0 28px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+.site-footer__content {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 22px;
+}
+.site-footer p {
+  margin: 0;
+}
+.site-footer__images {
+  text-align: center;
+}
+.site-footer nav {
+  display: flex;
+  gap: 18px;
+}
+.site-footer a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+.site-footer a:hover {
+  text-decoration: underline;
+}
 @media (max-width: 600px) {
   .topbar {
     height: 68px;
@@ -72,5 +106,14 @@
   }
   .brand {
     letter-spacing: 0.11em;
+  }
+  .site-footer {
+    width: calc(100% - 28px);
+  }
+  .site-footer__content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+    text-align: center;
   }
 }

@@ -22,5 +22,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/game/pages/game-page/game-page.component').then((m) => m.GamePageComponent),
     title: 'Game · Deep Space Duel',
   },
+  {
+    path: 'privacidade',
+    loadComponent: () =>
+      import('./features/legal/pages/privacy-page/privacy-page.component').then((m) => m.PrivacyPageComponent),
+    title: 'Privacidade · Deep Space Duel',
+  },
   { path: '**', redirectTo: '' },
 ];

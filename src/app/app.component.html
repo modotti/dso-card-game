@@ -1,6 +1,6 @@
 <div class="app-shell">
   <header class="topbar">
-    <a class="brand" href="/" aria-label="Deep Space Duel home">
+    <a class="brand" routerLink="/" aria-label="Deep Space Duel home">
       <span class="brand__orbit" aria-hidden="true"></span>
       <span>DEEP SPACE <strong>DUEL</strong></span>
     </a>
@@ -11,4 +11,14 @@
     </div>
   </header>
   <main><router-outlet /></main>
+  <footer class="site-footer">
+    <div class="site-footer__content">
+      <p>© 2026 Fernando Modotti</p>
+      <p class="site-footer__images">{{ i18n.text('footer.images') }}</p>
+      <nav [attr.aria-label]="i18n.text('footer.links')">
+        <a href="https://www.instagram.com/luimodotti/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a routerLink="/privacidade">{{ i18n.text('footer.privacy') }}</a>
+      </nav>
+    </div>
+  </footer>
 </div>
