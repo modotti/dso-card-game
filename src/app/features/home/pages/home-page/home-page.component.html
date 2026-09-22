@@ -42,6 +42,22 @@
               [placeholder]="i18n.text('home.codePlaceholder')"
           /></label>
         }
+        @if (intent() === 'cpu') {
+          <fieldset class="difficulty-picker">
+            <legend>{{ i18n.text('home.cpuDifficulty') }}</legend>
+            <div class="difficulty-options">
+              @for (difficulty of ['easy', 'medium', 'hard']; track difficulty) {
+                <label class="difficulty-option">
+                  <input type="radio" formControlName="cpuDifficulty" [value]="difficulty" />
+                  <span>
+                    <strong>{{ i18n.text('home.cpuDifficulty.' + difficulty) }}</strong>
+                    <small>{{ i18n.text('home.cpuDifficulty.' + difficulty + '.description') }}</small>
+                  </span>
+                </label>
+              }
+            </div>
+          </fieldset>
+        }
         @if (errorKey(); as key) {
           <p class="error" role="alert">{{ i18n.text(key) }}</p>
         }

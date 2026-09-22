@@ -1,4 +1,5 @@
 export type GameStatus = 'waiting' | 'ready' | 'in_progress' | 'finished';
+export type CpuDifficulty = 'easy' | 'medium' | 'hard';
 
 export interface LobbyPlayer {
   readonly id: string;

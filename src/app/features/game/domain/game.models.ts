@@ -1,4 +1,5 @@
 export type AttributeComparison = 'higher_wins' | 'lower_wins';
+export type CpuDifficulty = 'easy' | 'medium' | 'hard';
 export type RoundStatus = 'choosing_attribute' | 'choosing_cards' | 'resolved';
 export interface AttributeDefinition {
   readonly id: string;
@@ -64,7 +65,12 @@ export interface GameView {
   readonly matchNumber: number;
   readonly sessionDraws: number;
   readonly rematch: RematchState;
-  readonly rules: { readonly handSize: number; readonly roundsToPlay: number; readonly actionTimeoutSeconds: number };
+  readonly rules: {
+    readonly handSize: number;
+    readonly roundsToPlay: number;
+    readonly actionTimeoutSeconds: number;
+    readonly cpuDifficulty?: CpuDifficulty;
+  };
   readonly players: readonly GamePlayer[];
   readonly availableAttributes: readonly AttributeDefinition[];
   readonly hand: readonly GameCard[];
