@@ -7,11 +7,13 @@
   align-items: center;
   position: relative;
 }
+
 .content {
   position: relative;
   z-index: 2;
   padding: 40px 0 110px;
 }
+
 .eyebrow {
   color: var(--cyan);
   text-transform: uppercase;
@@ -19,6 +21,7 @@
   font-size: 0.68rem;
   margin: 0 0 24px;
 }
+
 h1 {
   margin: 0;
   font-family: var(--display);
@@ -28,17 +31,20 @@ h1 {
   line-height: 0.88;
   max-width: 760px;
 }
+
 h1 em {
   color: transparent;
   -webkit-text-stroke: 1px rgba(230, 239, 255, 0.74);
   font-weight: 300;
 }
+
 .description {
   max-width: 520px;
   color: var(--muted);
   line-height: 1.75;
   margin: 30px 0 34px;
 }
+
 .actions,
 .form-actions {
   display: flex;
@@ -46,6 +52,7 @@ h1 em {
   align-items: center;
   gap: 12px;
 }
+
 .button {
   min-height: 54px;
   padding: 0 27px;
@@ -57,32 +64,39 @@ h1 em {
   cursor: pointer;
   transition: 0.2s ease;
 }
+
 .button--primary {
   color: #051016;
   background: linear-gradient(115deg, var(--cyan), #adf3ff);
   box-shadow: 0 8px 36px rgba(73, 213, 255, 0.18);
 }
+
 .button--primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 40px rgba(73, 213, 255, 0.28);
 }
+
 .button--primary span {
   margin-left: 20px;
   font-size: 1.15rem;
 }
+
 .button--ghost {
   color: var(--text);
   background: rgba(255, 255, 255, 0.025);
   border-color: var(--line);
 }
+
 .button--cpu {
   border-color: rgba(92, 225, 255, 0.34);
   color: var(--cyan);
 }
+
 .button:disabled {
   opacity: 0.55;
   cursor: wait;
 }
+
 .promise {
   margin: 0;
   color: #7f8ba6;
@@ -92,12 +106,14 @@ h1 em {
   gap: 9px;
   align-items: center;
 }
+
 .home-footer {
   display: flex;
   align-items: center;
   gap: 22px;
   margin-top: 24px;
 }
+
 .how-to-play {
   padding: 4px 0;
   border: 0;
@@ -109,6 +125,7 @@ h1 em {
   text-transform: uppercase;
   cursor: pointer;
 }
+
 .rules-backdrop {
   position: fixed;
   z-index: 20;
@@ -119,6 +136,7 @@ h1 em {
   background: rgba(2, 6, 16, 0.82);
   backdrop-filter: blur(9px);
 }
+
 .rules-modal {
   position: relative;
   width: min(650px, 100%);
@@ -130,6 +148,7 @@ h1 em {
   background: #091020;
   box-shadow: 0 24px 90px rgba(0, 0, 0, 0.58);
 }
+
 .rules-modal__close {
   position: absolute;
   top: 14px;
@@ -140,15 +159,18 @@ h1 em {
   font-size: 1.7rem;
   cursor: pointer;
 }
+
 .rules-modal h2 {
   margin: 0;
   font: 500 clamp(2rem, 6vw, 3rem) var(--display);
 }
+
 .rules-intro {
   margin: 12px 0 28px;
   color: var(--muted);
   line-height: 1.6;
 }
+
 .rules-modal ol {
   display: grid;
   gap: 12px;
@@ -156,6 +178,7 @@ h1 em {
   padding: 0;
   list-style: none;
 }
+
 .rules-modal li {
   display: grid;
   grid-template-columns: 38px 1fr;
@@ -163,19 +186,23 @@ h1 em {
   padding: 14px 0;
   border-top: 1px solid var(--line);
 }
-.rules-modal li > span {
+
+.rules-modal li>span {
   color: var(--cyan);
   font: 500 0.75rem var(--display);
 }
+
 .rules-modal li strong {
   font-size: 0.9rem;
 }
+
 .rules-modal li p {
   margin: 5px 0 0;
   color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.55;
 }
+
 .rules-tip {
   margin: 22px 0 0;
   padding: 13px 15px;
@@ -185,10 +212,12 @@ h1 em {
   font-size: 0.76rem;
   line-height: 1.55;
 }
+
 .rules-modal__action {
   width: 100%;
   margin-top: 22px;
 }
+
 .promise span {
   width: 5px;
   height: 5px;
@@ -196,6 +225,7 @@ h1 em {
   background: var(--violet);
   box-shadow: 0 0 12px var(--violet);
 }
+
 .entry-form {
   width: min(520px, 100%);
   padding: 22px;
@@ -203,6 +233,7 @@ h1 em {
   background: rgba(7, 12, 28, 0.68);
   backdrop-filter: blur(18px);
 }
+
 label {
   display: block;
   color: #9da9c0;
@@ -211,6 +242,7 @@ label {
   text-transform: uppercase;
   margin-bottom: 17px;
 }
+
 input {
   display: block;
   width: 100%;
@@ -223,15 +255,18 @@ input {
   font: 400 1rem var(--body);
   outline: none;
 }
+
 input:focus {
   border-color: var(--cyan);
   box-shadow: 0 0 0 2px rgba(92, 225, 255, 0.08);
 }
+
 .difficulty-picker {
   margin: 0 0 20px;
   padding: 0;
   border: 0;
 }
+
 .difficulty-picker legend {
   margin-bottom: 9px;
   color: #9da9c0;
@@ -239,22 +274,26 @@ input:focus {
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
+
 .difficulty-options {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
+
 .difficulty-option {
   position: relative;
   margin: 0;
   cursor: pointer;
 }
+
 .difficulty-option input {
   position: absolute;
   width: 1px;
   height: 1px;
   opacity: 0;
 }
+
 .difficulty-option span {
   display: grid;
   min-height: 84px;
@@ -266,11 +305,13 @@ input:focus {
   background: #080e20;
   transition: 0.2s ease;
 }
+
 .difficulty-option strong {
   color: var(--text);
   font-size: 0.74rem;
   letter-spacing: 0.08em;
 }
+
 .difficulty-option small {
   color: var(--muted);
   font-size: 0.65rem;
@@ -278,15 +319,18 @@ input:focus {
   letter-spacing: 0;
   text-transform: none;
 }
-.difficulty-option input:checked + span {
+
+.difficulty-option input:checked+span {
   border-color: var(--cyan);
   background: rgba(92, 225, 255, 0.08);
   box-shadow: 0 0 0 2px rgba(92, 225, 255, 0.08);
 }
-.difficulty-option input:focus-visible + span {
+
+.difficulty-option input:focus-visible+span {
   outline: 2px solid var(--cyan);
   outline-offset: 2px;
 }
+
 .back {
   border: 0;
   background: none;
@@ -294,14 +338,17 @@ input:focus {
   cursor: pointer;
   padding: 12px 8px 12px 0;
 }
+
 .form-actions {
   justify-content: space-between;
 }
+
 .error {
   color: #ff8eae;
   font-size: 0.78rem;
   line-height: 1.5;
 }
+
 .nebula {
   position: absolute;
   width: 720px;
@@ -310,14 +357,8 @@ input:focus {
   top: 45%;
   transform: translateY(-50%);
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 48% 48%,
-    rgba(73, 169, 255, 0.16),
-    rgba(101, 53, 217, 0.09) 28%,
-    transparent 65%
-  );
-  filter: drop-shadow(0 0 50px rgba(68, 80, 255, 0.08));
 }
+
 .nebula::before {
   content: '';
   position: absolute;
@@ -326,90 +367,98 @@ input:focus {
   border-radius: 50%;
   transform: rotate(18deg) scaleY(0.58);
 }
-.card {
+
+.featured-card {
   position: absolute;
-  width: 190px;
-  aspect-ratio: 0.68;
-  border: 1px solid rgba(131, 184, 255, 0.28);
-  border-radius: 10px;
-  background: linear-gradient(150deg, rgba(19, 33, 70, 0.84), rgba(5, 8, 20, 0.9));
+  width: 270px;
+  height: 500px;
+  --card-image-aspect-ratio: 1.1364;
+  --card-image-object-fit: cover;
   box-shadow: -20px 30px 70px rgba(0, 0, 0, 0.45);
 }
-.card::after {
-  content: '';
-  position: absolute;
-  inset: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    radial-gradient(circle at 50% 38%, #d5efff 0 1%, #468aca 2%, #43328f 9%, transparent 30%),
-    radial-gradient(ellipse, rgba(88, 72, 188, 0.45), transparent 60%);
-}
-.card--one {
-  top: 185px;
-  left: 255px;
-  transform: rotate(8deg);
+
+.featured-card--1 {
+  top: 98px;
+  left: 256px;
+  transform: rotate(1deg);
   z-index: 3;
 }
-.card--two {
-  top: 215px;
-  left: 105px;
-  transform: rotate(-17deg) scale(0.88);
-  opacity: 0.65;
+
+.featured-card--2 {
+  top: 135px;
+  left: 62px;
+  transform: rotate(-10deg) scale(0.92);
+  opacity: 0.72;
 }
-.card--three {
-  top: 220px;
-  left: 400px;
-  transform: rotate(25deg) scale(0.82);
-  opacity: 0.45;
+
+.featured-card--3 {
+  top: 140px;
+  left: 445px;
+  transform: rotate(12deg) scale(0.9);
+  opacity: 0.58;
 }
+
 @media (max-width: 850px) {
   .hero {
     grid-template-columns: 1fr;
     min-height: calc(100dvh - 68px);
   }
+
   .content {
     padding: 60px 0 90px;
   }
+
   .nebula {
     opacity: 0.52;
     right: -390px;
   }
+
   h1 {
     font-size: clamp(3.3rem, 15vw, 5.4rem);
   }
 }
+
 @media (max-width: 600px) {
   .hero {
     width: calc(100% - 28px);
   }
+
   .actions {
     align-items: stretch;
     flex-direction: column;
   }
+
   .form-actions {
     align-items: stretch;
     flex-direction: column-reverse;
   }
+
   .button {
     width: 100%;
   }
+
   .entry-form {
     padding: 17px;
   }
+
   .difficulty-options {
     grid-template-columns: 1fr;
   }
+
   .difficulty-option span {
     min-height: 64px;
   }
+
   .home-footer {
     align-items: flex-start;
     flex-direction: column;
     gap: 14px;
   }
+
   .rules-backdrop {
     padding: 12px;
   }
+
   .rules-modal {
     max-height: calc(100dvh - 24px);
     padding: 30px 20px 22px;
