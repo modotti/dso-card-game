@@ -7,6 +7,17 @@
   <div class="image">
     <img [src]="imageSource()" [alt]="cardName()" loading="lazy" /><span>{{ card().catalogName }}</span>
   </div>
+  @if (card().image; as image) {
+    <div class="image-details">
+      <span>{{ image.collectionName }}</span>
+      <span>
+        {{ i18n.text('card.photoCredit') }}: {{ image.photographerName }}
+        @if (image.photographerHandle) {
+          · {{ image.photographerHandle }}
+        }
+      </span>
+    </div>
+  }
   <div class="content">
     @if (ownerLabel()) {
       <small class="owner">{{ ownerLabel() }}</small>

@@ -1,9 +1,8 @@
-# Card image provenance
+# First Light Collection
 
-The card images are local, optimized derivatives used for the MVP. NASA Image and Video Library or NASA Science supplies the primary imagery. When a suitable NASA image was unavailable, the asset is a DSS2 color survey cutout served by CDS Strasbourg.
+As imagens desta pasta pertencem aos astrofotógrafos creditados em
+`src/assets/data/image-credits.json` e são usadas com autorização no jogo.
 
-The exact source URL or NASA asset identifier for every downloaded file is preserved in `scripts/download-catalog-images.sh`. The original ten image identifiers are also recorded in `src/assets/data/image-credits.json`.
-
-`clouds.jpg` is original AI-generated artwork created for the special Clouds card with OpenAI's built-in image generation tool. It contains no third-party source image or embedded text.
-
-Before public launch, surface image credits in the product UI and review the credit line on each source page. NASA imagery is generally reusable, but individual assets can include partner contributions with their own attribution requirements.
+Cada imagem possui identidade própria e está associada a um alvo. Um mesmo alvo
+pode receber novas imagens em coleções futuras; a imagem exibida é sorteada no
+início da partida e permanece fixa até seu encerramento.

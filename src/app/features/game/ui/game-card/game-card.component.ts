@@ -18,7 +18,7 @@ export class GameCardComponent {
   protected imageSource(): string {
     return this.card().effectKey === 'cancel_round'
       ? '/assets/cards/clouds.jpg'
-      : `/assets/cards/${this.card().id}.jpg`;
+      : (this.card().image?.src ?? `/assets/cards/${this.card().id}.jpg`);
   }
   protected cardName(): string {
     return this.card().effectKey === 'cancel_round' ? this.i18n.text('card.clouds.name') : this.card().commonName;

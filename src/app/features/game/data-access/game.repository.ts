@@ -112,6 +112,15 @@ export class GameRepository {
     commonName: String(raw['common_name']),
     objectType: String(raw['object_type']),
     constellation: String(raw['constellation']),
+    image: raw['image']
+      ? {
+          id: String((raw['image'] as RawCard)['id']),
+          src: String((raw['image'] as RawCard)['src']),
+          collectionName: String((raw['image'] as RawCard)['collectionName']),
+          photographerName: String((raw['image'] as RawCard)['photographerName']),
+          photographerHandle: ((raw['image'] as RawCard)['photographerHandle'] as string | null) ?? null,
+        }
+      : null,
     attributes: (raw['attributes'] as Array<Record<string, unknown>>).map(
       (attribute) =>
         ({
