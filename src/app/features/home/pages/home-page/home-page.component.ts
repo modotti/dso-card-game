@@ -6,6 +6,7 @@ import { AnalyticsService } from '../../../../core/analytics/analytics.service';
 import type { TranslationKey } from '../../../../core/i18n/translation.service';
 import { TranslationService } from '../../../../core/i18n/translation.service';
 import { SupabaseService } from '../../../../core/supabase/supabase.service';
+import type { CpuDifficulty } from '../../../lobby/domain/lobby.models';
 import { normalizeRoomCode } from '../../../lobby/domain/lobby.models';
 import { LobbyFacade } from '../../../lobby/state/lobby.facade';
 
@@ -36,6 +37,7 @@ export class HomePageComponent implements OnInit {
       validators: [Validators.required, Validators.maxLength(32)],
     }),
     roomCode: new FormControl('', { nonNullable: true }),
+    cpuDifficulty: new FormControl<CpuDifficulty>('medium', { nonNullable: true }),
   });
 
   ngOnInit(): void {
@@ -81,11 +83,12 @@ export class HomePageComponent implements OnInit {
         intent === 'create'
           ? await this.facade.create(displayName)
           : intent === 'cpu'
-            ? await this.facade.createCpu(displayName)
+            ? await this.facade.createCpu(displayName, this.form.controls.cpuDifficulty.value)
             : await this.facade.join(normalizeRoomCode(this.form.controls.roomCode.value), displayName);
       this.analytics.track(intent === 'join' ? 'game_joined' : 'game_created', {
         game_id: result.gameId,
         game_mode: intent === 'cpu' ? 'cpu' : 'multiplayer',
+        ...(intent === 'cpu' ? { cpu_difficulty: this.form.controls.cpuDifficulty.value } : {}),
       });
       await this.router.navigate([intent === 'cpu' ? '/game' : '/lobby', result.code]);
     } catch {

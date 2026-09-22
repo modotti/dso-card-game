@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { AuthService } from '../../../core/auth/auth.service';
 import { LobbyRepository } from '../data-access/lobby.repository';
-import type { Lobby, RoomResult } from '../domain/lobby.models';
+import type { CpuDifficulty, Lobby, RoomResult } from '../domain/lobby.models';
 
 export type ConnectionState = 'connecting' | 'connected' | 'error';
 
@@ -24,9 +24,9 @@ export class LobbyFacade {
     return this.repository.create(displayName);
   }
 
-  async createCpu(displayName: string): Promise<RoomResult> {
+  async createCpu(displayName: string, difficulty: CpuDifficulty): Promise<RoomResult> {
     this.currentPlayerId.set(await this.auth.ensurePlayerIdentity());
-    return this.repository.createCpu(displayName);
+    return this.repository.createCpu(displayName, difficulty);
   }
 
   async join(code: string, displayName: string): Promise<RoomResult> {

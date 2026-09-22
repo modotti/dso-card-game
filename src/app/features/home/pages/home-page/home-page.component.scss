@@ -227,6 +227,66 @@ input:focus {
   border-color: var(--cyan);
   box-shadow: 0 0 0 2px rgba(92, 225, 255, 0.08);
 }
+.difficulty-picker {
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+}
+.difficulty-picker legend {
+  margin-bottom: 9px;
+  color: #9da9c0;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.difficulty-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.difficulty-option {
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+}
+.difficulty-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.difficulty-option span {
+  display: grid;
+  min-height: 84px;
+  align-content: center;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #28314b;
+  border-radius: 3px;
+  background: #080e20;
+  transition: 0.2s ease;
+}
+.difficulty-option strong {
+  color: var(--text);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+}
+.difficulty-option small {
+  color: var(--muted);
+  font-size: 0.65rem;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.difficulty-option input:checked + span {
+  border-color: var(--cyan);
+  background: rgba(92, 225, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(92, 225, 255, 0.08);
+}
+.difficulty-option input:focus-visible + span {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
 .back {
   border: 0;
   background: none;
@@ -335,6 +395,12 @@ input:focus {
   }
   .entry-form {
     padding: 17px;
+  }
+  .difficulty-options {
+    grid-template-columns: 1fr;
+  }
+  .difficulty-option span {
+    min-height: 64px;
   }
   .home-footer {
     align-items: flex-start;

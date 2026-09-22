@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { SupabaseService } from '../../../core/supabase/supabase.service';
-import type { AttributeDefinition, CardAttributeValue, GameCard, GameView } from '../domain/game.models';
+import type { AttributeDefinition, CardAttributeValue, CpuDifficulty, GameCard, GameView } from '../domain/game.models';
 
 type RawCard = Record<string, unknown>;
 @Injectable({ providedIn: 'root' })
@@ -11,8 +11,14 @@ export class GameRepository {
     const { error } = await this.supabase.client.rpc('start_ready_game', { requested_code: code });
     if (error && error.message !== 'PLAYERS_NOT_READY') throw error;
   }
-  async createCpuGame(displayName: string): Promise<{ readonly gameId: string; readonly code: string }> {
-    const { data, error } = await this.supabase.client.rpc('create_cpu_game', { player_name: displayName });
+  async createCpuGame(
+    displayName: string,
+    difficulty: CpuDifficulty,
+  ): Promise<{ readonly gameId: string; readonly code: string }> {
+    const { data, error } = await this.supabase.client.rpc('create_cpu_game', {
+      player_name: displayName,
+      cpu_difficulty: difficulty,
+    });
     if (error) throw error;
     const row = (Array.isArray(data) ? data[0] : data) as { game_id?: string; room_code?: string } | null;
     if (!row?.game_id || !row.room_code) throw new Error('CPU_GAME_CREATION_FAILED');

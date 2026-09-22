@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 import { SupabaseService } from '../../../core/supabase/supabase.service';
-import type { Lobby, RoomResult } from '../domain/lobby.models';
+import type { CpuDifficulty, Lobby, RoomResult } from '../domain/lobby.models';
 
 interface LobbyRpcRow {
   game_id: string;
@@ -21,8 +21,11 @@ export class LobbyRepository {
     return { gameId: row.game_id, code: row.room_code };
   }
 
-  async createCpu(displayName: string): Promise<RoomResult> {
-    const { data, error } = await this.supabase.client.rpc('create_cpu_game', { player_name: displayName });
+  async createCpu(displayName: string, difficulty: CpuDifficulty): Promise<RoomResult> {
+    const { data, error } = await this.supabase.client.rpc('create_cpu_game', {
+      player_name: displayName,
+      cpu_difficulty: difficulty,
+    });
     if (error) throw error;
     const row = this.firstRow(data);
     return { gameId: row.game_id, code: row.room_code };
