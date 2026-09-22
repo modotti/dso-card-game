@@ -95,7 +95,7 @@ export class AnalyticsService {
           ...defaults,
           url: '/',
           referrer: '',
-          title: 'Deep Space Duel',
+          title: 'Deep Sky Duels',
           name: eventName,
           data: sanitized,
         })),

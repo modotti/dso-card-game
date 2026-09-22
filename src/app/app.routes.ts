@@ -4,29 +4,29 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./features/home/pages/home-page/home-page.component').then((m) => m.HomePageComponent),
-    title: 'Deep Space Duel',
+    title: 'Deep Sky Duels',
   },
   {
     path: 'join/:code',
     loadComponent: () => import('./features/home/pages/home-page/home-page.component').then((m) => m.HomePageComponent),
-    title: 'Join game · Deep Space Duel',
+    title: 'Join game · Deep Sky Duels',
   },
   {
     path: 'lobby/:code',
     loadComponent: () =>
       import('./features/lobby/pages/lobby-page/lobby-page.component').then((m) => m.LobbyPageComponent),
-    title: 'Lobby · Deep Space Duel',
+    title: 'Lobby · Deep Sky Duels',
   },
   {
     path: 'game/:code',
     loadComponent: () => import('./features/game/pages/game-page/game-page.component').then((m) => m.GamePageComponent),
-    title: 'Game · Deep Space Duel',
+    title: 'Game · Deep Sky Duels',
   },
   {
     path: 'privacidade',
     loadComponent: () =>
       import('./features/legal/pages/privacy-page/privacy-page.component').then((m) => m.PrivacyPageComponent),
-    title: 'Privacidade · Deep Space Duel',
+    title: 'Privacidade · Deep Sky Duels',
   },
   { path: '**', redirectTo: '' },
 ];

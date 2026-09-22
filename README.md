@@ -1,4 +1,4 @@
-# Deep Space Duel
+# Deep Sky Duels
 
 Experimental 1v1 card game featuring real deep-sky objects. This first increment contains the landing page and a realtime, two-player lobby; gameplay rules are intentionally out of scope.
 

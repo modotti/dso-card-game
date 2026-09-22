@@ -25,7 +25,7 @@ const EN = {
   'footer.privacy': 'Privacy and images',
   'privacy.eyebrow': 'Transparency',
   'privacy.title': 'Privacy and image use',
-  'privacy.intro': 'Deep Space Duel only uses the information needed to operate and improve the game.',
+  'privacy.intro': 'Deep Sky Duels only uses the information needed to operate and improve the game.',
   'privacy.data.title': 'Your data',
   'privacy.data.body':
     'Your display name and game data are processed to create rooms and matches. The name is also saved in your browser for convenience. No account is required, and personal data is not sold.',
@@ -159,7 +159,7 @@ const PT: Record<TranslationKey, string> = {
   'footer.privacy': 'Privacidade e imagens',
   'privacy.eyebrow': 'Transparência',
   'privacy.title': 'Privacidade e uso das imagens',
-  'privacy.intro': 'O Deep Space Duel utiliza somente as informações necessárias para operar e melhorar o jogo.',
+  'privacy.intro': 'O Deep Sky Duels utiliza somente as informações necessárias para operar e melhorar o jogo.',
   'privacy.data.title': 'Seus dados',
   'privacy.data.body':
     'Seu nome de exibição e os dados das partidas são processados para criar salas e partidas. O nome também fica salvo no seu navegador por conveniência. Não é necessário criar uma conta e dados pessoais não são vendidos.',

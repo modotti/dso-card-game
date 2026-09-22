@@ -47,7 +47,7 @@ describe('AnalyticsService', () => {
       hostname: 'game.example',
       url: '/',
       referrer: '',
-      title: 'Deep Space Duel',
+      title: 'Deep Sky Duels',
       name: 'game_completed',
       data: {
         game_id: 'game-1',
