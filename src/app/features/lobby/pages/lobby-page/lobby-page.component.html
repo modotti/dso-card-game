@@ -52,7 +52,7 @@
     <div class="footer-actions">
       <button class="link" type="button" (click)="leave()">← {{ i18n.text('lobby.leave') }}</button>
       @if (facade.isReady()) {
-        <button class="start" type="button" (click)="startPlaceholder()" disabled>
+        <button class="start" type="button" disabled>
           {{ i18n.text('lobby.readyTitle') }}
         </button>
       }

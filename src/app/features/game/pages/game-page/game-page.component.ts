@@ -1,6 +1,7 @@
 import type { OnDestroy, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AnalyticsService } from '../../../../core/analytics/analytics.service';
 import { TranslationService } from '../../../../core/i18n/translation.service';
 import type { AttributeDefinition, CardAttributeValue, GameCard, RevealedCard } from '../../domain/game.models';
 import { GameFacade } from '../../state/game.facade';
@@ -17,6 +18,7 @@ import { GameCardComponent } from '../../ui/game-card/game-card.component';
 export class GamePageComponent implements OnInit, OnDestroy {
   protected readonly facade = inject(GameFacade);
   protected readonly i18n = inject(TranslationService);
+  private readonly analytics = inject(AnalyticsService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   protected readonly selectedCard = signal<string | null>(null);
@@ -35,6 +37,33 @@ export class GamePageComponent implements OnInit, OnDestroy {
   private previousRoundStatus: string | null = null;
 
   constructor() {
+    effect(() => {
+      const game = this.facade.game();
+      const playerId = this.facade.playerId();
+      if (!game || !playerId) return;
+      const gameMode = this.gameMode();
+      const eventIdentity = `${game.id}:${playerId}`;
+      this.analytics.trackOnce('game_started', eventIdentity, {
+        game_id: game.id,
+        game_mode: gameMode,
+      });
+      if (game.round.status === 'resolved') {
+        this.analytics.trackOnce('round_completed', `${eventIdentity}:${game.round.number}`, {
+          game_id: game.id,
+          game_mode: gameMode,
+          round_number: game.round.number,
+          result: this.roundResult(),
+        });
+      }
+      if (game.status === 'finished') {
+        this.analytics.trackOnce('game_completed', eventIdentity, {
+          game_id: game.id,
+          game_mode: gameMode,
+          rounds_played: game.round.number,
+          result: this.gameResult(),
+        });
+      }
+    });
     effect(() => {
       const finished = this.facade.game()?.status === 'finished';
       if (finished && !this.finalModalScheduled) {
@@ -145,6 +174,16 @@ export class GamePageComponent implements OnInit, OnDestroy {
     this.currentCardIndex.set(Math.min(cards.length, Math.round(carousel.scrollLeft / step) + 1));
   }
   leave(): void {
+    const game = this.facade.game();
+    const playerId = this.facade.playerId();
+    if (game && playerId && game.status !== 'finished') {
+      this.analytics.trackOnce('game_abandoned', `${game.id}:${playerId}`, {
+        game_id: game.id,
+        game_mode: this.gameMode(),
+        rounds_played: game.round.status === 'resolved' ? game.round.number : Math.max(0, game.round.number - 1),
+        disconnect_reason: 'explicit_exit',
+      });
+    }
     void this.router.navigate(['/']);
   }
   createGame(): void {
@@ -152,8 +191,16 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
   async playAgain(): Promise<void> {
     await this.run(async () => {
-      const code = await this.facade.createCpuRematch();
-      window.location.assign(`/game/${code}`);
+      const previousGameId = this.facade.game()?.id;
+      if (!previousGameId) return;
+      this.analytics.track('rematch_requested', { game_id: previousGameId, game_mode: 'cpu' });
+      const rematch = await this.facade.createCpuRematch();
+      this.analytics.track('rematch_started', {
+        game_id: rematch.gameId,
+        previous_game_id: previousGameId,
+        game_mode: 'cpu',
+      });
+      window.location.assign(`/game/${rematch.code}`);
     });
   }
   attributeLabel(value: string | null): string {
@@ -208,6 +255,24 @@ export class GamePageComponent implements OnInit, OnDestroy {
   canAdvanceRound(): boolean {
     const game = this.facade.game();
     return !!game && (!!this.facade.cpuPlayer() || game.round.activePlayerId !== this.facade.playerId());
+  }
+  private gameMode(): 'cpu' | 'multiplayer' {
+    return this.facade.cpuPlayer() ? 'cpu' : 'multiplayer';
+  }
+  private roundResult(): 'win' | 'loss' | 'tie' | 'cancelled' {
+    const round = this.facade.game()?.round;
+    if (!round || round.isCancelled) return 'cancelled';
+    if (round.isTie) return 'tie';
+    return round.winnerId === this.facade.playerId() ? 'win' : 'loss';
+  }
+  private gameResult(): 'win' | 'loss' | 'tie' {
+    const game = this.facade.game();
+    const playerId = this.facade.playerId();
+    if (!game || !playerId) return 'tie';
+    const player = game.players.find((item) => item.id === playerId);
+    const opponent = game.players.find((item) => item.id !== playerId);
+    if (!player || !opponent || player.score === opponent.score) return 'tie';
+    return player.score > opponent.score ? 'win' : 'loss';
   }
   private async run(action: () => Promise<void>): Promise<void> {
     this.busy.set(true);

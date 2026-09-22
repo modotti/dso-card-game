@@ -39,7 +39,6 @@ export class HomePageComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.analytics.track('landing_view');
     const invitedCode = normalizeRoomCode(this.route.snapshot.paramMap.get('code') ?? '');
     if (invitedCode) {
       this.form.controls.roomCode.setValue(invitedCode);
@@ -84,7 +83,10 @@ export class HomePageComponent implements OnInit {
           : intent === 'cpu'
             ? await this.facade.createCpu(displayName)
             : await this.facade.join(normalizeRoomCode(this.form.controls.roomCode.value), displayName);
-      this.analytics.track(intent === 'join' ? 'game_joined' : intent === 'cpu' ? 'cpu_game_created' : 'game_created');
+      this.analytics.track(intent === 'join' ? 'game_joined' : 'game_created', {
+        game_id: result.gameId,
+        game_mode: intent === 'cpu' ? 'cpu' : 'multiplayer',
+      });
       await this.router.navigate([intent === 'cpu' ? '/game' : '/lobby', result.code]);
     } catch {
       this.errorKey.set('home.error.generic');

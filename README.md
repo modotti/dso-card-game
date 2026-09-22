@@ -27,6 +27,12 @@ The publishable key is expected to be present in the browser. Authorization is e
 - `npm run lint` — TypeScript lint
 - `npm run format` — format project files
 
+## Product analytics
+
+Production analytics uses the official Umami tracker through `AnalyticsService`. Development analytics is disabled in `environment.development.ts`, and automatic pageviews, click tracking, path tracking, and performance tracking are disabled.
+
+To enable analytics in production, create a Website in Umami and copy its **Website ID** into `environment.analytics.umamiWebsiteId` in `src/environments/environment.ts`. Keep `umamiHostUrl` as `https://cloud.umami.is` for Umami Cloud or replace it with the origin of a self-hosted instance. No Umami account token or API key belongs in the browser application.
+
 ## Current architecture
 
 - `core`: application-wide infrastructure such as auth, Supabase, analytics, and translations.

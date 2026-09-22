@@ -61,7 +61,7 @@ export class GameFacade {
     await this.repository.playCpuTurn(id);
     await this.refresh();
   }
-  async createCpuRematch(): Promise<string> {
+  async createCpuRematch(): Promise<{ readonly gameId: string; readonly code: string }> {
     const player = this.game()?.players.find((item) => item.id === this.playerId() && !item.isCpu);
     if (!player) throw new Error('PLAYER_NOT_FOUND');
     return this.repository.createCpuGame(player.displayName);
