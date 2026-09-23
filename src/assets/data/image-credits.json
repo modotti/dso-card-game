@@ -182,5 +182,69 @@
     "asset": "/assets/cards/ngc3372.jpg",
     "photographer": "Tiago Rocha",
     "handle": "@astro_scient"
+  },
+  {
+    "id": "eso-m104",
+    "cardId": "m104",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/m104.jpg",
+    "photographer": "ESO/IDA/Danish 1.5 m/R. Gendler and J.-E. Ovaldsen",
+    "handle": ""
+  },
+  {
+    "id": "eso-ngc1365",
+    "cardId": "ngc1365",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/ngc1365.jpg",
+    "photographer": "ESO/IDA/Danish 1.5 m/ R. Gendler, J-E. Ovaldsen, C. Thöne, and C. Feron.",
+    "handle": ""
+  },
+  {
+    "id": "eso-ngc1055",
+    "cardId": "ngc1055",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/ngc1055.jpg",
+    "photographer": "ESO",
+    "handle": ""
+  },
+  {
+    "id": "eso-ngc1097",
+    "cardId": "ngc1097",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/ngc1097.jpg",
+    "photographer": "ESO",
+    "handle": ""
+  },
+  {
+    "id": "eso-ngc1232",
+    "cardId": "ngc1232",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/ngc1232.jpg",
+    "photographer": "ESO",
+    "handle": ""
+  },
+  {
+    "id": "eso-ngc1398",
+    "cardId": "ngc1398",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/ngc1398.jpg",
+    "photographer": "ESO",
+    "handle": ""
+  },
+  {
+    "id": "eso-ngc55",
+    "cardId": "ngc55",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/ngc55.jpg",
+    "photographer": "ESO",
+    "handle": ""
+  },
+  {
+    "id": "eso-m83",
+    "cardId": "m83",
+    "collectionName": "ESO Collection",
+    "asset": "/assets/cards/m83.jpg",
+    "photographer": "ESO",
+    "handle": ""
   }
 ]

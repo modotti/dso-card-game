@@ -274,5 +274,101 @@
     "apparentSizeArcmin": 120,
     "physicalSizeLightYears": 300,
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-92/"
+  },
+  {
+    "id": "m104",
+    "catalogName": "M104",
+    "commonName": "Sombrero Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Virgo",
+    "distanceLightYears": 28000000,
+    "apparentMagnitude": 8,
+    "apparentSizeArcmin": 8.51,
+    "physicalSizeLightYears": 69000,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/"
+  },
+  {
+    "id": "ngc1365",
+    "catalogName": "NGC 1365",
+    "commonName": "Great Barred Spiral Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Fornax",
+    "distanceLightYears": 60000000,
+    "apparentMagnitude": 9.63,
+    "apparentSizeArcmin": 7.56,
+    "physicalSizeLightYears": 200000,
+    "sourceUrl": "https://www.eso.org/public/images/potw1037a/"
+  },
+  {
+    "id": "ngc1055",
+    "catalogName": "NGC 1055",
+    "commonName": "Edge-on Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Cetus",
+    "distanceLightYears": 52000000,
+    "apparentMagnitude": 10.59,
+    "apparentSizeArcmin": 7.08,
+    "physicalSizeLightYears": 115000,
+    "sourceUrl": "https://www.eso.org/public/images/eso1707a/"
+  },
+  {
+    "id": "ngc1097",
+    "catalogName": "NGC 1097",
+    "commonName": "Barred Spiral Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Fornax",
+    "distanceLightYears": 45000000,
+    "apparentMagnitude": 9.48,
+    "apparentSizeArcmin": 10.6,
+    "physicalSizeLightYears": 140000,
+    "sourceUrl": "https://www.eso.org/public/images/eso0128a/"
+  },
+  {
+    "id": "ngc1232",
+    "catalogName": "NGC 1232",
+    "commonName": "Grand Design Spiral",
+    "objectType": "spiral_galaxy",
+    "constellation": "Eridanus",
+    "distanceLightYears": 60000000,
+    "apparentMagnitude": 9.87,
+    "apparentSizeArcmin": 5.07,
+    "physicalSizeLightYears": 90000,
+    "sourceUrl": "https://www.eso.org/public/images/eso9845d/"
+  },
+  {
+    "id": "ngc1398",
+    "catalogName": "NGC 1398",
+    "commonName": "Ribbons and Pearls",
+    "objectType": "spiral_galaxy",
+    "constellation": "Fornax",
+    "distanceLightYears": 65000000,
+    "apparentMagnitude": 9.7,
+    "apparentSizeArcmin": 7.2,
+    "physicalSizeLightYears": 135000,
+    "sourceUrl": "https://www.eso.org/public/images/potw1801a/"
+  },
+  {
+    "id": "ngc55",
+    "catalogName": "NGC 55",
+    "commonName": "String of Pearls Galaxy",
+    "objectType": "irregular_galaxy",
+    "constellation": "Sculptor",
+    "distanceLightYears": 8000000,
+    "apparentMagnitude": 7.87,
+    "apparentSizeArcmin": 32.36,
+    "physicalSizeLightYears": 70000,
+    "sourceUrl": "https://www.eso.org/public/images/ngc/"
+  },
+  {
+    "id": "m83",
+    "catalogName": "M83",
+    "commonName": "Southern Pinwheel Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Hydra",
+    "distanceLightYears": 15000000,
+    "apparentMagnitude": 7.52,
+    "apparentSizeArcmin": 13.8,
+    "physicalSizeLightYears": 40000,
+    "sourceUrl": "https://www.eso.org/public/images/eso0525b/"
   }
 ]

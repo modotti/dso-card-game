@@ -30,7 +30,12 @@
             />
             <span class="catalog-card__credit">
               <span>{{ card.image.collectionName }}</span>
-              <span>{{ card.image.photographer }} · {{ card.image.handle }}</span>
+              <span>
+                {{ card.image.photographer }}
+                @if (card.image.handle) {
+                  · {{ card.image.handle }}
+                }
+              </span>
             </span>
           }
         </span>
@@ -67,7 +72,12 @@
           <img [src]="card.image.asset" [alt]="card.commonName" />
           <div class="photo-credit">
             <span>{{ card.image.collectionName }}</span>
-            <span>{{ i18n.text('catalog.imageCredit') }}: {{ card.image.photographer }} · {{ card.image.handle }}</span>
+            <span>
+              {{ i18n.text('catalog.imageCredit') }}: {{ card.image.photographer }}
+              @if (card.image.handle) {
+                · {{ card.image.handle }}
+              }
+            </span>
           </div>
         }
       </div>

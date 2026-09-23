@@ -12,7 +12,7 @@ describe('CatalogPageComponent', () => {
     const fixture = TestBed.createComponent(CatalogPageComponent);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelectorAll('.catalog-card')).toHaveSize(23);
+    expect(fixture.nativeElement.querySelectorAll('.catalog-card')).toHaveSize(31);
   });
 
   it('opens and closes the card details modal', () => {
