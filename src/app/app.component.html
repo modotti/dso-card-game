@@ -4,10 +4,32 @@
       <img src="/assets/brand/deep-sky-duels-logo.png" alt="" aria-hidden="true" />
       <span>DEEP SKY <strong>DUELS</strong></span>
     </a>
-    <div class="language" role="group" [attr.aria-label]="i18n.text('language.label')">
-      <button type="button" [class.active]="i18n.language() === 'en'" (click)="i18n.setLanguage('en')">EN</button>
-      <span aria-hidden="true">/</span>
-      <button type="button" [class.active]="i18n.language() === 'pt-BR'" (click)="i18n.setLanguage('pt-BR')">PT</button>
+    <div class="topbar__controls">
+      <button
+        class="audio-toggle"
+        type="button"
+        [attr.aria-label]="i18n.text(backgroundAudio.muted() ? 'audio.unmute' : 'audio.mute')"
+        [attr.title]="i18n.text(backgroundAudio.muted() ? 'audio.unmute' : 'audio.mute')"
+        [attr.aria-pressed]="backgroundAudio.muted()"
+        (click)="backgroundAudio.toggleMute()"
+      >
+        @if (backgroundAudio.muted()) {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Zm4.5 5 5 5m0-5-5 5" />
+          </svg>
+        } @else {
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5 6.8 8.5H3.5v7h3.3L11 19V5Zm4 3.2a5 5 0 0 1 0 7.6m2.7-10.3a8.5 8.5 0 0 1 0 13" />
+          </svg>
+        }
+      </button>
+      <div class="language" role="group" [attr.aria-label]="i18n.text('language.label')">
+        <button type="button" [class.active]="i18n.language() === 'en'" (click)="i18n.setLanguage('en')">EN</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" [class.active]="i18n.language() === 'pt-BR'" (click)="i18n.setLanguage('pt-BR')">
+          PT
+        </button>
+      </div>
     </div>
   </header>
   <main><router-outlet /></main>

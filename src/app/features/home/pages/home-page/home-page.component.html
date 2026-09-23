@@ -2,7 +2,7 @@
   <div class="nebula" aria-hidden="true">
     @for (card of featuredCards; track card.id; let index = $index) {
       <div class="featured-card" [class]="'featured-card featured-card--' + (index + 1)">
-        <app-game-card [card]="card" />
+        <app-game-card [card]="card" [imagePriority]="index === 0" />
       </div>
     }
   </div>

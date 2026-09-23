@@ -5,7 +5,12 @@
     >
   }
   <div class="image">
-    <img [src]="imageSource()" [alt]="cardName()" loading="lazy" /><span>{{ card().catalogName }}</span>
+    <img
+      [src]="imageSource()"
+      [alt]="cardName()"
+      [attr.loading]="imagePriority() ? 'eager' : 'lazy'"
+      [attr.fetchpriority]="imagePriority() ? 'high' : null"
+    /><span>{{ card().catalogName }}</span>
   </div>
   @if (card().image; as image) {
     <div class="image-details">

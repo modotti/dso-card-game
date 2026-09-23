@@ -2,6 +2,7 @@ import type { OnDestroy, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnalyticsService } from '../../../../core/analytics/analytics.service';
+import { BackgroundAudioService } from '../../../../core/audio/background-audio.service';
 import { TranslationService } from '../../../../core/i18n/translation.service';
 import type { AttributeDefinition, CardAttributeValue, GameCard, RevealedCard } from '../../domain/game.models';
 import { GameFacade } from '../../state/game.facade';
@@ -19,6 +20,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   protected readonly facade = inject(GameFacade);
   protected readonly i18n = inject(TranslationService);
   private readonly analytics = inject(AnalyticsService);
+  private readonly backgroundAudio = inject(BackgroundAudioService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   protected readonly selectedCard = signal<string | null>(null);
@@ -49,12 +51,14 @@ export class GamePageComponent implements OnInit, OnDestroy {
         game_mode: gameMode,
       });
       if (game.round.status === 'resolved') {
+        const result = this.roundResult();
         this.analytics.trackOnce('round_completed', `${eventIdentity}:${game.round.number}`, {
           game_id: game.id,
           game_mode: gameMode,
           round_number: game.round.number,
-          result: this.roundResult(),
+          result,
         });
+        this.backgroundAudio.playRoundResult(result, `${game.id}:${game.matchNumber}:${game.round.number}`);
       }
       if (game.status === 'finished') {
         this.analytics.trackOnce('game_completed', eventIdentity, {
@@ -67,6 +71,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
     });
     effect(() => {
       const finished = this.facade.game()?.status === 'finished';
+      this.backgroundAudio.setGameFinished(finished);
       if (finished && !this.finalModalScheduled) {
         this.finalModalScheduled = true;
         this.finalModalTimer = setTimeout(() => this.showFinalModal.set(true), 2500);
@@ -201,7 +206,10 @@ export class GamePageComponent implements OnInit, OnDestroy {
         previous_game_id: previousGameId,
         game_mode: 'cpu',
       });
-      window.location.assign(`/game/${rematch.code}`);
+      this.backgroundAudio.setGameFinished(false);
+      this.showFinalModal.set(false);
+      await this.router.navigate(['/game', rematch.code]);
+      await this.facade.reconnect(rematch.code);
     });
   }
   async requestRematch(): Promise<void> {

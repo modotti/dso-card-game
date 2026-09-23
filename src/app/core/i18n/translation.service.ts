@@ -3,6 +3,8 @@ import { Injectable, signal } from '@angular/core';
 export type Language = 'en' | 'pt-BR';
 const EN = {
   'language.label': 'Choose language',
+  'audio.mute': 'Mute music',
+  'audio.unmute': 'Turn music on',
   'home.eyebrow': 'A universe of cards',
   'home.title.before': 'The cosmos is',
   'home.title.accent': 'in your hand.',
@@ -151,6 +153,8 @@ const EN = {
 export type TranslationKey = keyof typeof EN;
 const PT: Record<TranslationKey, string> = {
   'language.label': 'Escolher idioma',
+  'audio.mute': 'Silenciar música',
+  'audio.unmute': 'Ativar música',
   'home.eyebrow': 'Um universo de cartas',
   'home.title.before': 'O cosmos está',
   'home.title.accent': 'nas suas mãos.',

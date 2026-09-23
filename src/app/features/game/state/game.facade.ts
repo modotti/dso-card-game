@@ -31,6 +31,13 @@ export class GameFacade {
       this.loading.set(false);
     }
   }
+  async reconnect(code: string): Promise<void> {
+    this.game.set(null);
+    this.loading.set(true);
+    this.error.set(null);
+    await this.disconnect();
+    await this.connect(code);
+  }
   async chooseAttribute(attribute: string): Promise<void> {
     const id = this.game()?.id;
     if (!id) return;
@@ -79,7 +86,10 @@ export class GameFacade {
     await this.refresh();
   }
   async disconnect(): Promise<void> {
-    if (this.channel) await this.repository.unsubscribe(this.channel);
+    if (!this.channel) return;
+    const channel = this.channel;
+    this.channel = undefined;
+    await this.repository.unsubscribe(channel);
   }
   private async refresh(): Promise<void> {
     this.game.set(await this.repository.get(this.code));

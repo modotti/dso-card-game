@@ -14,6 +14,7 @@ export class GameCardComponent {
   readonly ownerLabel = input<string>('');
   readonly selected = input(false);
   readonly winner = input(false);
+  readonly imagePriority = input(false);
   protected readonly i18n = inject(TranslationService);
   protected imageSource(): string {
     return this.card().effectKey === 'cancel_round'
