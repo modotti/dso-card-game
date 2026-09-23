@@ -1,0 +1,108 @@
+<section class="catalog">
+  <header class="catalog-hero">
+    <div>
+      <p class="eyebrow">{{ i18n.text('catalog.eyebrow') }}</p>
+      <h1>{{ i18n.text('catalog.title') }}</h1>
+      <p class="description">{{ i18n.text('catalog.description') }}</p>
+    </div>
+    <div class="collection-count" aria-live="polite">
+      <strong>{{ cards.length }}</strong>
+      <span>{{ i18n.text('catalog.count') }}</span>
+    </div>
+  </header>
+
+  <div class="catalog-grid">
+    @for (card of cards; track card.id; let index = $index) {
+      <button
+        class="catalog-card"
+        type="button"
+        (click)="openCard(card)"
+        [attr.aria-label]="i18n.text('catalog.openCard') + ': ' + card.commonName"
+      >
+        <span class="catalog-card__number">{{ (index + 1).toString().padStart(2, '0') }}</span>
+        <span class="catalog-card__image">
+          @if (card.image) {
+            <img
+              [src]="card.image.asset"
+              [alt]="card.commonName"
+              [attr.loading]="index < 4 ? 'eager' : 'lazy'"
+              [attr.fetchpriority]="index === 0 ? 'high' : null"
+            />
+            <span class="catalog-card__credit">
+              <span>{{ card.image.collectionName }}</span>
+              <span>{{ card.image.photographer }} · {{ card.image.handle }}</span>
+            </span>
+          }
+        </span>
+        <span class="catalog-card__body">
+          <span class="catalog-card__meta">{{ card.catalogName }} · {{ card.constellation }}</span>
+          <strong>{{ card.commonName }}</strong>
+          <span class="catalog-card__type">{{ i18n.text('objectType.' + card.objectType) }}</span>
+        </span>
+        <span class="catalog-card__open" aria-hidden="true">↗</span>
+      </button>
+    }
+  </div>
+</section>
+
+@if (selectedCard(); as card) {
+  <div class="modal-backdrop" (click)="closeCard()">
+    <section
+      class="card-modal"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="card.commonName"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        class="card-modal__close"
+        type="button"
+        (click)="closeCard()"
+        [attr.aria-label]="i18n.text('catalog.close')"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="card-modal__visual">
+        @if (card.image) {
+          <img [src]="card.image.asset" [alt]="card.commonName" />
+          <div class="photo-credit">
+            <span>{{ card.image.collectionName }}</span>
+            <span>{{ i18n.text('catalog.imageCredit') }}: {{ card.image.photographer }} · {{ card.image.handle }}</span>
+          </div>
+        }
+      </div>
+      <div class="card-modal__content">
+        <p class="modal-catalog-name">{{ card.catalogName }}</p>
+        <h2>{{ card.commonName }}</h2>
+        <p class="modal-kind">{{ i18n.text('objectType.' + card.objectType) }}</p>
+
+        <dl class="card-facts">
+          <div>
+            <dt>{{ i18n.text('catalog.constellation') }}</dt>
+            <dd>{{ card.constellation }}</dd>
+          </div>
+          <div>
+            <dt>{{ i18n.text('attribute.distance') }}</dt>
+            <dd>≈ {{ format(card.distanceLightYears, 0) }} ly</dd>
+          </div>
+          <div>
+            <dt>{{ i18n.text('attribute.apparentMagnitude') }}</dt>
+            <dd>{{ format(card.apparentMagnitude, 2) }} mag</dd>
+          </div>
+          <div>
+            <dt>{{ i18n.text('attribute.apparentSize') }}</dt>
+            <dd>{{ format(card.apparentSizeArcmin, 2) }}′</dd>
+          </div>
+          <div>
+            <dt>{{ i18n.text('attribute.physicalSize') }}</dt>
+            <dd>≈ {{ format(card.physicalSizeLightYears, 0) }} ly</dd>
+          </div>
+        </dl>
+
+        <a class="source-link" [href]="card.sourceUrl" target="_blank" rel="noopener noreferrer">
+          {{ i18n.text('catalog.source') }} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </div>
+}

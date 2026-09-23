@@ -23,6 +23,12 @@ export const routes: Routes = [
     title: 'Game · Deep Sky Duels',
   },
   {
+    path: 'catalogo',
+    loadComponent: () =>
+      import('./features/cards/pages/catalog-page/catalog-page.component').then((m) => m.CatalogPageComponent),
+    title: 'Catálogo · Deep Sky Duels',
+  },
+  {
     path: 'privacidade',
     loadComponent: () =>
       import('./features/legal/pages/privacy-page/privacy-page.component').then((m) => m.PrivacyPageComponent),
