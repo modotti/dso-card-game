@@ -32,6 +32,41 @@
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(93, 224, 255, 0.22));
 }
+.topbar__controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.audio-toggle {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  background: rgba(8, 14, 31, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+.audio-toggle:hover {
+  color: var(--cyan);
+  border-color: rgba(92, 225, 255, 0.42);
+  background: rgba(16, 27, 54, 0.88);
+}
+.audio-toggle svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .language {
   display: flex;
   gap: 7px;
@@ -97,6 +132,9 @@
   .brand img {
     width: 34px;
     height: 34px;
+  }
+  .topbar__controls {
+    gap: 10px;
   }
   .site-footer {
     width: calc(100% - 28px);
