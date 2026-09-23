@@ -37,6 +37,17 @@
   align-items: center;
   gap: 18px;
 }
+.catalog-link {
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.66rem;
+  transition: color 160ms ease;
+}
+.catalog-link:hover {
+  color: var(--cyan);
+}
 .audio-toggle {
   width: 36px;
   height: 36px;
@@ -133,8 +144,15 @@
     width: 34px;
     height: 34px;
   }
+  .brand span {
+    display: none;
+  }
   .topbar__controls {
     gap: 10px;
+  }
+  .catalog-link {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
   }
   .site-footer {
     width: calc(100% - 28px);
