@@ -186,7 +186,7 @@
   {
     "id": "eso-m104",
     "cardId": "m104",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/m104.jpg",
     "photographer": "ESO/IDA/Danish 1.5 m/R. Gendler and J.-E. Ovaldsen",
     "handle": ""
@@ -194,7 +194,7 @@
   {
     "id": "eso-ngc1365",
     "cardId": "ngc1365",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/ngc1365.jpg",
     "photographer": "ESO/IDA/Danish 1.5 m/ R. Gendler, J-E. Ovaldsen, C. Thöne, and C. Feron.",
     "handle": ""
@@ -202,7 +202,7 @@
   {
     "id": "eso-ngc1055",
     "cardId": "ngc1055",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/ngc1055.jpg",
     "photographer": "ESO",
     "handle": ""
@@ -210,7 +210,7 @@
   {
     "id": "eso-ngc1097",
     "cardId": "ngc1097",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/ngc1097.jpg",
     "photographer": "ESO",
     "handle": ""
@@ -218,7 +218,7 @@
   {
     "id": "eso-ngc1232",
     "cardId": "ngc1232",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/ngc1232.jpg",
     "photographer": "ESO",
     "handle": ""
@@ -226,7 +226,7 @@
   {
     "id": "eso-ngc1398",
     "cardId": "ngc1398",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/ngc1398.jpg",
     "photographer": "ESO",
     "handle": ""
@@ -234,7 +234,7 @@
   {
     "id": "eso-ngc55",
     "cardId": "ngc55",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/ngc55.jpg",
     "photographer": "ESO",
     "handle": ""
@@ -242,7 +242,7 @@
   {
     "id": "eso-m83",
     "cardId": "m83",
-    "collectionName": "ESO Collection",
+    "collectionName": "Space Agencies Collection",
     "asset": "/assets/cards/m83.jpg",
     "photographer": "ESO",
     "handle": ""
@@ -262,5 +262,61 @@
     "asset": "/assets/cards/sfo82.jpg",
     "photographer": "Fernando Modotti",
     "handle": "@luimodotti"
+  },
+  {
+    "id": "agency-ngc7293",
+    "cardId": "ngc7293",
+    "collectionName": "Space Agencies Collection",
+    "asset": "/assets/cards/ngc7293.jpg",
+    "photographer": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon",
+    "handle": ""
+  },
+  {
+    "id": "agency-ngc104",
+    "cardId": "ngc104",
+    "collectionName": "Space Agencies Collection",
+    "asset": "/assets/cards/ngc104.jpg",
+    "photographer": "ESO/M.-R. Cioni/VISTA Magellanic Cloud survey.",
+    "handle": ""
+  },
+  {
+    "id": "agency-ngc4755",
+    "cardId": "ngc4755",
+    "collectionName": "Space Agencies Collection",
+    "asset": "/assets/cards/ngc4755.jpg",
+    "photographer": "ESO/Y. Beletsky",
+    "handle": ""
+  },
+  {
+    "id": "agency-m2",
+    "cardId": "m2",
+    "collectionName": "Space Agencies Collection",
+    "asset": "/assets/cards/m2.jpg",
+    "photographer": "ESA/Hubble & NASA, G. Piotto et al",
+    "handle": ""
+  },
+  {
+    "id": "agency-m92",
+    "cardId": "m92",
+    "collectionName": "Space Agencies Collection",
+    "asset": "/assets/cards/m92.jpg",
+    "photographer": "ESA/Hubble & NASA Acknowledgement: Gilles Chapdelaine",
+    "handle": ""
+  },
+  {
+    "id": "agency-ngc7006",
+    "cardId": "ngc7006",
+    "collectionName": "Space Agencies Collection",
+    "asset": "/assets/cards/ngc7006.jpg",
+    "photographer": "ESA/Hubble & NASA",
+    "handle": ""
+  },
+  {
+    "id": "agency-m78",
+    "cardId": "m78",
+    "collectionName": "Space Agencies Collection",
+    "asset": "/assets/cards/m78.jpg",
+    "photographer": "ESO/Igor Chekalin",
+    "handle": ""
   }
 ]
