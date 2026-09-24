@@ -84,6 +84,18 @@
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-11/"
   },
   {
+    "id": "sfo82",
+    "catalogName": "SFO 82",
+    "commonName": "Dark Tower",
+    "objectType": "cometary_globule",
+    "constellation": "Scorpius",
+    "distanceLightYears": 5000,
+    "apparentMagnitude": 10,
+    "apparentSizeArcmin": 30,
+    "physicalSizeLightYears": 40,
+    "sourceUrl": "https://www.eso.org/public/images/potw2411a/"
+  },
+  {
     "id": "sh2-308",
     "catalogName": "Sh 2-308",
     "commonName": "Dolphin Head Nebula",
@@ -132,16 +144,16 @@
     "sourceUrl": "https://science.nasa.gov/photojournal/chasing-chickens-in-the-lambda-centauri-nebula/"
   },
   {
-    "id": "ngc2736",
-    "catalogName": "NGC 2736",
-    "commonName": "Pencil Nebula",
-    "objectType": "supernova_remnant",
-    "constellation": "Vela",
-    "distanceLightYears": 815,
-    "apparentMagnitude": 12,
-    "apparentSizeArcmin": 30,
-    "physicalSizeLightYears": 7,
-    "sourceUrl": "https://science.nasa.gov/asset/hubble/the-pencil-nebula-remnants-of-an-exploded-star-ngc-2736/"
+    "id": "m31",
+    "catalogName": "M31",
+    "commonName": "Andromeda Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Andromeda",
+    "distanceLightYears": 2500000,
+    "apparentMagnitude": 3.44,
+    "apparentSizeArcmin": 190,
+    "physicalSizeLightYears": 152000,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-31/"
   },
   {
     "id": "m33",
@@ -154,6 +166,18 @@
     "apparentSizeArcmin": 70.8,
     "physicalSizeLightYears": 56000,
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-33/"
+  },
+  {
+    "id": "ngc2736",
+    "catalogName": "NGC 2736",
+    "commonName": "Pencil Nebula",
+    "objectType": "supernova_remnant",
+    "constellation": "Vela",
+    "distanceLightYears": 815,
+    "apparentMagnitude": 12,
+    "apparentSizeArcmin": 30,
+    "physicalSizeLightYears": 7,
+    "sourceUrl": "https://science.nasa.gov/asset/hubble/the-pencil-nebula-remnants-of-an-exploded-star-ngc-2736/"
   },
   {
     "id": "ngc7000",
@@ -274,5 +298,185 @@
     "apparentSizeArcmin": 120,
     "physicalSizeLightYears": 300,
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-92/"
+  },
+  {
+    "id": "m104",
+    "catalogName": "M104",
+    "commonName": "Sombrero Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Virgo",
+    "distanceLightYears": 28000000,
+    "apparentMagnitude": 8,
+    "apparentSizeArcmin": 8.51,
+    "physicalSizeLightYears": 69000,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/"
+  },
+  {
+    "id": "ngc1365",
+    "catalogName": "NGC 1365",
+    "commonName": "Great Barred Spiral Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Fornax",
+    "distanceLightYears": 60000000,
+    "apparentMagnitude": 9.63,
+    "apparentSizeArcmin": 7.56,
+    "physicalSizeLightYears": 200000,
+    "sourceUrl": "https://www.eso.org/public/images/potw1037a/"
+  },
+  {
+    "id": "ngc1055",
+    "catalogName": "NGC 1055",
+    "commonName": "Edge-on Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Cetus",
+    "distanceLightYears": 52000000,
+    "apparentMagnitude": 10.59,
+    "apparentSizeArcmin": 7.08,
+    "physicalSizeLightYears": 115000,
+    "sourceUrl": "https://www.eso.org/public/images/eso1707a/"
+  },
+  {
+    "id": "ngc1097",
+    "catalogName": "NGC 1097",
+    "commonName": "Barred Spiral Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Fornax",
+    "distanceLightYears": 45000000,
+    "apparentMagnitude": 9.48,
+    "apparentSizeArcmin": 10.6,
+    "physicalSizeLightYears": 140000,
+    "sourceUrl": "https://www.eso.org/public/images/eso0128a/"
+  },
+  {
+    "id": "ngc1232",
+    "catalogName": "NGC 1232",
+    "commonName": "Grand Design Spiral",
+    "objectType": "spiral_galaxy",
+    "constellation": "Eridanus",
+    "distanceLightYears": 60000000,
+    "apparentMagnitude": 9.87,
+    "apparentSizeArcmin": 5.07,
+    "physicalSizeLightYears": 90000,
+    "sourceUrl": "https://www.eso.org/public/images/eso9845d/"
+  },
+  {
+    "id": "ngc1398",
+    "catalogName": "NGC 1398",
+    "commonName": "Ribbons and Pearls",
+    "objectType": "spiral_galaxy",
+    "constellation": "Fornax",
+    "distanceLightYears": 65000000,
+    "apparentMagnitude": 9.7,
+    "apparentSizeArcmin": 7.2,
+    "physicalSizeLightYears": 135000,
+    "sourceUrl": "https://www.eso.org/public/images/potw1801a/"
+  },
+  {
+    "id": "ngc55",
+    "catalogName": "NGC 55",
+    "commonName": "String of Pearls Galaxy",
+    "objectType": "irregular_galaxy",
+    "constellation": "Sculptor",
+    "distanceLightYears": 8000000,
+    "apparentMagnitude": 7.87,
+    "apparentSizeArcmin": 32.36,
+    "physicalSizeLightYears": 70000,
+    "sourceUrl": "https://www.eso.org/public/images/ngc/"
+  },
+  {
+    "id": "m83",
+    "catalogName": "M83",
+    "commonName": "Southern Pinwheel Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Hydra",
+    "distanceLightYears": 15000000,
+    "apparentMagnitude": 7.52,
+    "apparentSizeArcmin": 13.8,
+    "physicalSizeLightYears": 40000,
+    "sourceUrl": "https://www.eso.org/public/images/eso0525b/"
+  },
+  {
+    "id": "ngc7293",
+    "catalogName": "NGC 7293",
+    "commonName": "Helix Nebula",
+    "objectType": "planetary_nebula",
+    "constellation": "Aquarius",
+    "distanceLightYears": 655,
+    "apparentMagnitude": 7.6,
+    "apparentSizeArcmin": 25,
+    "physicalSizeLightYears": 2.9,
+    "sourceUrl": "https://science.nasa.gov/universe/exoplanets-or-stars-from-afar/the-helix-nebula-unraveling-at-the-seams/"
+  },
+  {
+    "id": "ngc104",
+    "catalogName": "NGC 104",
+    "commonName": "47 Tucanae",
+    "objectType": "globular_cluster",
+    "constellation": "Tucana",
+    "distanceLightYears": 15000,
+    "apparentMagnitude": 4.09,
+    "apparentSizeArcmin": 43.8,
+    "physicalSizeLightYears": 190,
+    "sourceUrl": "https://www.eso.org/public/images/eso1302a/"
+  },
+  {
+    "id": "ngc4755",
+    "catalogName": "NGC 4755",
+    "commonName": "Jewel Box Cluster",
+    "objectType": "open_cluster",
+    "constellation": "Crux",
+    "distanceLightYears": 6500,
+    "apparentMagnitude": 4.2,
+    "apparentSizeArcmin": 7.8,
+    "physicalSizeLightYears": 15,
+    "sourceUrl": "https://www.eso.org/public/images/eso0940a/"
+  },
+  {
+    "id": "m2",
+    "catalogName": "M2",
+    "commonName": "Messier 2",
+    "objectType": "globular_cluster",
+    "constellation": "Aquarius",
+    "distanceLightYears": 37000,
+    "apparentMagnitude": 6.3,
+    "apparentSizeArcmin": 8.4,
+    "physicalSizeLightYears": 175,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-2/"
+  },
+  {
+    "id": "m92",
+    "catalogName": "M92",
+    "commonName": "Messier 92",
+    "objectType": "globular_cluster",
+    "constellation": "Hercules",
+    "distanceLightYears": 27000,
+    "apparentMagnitude": 6.3,
+    "apparentSizeArcmin": 14,
+    "physicalSizeLightYears": 110,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-92/"
+  },
+  {
+    "id": "ngc7006",
+    "catalogName": "NGC 7006",
+    "commonName": "Caldwell 42",
+    "objectType": "globular_cluster",
+    "constellation": "Delphinus",
+    "distanceLightYears": 135000,
+    "apparentMagnitude": 10.5,
+    "apparentSizeArcmin": 3.6,
+    "physicalSizeLightYears": 140,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-42/"
+  },
+  {
+    "id": "m78",
+    "catalogName": "M78",
+    "commonName": "Messier 78",
+    "objectType": "reflection_nebula",
+    "constellation": "Orion",
+    "distanceLightYears": 1400,
+    "apparentMagnitude": 8,
+    "apparentSizeArcmin": 8,
+    "physicalSizeLightYears": 4,
+    "sourceUrl": "https://www.eso.org/public/images/eso1105a/"
   }
 ]
