@@ -245,7 +245,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
   isCompatible(card: GameCard): boolean {
     return (
-      card.effectKey === 'cancel_round' ||
+      card.kind === 'effect' ||
       !this.facade.game()?.round.attribute ||
       card.attributes.some(
         (attribute) => attribute.id === this.facade.game()?.round.attribute && attribute.value !== null,
@@ -270,7 +270,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
   orderedRevealedCards(cards: readonly RevealedCard[], winnerId: string | null): readonly RevealedCard[] {
     const priority = (selection: RevealedCard): number =>
-      selection.card.effectKey === 'cancel_round' ? 2 : selection.playerId === winnerId ? 1 : 0;
+      selection.card.kind === 'effect' ? 2 : selection.playerId === winnerId ? 1 : 0;
     return [...cards].sort((first, second) => priority(second) - priority(first));
   }
   isFinalWinner(playerId: string): boolean {

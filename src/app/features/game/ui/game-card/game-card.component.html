@@ -28,11 +28,11 @@
       <small class="owner">{{ ownerLabel() }}</small>
     }
     <h3>{{ cardName() }}</h3>
-    @if (card().effectKey === 'cancel_round') {
+    @if (card().kind === 'effect') {
       <p>{{ i18n.text('objectType.special_effect') }}</p>
       <div class="effect-description">
-        <strong>{{ i18n.text('card.clouds.effect') }}</strong>
-        <span>{{ i18n.text('card.clouds.description') }}</span>
+        <strong>{{ effectText('effect') }}</strong>
+        <span>{{ effectText('description') }}</span>
       </div>
     } @else {
       <p>{{ objectTypeLabel() }} · {{ card().constellation }}</p>
