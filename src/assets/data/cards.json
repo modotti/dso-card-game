@@ -370,5 +370,29 @@
     "apparentSizeArcmin": 13.8,
     "physicalSizeLightYears": 40000,
     "sourceUrl": "https://www.eso.org/public/images/eso0525b/"
+  },
+  {
+    "id": "m31",
+    "catalogName": "M31",
+    "commonName": "Andromeda Galaxy",
+    "objectType": "spiral_galaxy",
+    "constellation": "Andromeda",
+    "distanceLightYears": 2500000,
+    "apparentMagnitude": 3.44,
+    "apparentSizeArcmin": 190,
+    "physicalSizeLightYears": 152000,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-31/"
+  },
+  {
+    "id": "sfo82",
+    "catalogName": "SFO 82",
+    "commonName": "Dark Tower",
+    "objectType": "cometary_globule",
+    "constellation": "Scorpius",
+    "distanceLightYears": 5000,
+    "apparentMagnitude": 10,
+    "apparentSizeArcmin": 30,
+    "physicalSizeLightYears": 40,
+    "sourceUrl": "https://www.eso.org/public/images/potw2411a/"
   }
 ]

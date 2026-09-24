@@ -246,5 +246,21 @@
     "asset": "/assets/cards/m83.jpg",
     "photographer": "ESO",
     "handle": ""
+  },
+  {
+    "id": "first-light-m31",
+    "cardId": "m31",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m31.jpg",
+    "photographer": "Tiago Rocha",
+    "handle": "@astro_scient"
+  },
+  {
+    "id": "first-light-sfo82",
+    "cardId": "sfo82",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/sfo82.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
   }
 ]
