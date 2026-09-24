@@ -22,6 +22,12 @@ interface CatalogEntry {
   } | null;
 }
 
+interface SpecialCatalogEntry {
+  readonly id: string;
+  readonly effectKey: string;
+  readonly asset: string;
+}
+
 @Component({
   selector: 'app-catalog-page',
   templateUrl: './catalog-page.component.html',
@@ -31,17 +37,41 @@ interface CatalogEntry {
 export class CatalogPageComponent {
   protected readonly i18n = inject(TranslationService);
   protected readonly selectedCard = signal<CatalogEntry | null>(null);
+  protected readonly selectedSpecialCard = signal<SpecialCatalogEntry | null>(null);
   protected readonly cards: readonly CatalogEntry[] = cardsData.map((card) => {
     const image = imageCredits.find((credit) => credit.cardId === card.id);
     return { ...card, image: image ?? null };
   });
+  protected readonly specialCards: readonly SpecialCatalogEntry[] = [
+    { id: 'clouds', effectKey: 'cancel_round', asset: '/assets/cards/clouds.jpg' },
+    {
+      id: 'stellar-winds',
+      effectKey: 'defeat_emission_nebula',
+      asset: '/assets/cards/stellar-winds.jpg',
+    },
+    {
+      id: 'galactic-collision',
+      effectKey: 'defeat_galaxy',
+      asset: '/assets/cards/galactic-collision.jpg',
+    },
+    {
+      id: 'tidal-disruption',
+      effectKey: 'defeat_star_cluster',
+      asset: '/assets/cards/tidal-disruption.jpg',
+    },
+  ];
 
   openCard(card: CatalogEntry): void {
     this.selectedCard.set(card);
   }
 
+  openSpecialCard(card: SpecialCatalogEntry): void {
+    this.selectedSpecialCard.set(card);
+  }
+
   closeCard(): void {
     this.selectedCard.set(null);
+    this.selectedSpecialCard.set(null);
   }
 
   format(value: number, maximumFractionDigits = 1): string {

@@ -48,6 +48,44 @@
       </button>
     }
   </div>
+
+  <section class="special-catalog" aria-labelledby="special-catalog-title">
+    <header class="special-catalog__header">
+      <div>
+        <p class="eyebrow">{{ i18n.text('catalog.special.eyebrow') }}</p>
+        <h2 id="special-catalog-title">{{ i18n.text('catalog.special.title') }}</h2>
+        <p class="description">{{ i18n.text('catalog.special.description') }}</p>
+      </div>
+      <div class="collection-count" aria-live="polite">
+        <strong>{{ specialCards.length }}</strong>
+        <span>{{ i18n.text('catalog.special.count') }}</span>
+      </div>
+    </header>
+
+    <div class="catalog-grid special-catalog__grid">
+      @for (card of specialCards; track card.id; let index = $index) {
+        <button
+          class="catalog-card catalog-card--special"
+          type="button"
+          (click)="openSpecialCard(card)"
+          [attr.aria-label]="
+            i18n.text('catalog.openCard') + ': ' + i18n.text('card.effect.' + card.effectKey + '.name')
+          "
+        >
+          <span class="catalog-card__number">S{{ index + 1 }}</span>
+          <span class="catalog-card__image">
+            <img [src]="card.asset" [alt]="i18n.text('card.effect.' + card.effectKey + '.name')" loading="lazy" />
+          </span>
+          <span class="catalog-card__body">
+            <span class="catalog-card__meta">{{ i18n.text('catalog.special.card') }}</span>
+            <strong>{{ i18n.text('card.effect.' + card.effectKey + '.name') }}</strong>
+            <span class="catalog-card__type">{{ i18n.text('card.effect.' + card.effectKey + '.effect') }}</span>
+          </span>
+          <span class="catalog-card__open" aria-hidden="true">↗</span>
+        </button>
+      }
+    </div>
+  </section>
 </section>
 
 @if (selectedCard(); as card) {
@@ -112,6 +150,40 @@
         <a class="source-link" [href]="card.sourceUrl" target="_blank" rel="noopener noreferrer">
           {{ i18n.text('catalog.source') }} <span aria-hidden="true">↗</span>
         </a>
+      </div>
+    </section>
+  </div>
+}
+
+@if (selectedSpecialCard(); as card) {
+  <div class="modal-backdrop" (click)="closeCard()">
+    <section
+      class="card-modal card-modal--special"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="i18n.text('card.effect.' + card.effectKey + '.name')"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        class="card-modal__close"
+        type="button"
+        (click)="closeCard()"
+        [attr.aria-label]="i18n.text('catalog.close')"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="card-modal__visual">
+        <img [src]="card.asset" [alt]="i18n.text('card.effect.' + card.effectKey + '.name')" />
+      </div>
+      <div class="card-modal__content">
+        <p class="modal-catalog-name">{{ i18n.text('catalog.special.card') }}</p>
+        <h2>{{ i18n.text('card.effect.' + card.effectKey + '.name') }}</h2>
+        <p class="modal-kind">{{ i18n.text('objectType.special_effect') }}</p>
+        <div class="special-effect">
+          <strong>{{ i18n.text('card.effect.' + card.effectKey + '.effect') }}</strong>
+          <p>{{ i18n.text('card.effect.' + card.effectKey + '.description') }}</p>
+        </div>
+        <p class="special-random-note">✦ {{ i18n.text('catalog.special.random') }}</p>
       </div>
     </section>
   </div>

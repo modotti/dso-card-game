@@ -12,7 +12,8 @@ describe('CatalogPageComponent', () => {
     const fixture = TestBed.createComponent(CatalogPageComponent);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelectorAll('.catalog-card')).toHaveSize(40);
+    expect(fixture.nativeElement.querySelectorAll('.catalog-card')).toHaveSize(44);
+    expect(fixture.nativeElement.querySelectorAll('.catalog-card--special')).toHaveSize(4);
   });
 
   it('opens and closes the card details modal', () => {
@@ -26,5 +27,15 @@ describe('CatalogPageComponent', () => {
     (fixture.nativeElement.querySelector('.card-modal__close') as HTMLButtonElement).click();
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.card-modal')).toBeNull();
+  });
+
+  it('opens the special card details modal', () => {
+    const fixture = TestBed.createComponent(CatalogPageComponent);
+    fixture.detectChanges();
+
+    (fixture.nativeElement.querySelector('.catalog-card--special') as HTMLButtonElement).click();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.card-modal--special')).not.toBeNull();
   });
 });
