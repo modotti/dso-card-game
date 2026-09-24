@@ -17,12 +17,21 @@ export class GameCardComponent {
   readonly imagePriority = input(false);
   protected readonly i18n = inject(TranslationService);
   protected imageSource(): string {
-    return this.card().effectKey === 'cancel_round'
-      ? '/assets/cards/clouds.jpg'
-      : (this.card().image?.src ?? `/assets/cards/${this.card().id}.jpg`);
+    const specialImages: Readonly<Record<string, string>> = {
+      cancel_round: '/assets/cards/clouds.jpg',
+      defeat_emission_nebula: '/assets/cards/stellar-winds.jpg',
+      defeat_galaxy: '/assets/cards/galactic-collision.jpg',
+      defeat_star_cluster: '/assets/cards/tidal-disruption.jpg',
+    };
+    const effectKey = this.card().effectKey;
+    const effectImage = effectKey ? specialImages[effectKey] : null;
+    return effectImage ?? this.card().image?.src ?? `/assets/cards/${this.card().id}.jpg`;
   }
   protected cardName(): string {
-    return this.card().effectKey === 'cancel_round' ? this.i18n.text('card.clouds.name') : this.card().commonName;
+    return this.card().effectKey ? this.i18n.text(`card.effect.${this.card().effectKey}.name`) : this.card().commonName;
+  }
+  protected effectText(part: 'effect' | 'description'): string {
+    return this.i18n.text(`card.effect.${this.card().effectKey}.${part}`);
   }
   protected objectTypeLabel(): string {
     return this.i18n.text(`objectType.${this.card().objectType}`);
