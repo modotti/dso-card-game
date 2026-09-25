@@ -1,4 +1,7 @@
 import { pickFeaturedCards } from './home-page.component';
+import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
+import { HomePageComponent } from './home-page.component';
 
 describe('pickFeaturedCards', () => {
   const cards = [
@@ -20,5 +23,16 @@ describe('pickFeaturedCards', () => {
     const sameType = cards.slice(0, 2);
 
     expect(pickFeaturedCards(sameType, 3, () => 0.5)).toEqual(sameType);
+  });
+});
+
+describe('HomePageComponent photo submission invitation', () => {
+  it('keeps the photo submission CTA disabled', () => {
+    TestBed.configureTestingModule({ imports: [HomePageComponent], providers: [provideRouter([])] });
+    const fixture = TestBed.createComponent(HomePageComponent);
+    fixture.detectChanges();
+    const cta = fixture.nativeElement.querySelector('.photo-invitation button') as HTMLButtonElement;
+    expect(cta).not.toBeNull();
+    expect(cta.disabled).toBeTrue();
   });
 });

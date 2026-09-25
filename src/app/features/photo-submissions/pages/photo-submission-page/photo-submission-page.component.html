@@ -1,0 +1,105 @@
+<section class="submission-page">
+  <header class="submission-intro">
+    <p class="eyebrow">{{ i18n.text('photo.eyebrow') }}</p>
+    <h1>{{ i18n.text('photo.title') }}</h1>
+    <p>{{ i18n.text('photo.description') }}</p>
+  </header>
+
+  @if (succeeded()) {
+    <section class="success" role="status">
+      <span aria-hidden="true">✦</span>
+      <h2>{{ i18n.text('photo.success.title') }}</h2>
+      <p>{{ i18n.text('photo.success.body') }}</p>
+      <a routerLink="/">← {{ i18n.text('photo.backHome') }}</a>
+    </section>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="field-grid">
+        <label>
+          <span>{{ i18n.text('photo.photographerName') }} *</span>
+          <input formControlName="photographerName" autocomplete="name" maxlength="100" />
+          @if (form.controls.photographerName.touched && form.controls.photographerName.invalid) {
+            <small class="field-error">{{ i18n.text('photo.error.required') }}</small>
+          }
+        </label>
+        <label>
+          <span>{{ i18n.text('photo.instagram') }}</span>
+          <input formControlName="instagram" autocomplete="off" placeholder="@username" />
+          @if (form.controls.instagram.touched && form.controls.instagram.invalid) {
+            <small class="field-error">{{ i18n.text('photo.error.instagram') }}</small>
+          }
+        </label>
+      </div>
+
+      <div class="field-grid">
+        <label>
+          <span>{{ i18n.text('photo.targetName') }} *</span>
+          <input
+            formControlName="targetName"
+            maxlength="120"
+            [placeholder]="i18n.text('photo.targetName.placeholder')"
+          />
+          @if (form.controls.targetName.touched && form.controls.targetName.invalid) {
+            <small class="field-error">{{ i18n.text('photo.error.required') }}</small>
+          }
+        </label>
+        <label>
+          <span>{{ i18n.text('photo.targetType') }} *</span>
+          <select formControlName="targetType">
+            <option value="" disabled>{{ i18n.text('photo.target.placeholder') }}</option>
+            <option value="emission_nebula">{{ i18n.text('photo.target.emissionNebula') }}</option>
+            <option value="reflection_nebula">{{ i18n.text('photo.target.reflectionNebula') }}</option>
+            <option value="dark_nebula">{{ i18n.text('photo.target.darkNebula') }}</option>
+            <option value="planetary_nebula">{{ i18n.text('photo.target.planetaryNebula') }}</option>
+            <option value="galaxy">{{ i18n.text('photo.target.galaxy') }}</option>
+            <option value="open_cluster">{{ i18n.text('photo.target.openCluster') }}</option>
+            <option value="globular_cluster">{{ i18n.text('photo.target.globularCluster') }}</option>
+            <option value="other">{{ i18n.text('photo.target.other') }}</option>
+          </select>
+          @if (form.controls.targetType.touched && form.controls.targetType.invalid) {
+            <small class="field-error">{{ i18n.text('photo.error.required') }}</small>
+          }
+        </label>
+      </div>
+
+      <div class="photo-field">
+        <span class="field-label">{{ i18n.text('photo.file') }} *</span>
+        <label class="drop-zone" [class.drop-zone--selected]="previewUrl()">
+          <input type="file" accept="image/jpeg,image/webp" (change)="selectPhoto($event)" />
+          @if (previewUrl(); as preview) {
+            <img [src]="preview" [alt]="i18n.text('photo.preview')" />
+            <span class="replace">{{ i18n.text('photo.replace') }}</span>
+          } @else {
+            <b aria-hidden="true">＋</b>
+            <strong>{{ i18n.text('photo.choose') }}</strong>
+            <small>{{ i18n.text('photo.requirements') }}</small>
+          }
+        </label>
+        @if (photoError(); as error) {
+          <small class="field-error">{{ i18n.text('photo.error.' + error) }}</small>
+        }
+      </div>
+
+      <label class="terms">
+        <input type="checkbox" formControlName="terms" />
+        <span>
+          {{ i18n.text('photo.terms.before') }}
+          <a routerLink="/photo-terms" target="_blank" (click)="$event.stopPropagation()">{{
+            i18n.text('photo.terms.link')
+          }}</a
+          >.
+        </span>
+      </label>
+      @if (form.controls.terms.touched && form.controls.terms.invalid) {
+        <small class="field-error terms-error">{{ i18n.text('photo.error.terms') }}</small>
+      }
+
+      @if (submitFailed()) {
+        <p class="submit-error" role="alert">{{ i18n.text('photo.error.submit') }}</p>
+      }
+      <button class="submit" type="submit" [disabled]="submitting()">
+        {{ i18n.text(submitting() ? 'photo.submitting' : 'photo.submit') }} <span aria-hidden="true">↗</span>
+      </button>
+    </form>
+  }
+</section>

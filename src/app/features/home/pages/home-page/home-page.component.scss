@@ -1,11 +1,63 @@
 .hero {
   width: min(1180px, calc(100% - 40px));
-  min-height: calc(100dvh - 84px);
+  min-height: clamp(580px, calc(100dvh - 205px), 760px);
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   position: relative;
+}
+.photo-invitation {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto 60px;
+  padding: 17px 26px;
+  overflow: hidden;
+  border: 1px solid rgba(151, 120, 255, 0.3);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 0 50%, rgba(92, 225, 255, 0.1), transparent 34%),
+    linear-gradient(135deg, rgba(18, 20, 48, 0.96), rgba(5, 9, 21, 0.98));
+}
+.photo-invitation__telescope {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(92, 225, 255, 0.2));
+}
+.photo-invitation .eyebrow {
+  margin-bottom: 6px;
+  color: #a995f3;
+}
+.photo-invitation h2 {
+  margin: 0;
+  font: 400 clamp(1.5rem, 2.5vw, 2.15rem)/1 var(--display);
+  letter-spacing: -0.03em;
+}
+.photo-invitation p:last-child {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+.photo-invitation button {
+  min-height: 44px;
+  padding: 0 18px;
+  color: #77839c;
+  font: 600 0.7rem var(--body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(128, 153, 206, 0.18);
+  border-radius: 4px;
+  cursor: not-allowed;
+}
+.photo-invitation button span {
+  margin-left: 15px;
 }
 
 .content {
@@ -187,7 +239,7 @@ h1 em {
   border-top: 1px solid var(--line);
 }
 
-.rules-modal li>span {
+.rules-modal li > span {
   color: var(--cyan);
   font: 500 0.75rem var(--display);
 }
@@ -320,13 +372,13 @@ input:focus {
   text-transform: none;
 }
 
-.difficulty-option input:checked+span {
+.difficulty-option input:checked + span {
   border-color: var(--cyan);
   background: rgba(92, 225, 255, 0.08);
   box-shadow: 0 0 0 2px rgba(92, 225, 255, 0.08);
 }
 
-.difficulty-option input:focus-visible+span {
+.difficulty-option input:focus-visible + span {
   outline: 2px solid var(--cyan);
   outline-offset: 2px;
 }
@@ -421,6 +473,18 @@ input:focus {
 @media (max-width: 600px) {
   .hero {
     width: calc(100% - 28px);
+  }
+  .photo-invitation {
+    grid-template-columns: 1fr;
+    width: calc(100% - 28px);
+    padding: 26px 22px;
+  }
+  .photo-invitation__telescope {
+    width: 58px;
+    height: 58px;
+  }
+  .photo-invitation button {
+    width: 100%;
   }
 
   .actions {

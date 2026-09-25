@@ -42,5 +42,21 @@ export const routes: Routes = [
       import('./features/legal/pages/privacy-page/privacy-page.component').then((m) => m.PrivacyPageComponent),
     title: 'Privacidade · Deep Sky Duels',
   },
+  {
+    path: 'submit-photo',
+    loadComponent: () =>
+      import('./features/photo-submissions/pages/photo-submission-page/photo-submission-page.component').then(
+        (m) => m.PhotoSubmissionPageComponent,
+      ),
+    title: 'Submit astrophotography · Deep Sky Duels',
+  },
+  {
+    path: 'photo-terms',
+    loadComponent: () =>
+      import('./features/photo-submissions/pages/photo-terms-page/photo-terms-page.component').then(
+        (m) => m.PhotoTermsPageComponent,
+      ),
+    title: 'Image Submission Terms · Deep Sky Duels',
+  },
   { path: '**', redirectTo: '' },
 ];
