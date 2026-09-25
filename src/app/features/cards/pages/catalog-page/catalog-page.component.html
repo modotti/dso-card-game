@@ -176,9 +176,28 @@
           </div>
         </dl>
 
-        <a class="source-link" [href]="card.sourceUrl" target="_blank" rel="noopener noreferrer">
-          {{ i18n.text('catalog.source') }} <span aria-hidden="true">↗</span>
-        </a>
+        <div class="card-actions">
+          <button class="share-button" type="button" [disabled]="isExporting()" (click)="shareCard(card)">
+            <span aria-hidden="true">⇧</span>
+            {{ i18n.text(isExporting() ? 'catalog.share.preparing' : 'catalog.share.action') }}
+          </button>
+          <a class="source-link" [href]="card.sourceUrl" target="_blank" rel="noopener noreferrer">
+            {{ i18n.text('catalog.source') }} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        @if (shareError()) {
+          <p class="share-error" role="alert">{{ i18n.text('catalog.share.error') }}</p>
+        }
+      </div>
+      <div class="card-export" #exportCard aria-hidden="true">
+        <div class="card-export__brand">
+          <img src="/assets/brand/deep-sky-duels-logo.png" alt="" />
+          <span>DEEP SKY <strong>DUELS</strong></span>
+        </div>
+        <div class="card-export__card">
+          <app-game-card [card]="asGameCard(card)" [imagePriority]="true" />
+        </div>
+        <p class="card-export__address">deepskyduels.com</p>
       </div>
     </section>
   </div>

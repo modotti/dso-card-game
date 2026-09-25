@@ -34,6 +34,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": ["html2canvas"],
             "assets": ["src/favicon.ico", "src/assets", "src/_redirects"],
             "styles": ["src/styles.scss"],
             "scripts": []
