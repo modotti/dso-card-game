@@ -1,7 +1,7 @@
 import type { OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AnalyticsService } from '../../../../core/analytics/analytics.service';
 import type { TranslationKey } from '../../../../core/i18n/translation.service';
 import { TranslationService } from '../../../../core/i18n/translation.service';
@@ -121,7 +121,7 @@ function toGameCard(card: CatalogCard): GameCard {
 
 @Component({
   selector: 'app-home-page',
-  imports: [ReactiveFormsModule, GameCardComponent],
+  imports: [ReactiveFormsModule, RouterLink, GameCardComponent],
   providers: [LobbyFacade],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',

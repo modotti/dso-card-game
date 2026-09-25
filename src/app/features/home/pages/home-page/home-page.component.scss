@@ -44,19 +44,27 @@
   font-size: 0.76rem;
   line-height: 1.55;
 }
-.photo-invitation button {
+.photo-invitation a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 44px;
   padding: 0 18px;
-  color: #77839c;
+  color: var(--text);
   font: 600 0.7rem var(--body);
   letter-spacing: 0.1em;
+  text-decoration: none;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(128, 153, 206, 0.18);
+  background: rgba(92, 225, 255, 0.08);
+  border: 1px solid rgba(92, 225, 255, 0.34);
   border-radius: 4px;
-  cursor: not-allowed;
+  transition: 160ms ease;
 }
-.photo-invitation button span {
+.photo-invitation a:hover {
+  color: #051016;
+  background: var(--cyan);
+}
+.photo-invitation a span {
   margin-left: 15px;
 }
 
@@ -483,7 +491,7 @@ input:focus {
     width: 58px;
     height: 58px;
   }
-  .photo-invitation button {
+  .photo-invitation a {
     width: 100%;
   }
 

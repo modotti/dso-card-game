@@ -27,12 +27,12 @@ describe('pickFeaturedCards', () => {
 });
 
 describe('HomePageComponent photo submission invitation', () => {
-  it('keeps the photo submission CTA disabled', () => {
+  it('links the photo submission CTA to the submission page', () => {
     TestBed.configureTestingModule({ imports: [HomePageComponent], providers: [provideRouter([])] });
     const fixture = TestBed.createComponent(HomePageComponent);
     fixture.detectChanges();
-    const cta = fixture.nativeElement.querySelector('.photo-invitation button') as HTMLButtonElement;
+    const cta = fixture.nativeElement.querySelector('.photo-invitation a') as HTMLAnchorElement;
     expect(cta).not.toBeNull();
-    expect(cta.disabled).toBeTrue();
+    expect(cta.getAttribute('href')).toBe('/submit-photo');
   });
 });
