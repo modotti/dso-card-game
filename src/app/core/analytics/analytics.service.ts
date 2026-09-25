@@ -12,7 +12,8 @@ export type AnalyticsEvent =
   | 'rematch_started'
   | 'game_abandoned'
   | 'card_discovered'
-  | 'catalog_completed';
+  | 'catalog_completed'
+  | 'achievement_unlocked';
 
 export type AnalyticsProperties = Readonly<Record<string, string | number | boolean | null | undefined>>;
 
@@ -72,6 +73,7 @@ const allowedProperties: Readonly<Record<AnalyticsEvent, readonly string[]>> = {
   game_abandoned: ['game_id', 'game_mode', 'rounds_played', 'disconnect_reason'],
   card_discovered: ['card_id', 'object_type', 'game_mode'],
   catalog_completed: [],
+  achievement_unlocked: ['achievement_id', 'game_mode'],
 };
 
 @Injectable({ providedIn: 'root' })

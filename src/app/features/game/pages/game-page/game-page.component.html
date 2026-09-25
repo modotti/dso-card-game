@@ -6,6 +6,13 @@
       <small>{{ discovery.commonName }}</small>
     </aside>
   }
+  @if (achievementNotification(); as achievement) {
+    <aside class="achievement-toast" role="status" aria-live="polite">
+      <span>{{ i18n.text('achievements.unlockedToast') }}</span>
+      <strong>{{ achievement.name }}</strong>
+      <small>{{ i18n.text(achievement.descriptionKey) }}</small>
+    </aside>
+  }
   @if (facade.loading()) {
     <p class="center">Loading deep space…</p>
   } @else if (facade.error()) {

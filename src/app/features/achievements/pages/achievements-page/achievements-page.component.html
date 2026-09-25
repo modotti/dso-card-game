@@ -1,0 +1,40 @@
+<section class="achievements-page">
+  <header class="achievements-hero">
+    <div>
+      <p class="eyebrow">{{ i18n.text('achievements.eyebrow') }}</p>
+      <h1>{{ i18n.text('achievements.title') }}</h1>
+      <p class="description">{{ i18n.text('achievements.description') }}</p>
+    </div>
+    <div class="achievement-total" aria-live="polite">
+      <strong>{{ achievements.unlockedCount() }} / {{ achievements.totalCount }}</strong>
+      <span>{{ i18n.text('achievements.unlocked') }}</span>
+      @if (achievements.unlockedCount() > 0) {
+        <button type="button" (click)="reset()">{{ i18n.text('achievements.reset') }}</button>
+      }
+    </div>
+  </header>
+
+  <div class="achievement-grid">
+    @for (achievement of achievements.achievements(); track achievement.id; let index = $index) {
+      <article class="achievement-card" [class.achievement-card--unlocked]="achievement.unlocked">
+        <div class="achievement-card__mark" aria-hidden="true">
+          <span>{{ (index + 1).toString().padStart(2, '0') }}</span>
+          <b>{{ achievement.unlocked ? '✦' : '◇' }}</b>
+        </div>
+        <div class="achievement-card__content">
+          <span class="state">{{
+            i18n.text(achievement.unlocked ? 'achievements.unlocked' : 'achievements.locked')
+          }}</span>
+          <h2>{{ achievement.name }}</h2>
+          <p>{{ i18n.text(achievement.descriptionKey) }}</p>
+          @if (achievement.current !== null && achievement.targetValue !== null) {
+            <div class="progress" [attr.aria-label]="i18n.text('achievements.progress')">
+              <div><i [style.width.%]="(achievement.current / achievement.targetValue) * 100"></i></div>
+              <strong>{{ achievement.current }} / {{ achievement.targetValue }}</strong>
+            </div>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>
