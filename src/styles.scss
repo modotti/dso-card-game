@@ -1,14 +1,105 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Manrope:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg: #040711; --surface: #080e1f; --text: #edf4ff; --muted: #98a4bb; --line: rgba(128, 153, 206, .18);
-  --cyan: #5ce1ff; --violet: #8874ff; --display: 'Manrope', sans-serif; --body: 'DM Sans', sans-serif;
-  color-scheme: dark; font-family: var(--body); background: var(--bg); color: var(--text);
+  --bg: #040711;
+  --surface: #080e1f;
+  --text: #edf4ff;
+  --muted: #98a4bb;
+  --line: rgba(128, 153, 206, 0.18);
+  --cyan: #5ce1ff;
+  --violet: #8874ff;
+  --display: 'Manrope', sans-serif;
+  --body: 'DM Sans', sans-serif;
+  color-scheme: dark;
+  font-family: var(--body);
+  background: var(--bg);
+  color: var(--text);
 }
-* { box-sizing: border-box; }
-html { min-width: 320px; background: var(--bg); }
-body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 78% 35%, rgba(43,38,115,.13), transparent 32%), radial-gradient(circle at 14% 92%, rgba(15,96,122,.08), transparent 30%), var(--bg); }
-body::before { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .42; background-image: radial-gradient(circle, rgba(222,237,255,.58) 0 .6px, transparent .8px); background-size: 53px 53px; mask-image: linear-gradient(to bottom, black, transparent 90%); }
-button, input { font: inherit; }
-button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
-::selection { background: rgba(92,225,255,.25); }
+* {
+  box-sizing: border-box;
+}
+html {
+  min-width: 320px;
+  background: var(--bg);
+}
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 78% 35%, rgba(43, 38, 115, 0.13), transparent 32%),
+    radial-gradient(circle at 14% 92%, rgba(15, 96, 122, 0.08), transparent 30%), var(--bg);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.42;
+  background-image: radial-gradient(circle, rgba(222, 237, 255, 0.58) 0 0.6px, transparent 0.8px);
+  background-size: 53px 53px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+button,
+input {
+  font: inherit;
+}
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+::selection {
+  background: rgba(92, 225, 255, 0.25);
+}
+
+.card-export {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  display: grid;
+  grid-template-rows: 70px 640px 66px;
+  justify-items: center;
+  width: 450px;
+  height: 800px;
+  padding: 12px 40px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(92, 225, 255, 0.15), transparent 23%),
+    radial-gradient(circle at 83% 74%, rgba(136, 116, 255, 0.18), transparent 28%),
+    radial-gradient(circle, rgba(222, 237, 255, 0.42) 0 0.6px, transparent 0.9px) 0 0 / 31px 31px,
+    linear-gradient(155deg, #090f25, #02050d 68%);
+  --card-image-aspect-ratio: 1;
+  --card-image-object-fit: contain;
+}
+.card-export__brand {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  gap: 12px;
+  color: var(--text);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+}
+.card-export__brand img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(93, 224, 255, 0.22));
+}
+.card-export__brand strong {
+  color: var(--cyan);
+  font-weight: 600;
+}
+.card-export__card {
+  width: 340px;
+  height: 640px;
+}
+.card-export__address {
+  align-self: center;
+  margin: 0;
+  color: rgba(237, 244, 255, 0.72);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}

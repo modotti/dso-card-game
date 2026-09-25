@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { CardShareService } from '../../data-access/card-share.service';
 import { CatalogPageComponent } from './catalog-page.component';
 
 describe('CatalogPageComponent', () => {
@@ -66,5 +67,25 @@ describe('CatalogPageComponent', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelector('.card-modal--special')).not.toBeNull();
+  });
+
+  it('renders the game card and shares its exported image', async () => {
+    localStorage.setItem('dsd-discovered-card-ids', JSON.stringify(['m16']));
+    const cardShare = TestBed.inject(CardShareService);
+    const image = new Blob(['card'], { type: 'image/png' });
+    spyOn(cardShare, 'createImage').and.resolveTo(image);
+    spyOn(cardShare, 'shareOrDownload').and.resolveTo('shared');
+    const fixture = TestBed.createComponent(CatalogPageComponent);
+    fixture.detectChanges();
+
+    (fixture.nativeElement.querySelector('.catalog-card') as HTMLButtonElement).click();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.card-export app-game-card')).not.toBeNull();
+    (fixture.nativeElement.querySelector('.share-button') as HTMLButtonElement).click();
+    await fixture.whenStable();
+
+    expect(cardShare.createImage).toHaveBeenCalled();
+    expect(cardShare.shareOrDownload).toHaveBeenCalledOnceWith(image, 'Eagle Nebula');
   });
 });
