@@ -4,6 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AnalyticsService } from '../../../../core/analytics/analytics.service';
 import { BackgroundAudioService } from '../../../../core/audio/background-audio.service';
 import { TranslationService } from '../../../../core/i18n/translation.service';
+import cardsData from '../../../../../assets/data/cards.json';
+import { AchievementService } from '../../../achievements/data-access/achievement.service';
+import { ACHIEVEMENTS, type AchievementDefinition } from '../../../achievements/domain/achievement-definitions';
+import { DiscoveryService } from '../../../cards/data-access/discovery.service';
 import type { AttributeDefinition, CardAttributeValue, GameCard, RevealedCard } from '../../domain/game.models';
 import { GameFacade } from '../../state/game.facade';
 import { GameCardComponent } from '../../ui/game-card/game-card.component';
@@ -21,6 +25,8 @@ export class GamePageComponent implements OnInit, OnDestroy {
   protected readonly i18n = inject(TranslationService);
   private readonly analytics = inject(AnalyticsService);
   private readonly backgroundAudio = inject(BackgroundAudioService);
+  private readonly discovery = inject(DiscoveryService);
+  private readonly achievements = inject(AchievementService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   protected readonly selectedCard = signal<string | null>(null);
@@ -30,6 +36,8 @@ export class GamePageComponent implements OnInit, OnDestroy {
   protected readonly nextRoundSeconds = signal(0);
   protected readonly rematchSeconds = signal(0);
   protected readonly showFinalModal = signal(false);
+  protected readonly discoveryNotification = signal<(typeof cardsData)[number] | null>(null);
+  protected readonly achievementNotification = signal<AchievementDefinition | null>(null);
   private readonly code = this.route.snapshot.paramMap.get('code') ?? '';
   private timer?: ReturnType<typeof setInterval>;
   private finalModalTimer?: ReturnType<typeof setTimeout>;
@@ -38,6 +46,11 @@ export class GamePageComponent implements OnInit, OnDestroy {
   private finalModalScheduled = false;
   private previousRoundNumber: number | null = null;
   private previousRoundStatus: string | null = null;
+  private readonly discoveryQueue: Array<(typeof cardsData)[number]> = [];
+  private discoveryTimer?: ReturnType<typeof setTimeout>;
+  private lastDiscoveredRound: string | null = null;
+  private readonly achievementQueue: AchievementDefinition[] = [];
+  private achievementTimer?: ReturnType<typeof setTimeout>;
 
   constructor() {
     effect(() => {
@@ -51,6 +64,32 @@ export class GamePageComponent implements OnInit, OnDestroy {
         game_mode: gameMode,
       });
       if (game.round.status === 'resolved') {
+        const roundIdentity = `${game.id}:${game.matchNumber}:${game.round.number}`;
+        if (this.lastDiscoveredRound !== roundIdentity) {
+          this.lastDiscoveredRound = roundIdentity;
+          const newIds = this.discovery.discoverRevealed(
+            game.round.revealedCards.map((selection) => selection.card),
+            gameMode,
+          );
+          for (const id of newIds) {
+            const card = cardsData.find((item) => item.id === id);
+            if (card) this.discoveryQueue.push(card);
+          }
+          this.showNextDiscovery();
+          const unlocked = [
+            ...this.achievements.syncDiscovery(gameMode),
+            ...this.achievements.recordRound({
+              matchId: eventIdentity,
+              roundNumber: game.round.number,
+              playerId,
+              winnerId: game.round.winnerId,
+              isCancelled: game.round.isCancelled,
+              revealedCards: game.round.revealedCards,
+              gameMode,
+            }),
+          ];
+          this.queueAchievements(unlocked);
+        }
         const result = this.roundResult();
         this.analytics.trackOnce('round_completed', `${eventIdentity}:${game.round.number}`, {
           game_id: game.id,
@@ -61,6 +100,14 @@ export class GamePageComponent implements OnInit, OnDestroy {
         this.backgroundAudio.playRoundResult(result, `${game.id}:${game.matchNumber}:${game.round.number}`);
       }
       if (game.status === 'finished') {
+        this.queueAchievements(
+          this.achievements.recordMatch({
+            matchId: eventIdentity,
+            result: this.gameResult(),
+            gameMode,
+            cpuDifficulty: game.rules.cpuDifficulty,
+          }),
+        );
         this.analytics.trackOnce('game_completed', eventIdentity, {
           game_id: game.id,
           game_mode: gameMode,
@@ -145,6 +192,8 @@ export class GamePageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.timer) clearInterval(this.timer);
     if (this.finalModalTimer) clearTimeout(this.finalModalTimer);
+    if (this.discoveryTimer) clearTimeout(this.discoveryTimer);
+    if (this.achievementTimer) clearTimeout(this.achievementTimer);
     void this.facade.disconnect();
   }
   async chooseAttribute(value: string): Promise<void> {
@@ -293,6 +342,29 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
   private gameMode(): 'cpu' | 'multiplayer' {
     return this.facade.cpuPlayer() ? 'cpu' : 'multiplayer';
+  }
+  private showNextDiscovery(): void {
+    if (this.discoveryNotification() || !this.discoveryQueue.length) return;
+    this.discoveryNotification.set(this.discoveryQueue.shift() ?? null);
+    this.discoveryTimer = setTimeout(() => {
+      this.discoveryNotification.set(null);
+      this.discoveryTimer = setTimeout(() => this.showNextDiscovery(), 250);
+    }, 3200);
+  }
+  private queueAchievements(ids: readonly string[]): void {
+    for (const id of ids) {
+      const achievement = ACHIEVEMENTS.find((item) => item.id === id);
+      if (achievement) this.achievementQueue.push(achievement);
+    }
+    this.showNextAchievement();
+  }
+  private showNextAchievement(): void {
+    if (this.achievementNotification() || !this.achievementQueue.length) return;
+    this.achievementNotification.set(this.achievementQueue.shift() ?? null);
+    this.achievementTimer = setTimeout(() => {
+      this.achievementNotification.set(null);
+      this.achievementTimer = setTimeout(() => this.showNextAchievement(), 250);
+    }, 3800);
   }
   private roundResult(): 'win' | 'loss' | 'tie' | 'cancelled' {
     const round = this.facade.game()?.round;

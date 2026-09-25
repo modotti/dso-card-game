@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from
 import cardsData from '../../../../../assets/data/cards.json';
 import imageCredits from '../../../../../assets/data/image-credits.json';
 import { TranslationService } from '../../../../core/i18n/translation.service';
+import { DiscoveryService } from '../../data-access/discovery.service';
 
 interface CatalogEntry {
   readonly id: string;
@@ -36,6 +37,7 @@ interface SpecialCatalogEntry {
 })
 export class CatalogPageComponent {
   protected readonly i18n = inject(TranslationService);
+  protected readonly discovery = inject(DiscoveryService);
   protected readonly selectedCard = signal<CatalogEntry | null>(null);
   protected readonly selectedSpecialCard = signal<SpecialCatalogEntry | null>(null);
   protected readonly cards: readonly CatalogEntry[] = cardsData.map((card) => {
@@ -62,7 +64,12 @@ export class CatalogPageComponent {
   ];
 
   openCard(card: CatalogEntry): void {
+    if (!this.discovery.isDiscovered(card.id)) return;
     this.selectedCard.set(card);
+  }
+
+  resetDiscovery(): void {
+    if (window.confirm(this.i18n.text('catalog.discovery.resetConfirm'))) this.discovery.reset();
   }
 
   openSpecialCard(card: SpecialCatalogEntry): void {
