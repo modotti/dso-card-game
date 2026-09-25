@@ -1,4 +1,40 @@
 <section class="achievements-page">
+  <section class="deep-sky-record" aria-labelledby="deep-sky-record-title">
+    <header>
+      <p class="eyebrow">{{ i18n.text('record.eyebrow') }}</p>
+      <h1 id="deep-sky-record-title">{{ i18n.text('record.title') }}</h1>
+      <p class="description">{{ i18n.text('record.subtitle') }}</p>
+    </header>
+    <div class="record-grid">
+      <article>
+        <strong>{{ achievements.record().completedGames }}</strong>
+        <span>{{ i18n.text('record.gamesPlayed') }}</span>
+      </article>
+      <article>
+        <strong>{{ achievements.record().victories }}</strong>
+        <span>{{ i18n.text('record.victories') }}</span>
+      </article>
+      <article>
+        <strong>{{ achievements.record().roundsWon }}</strong>
+        <span>{{ i18n.text('record.roundsWon') }}</span>
+      </article>
+      <article>
+        <strong>{{ achievements.record().bestWinStreak }}</strong>
+        <span>{{ i18n.text('record.bestWinStreak') }}</span>
+      </article>
+      <article>
+        <strong>{{ achievements.record().objectsDiscovered }} / {{ achievements.record().totalObjects }}</strong>
+        <span>{{ i18n.text('record.objectsDiscovered') }}</span>
+      </article>
+      <article>
+        <strong
+          >{{ achievements.record().achievementsUnlocked }} / {{ achievements.record().totalAchievements }}</strong
+        >
+        <span>{{ i18n.text('record.achievements') }}</span>
+      </article>
+    </div>
+  </section>
+
   <header class="achievements-hero">
     <div>
       <p class="eyebrow">{{ i18n.text('achievements.eyebrow') }}</p>

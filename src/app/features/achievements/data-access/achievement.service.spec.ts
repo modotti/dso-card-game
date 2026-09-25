@@ -97,6 +97,28 @@ describe('AchievementService', () => {
     expect(unlocked(service, 'deep-sky-veteran')).toBeTrue();
   });
 
+  it('counts only completed games and separates victories from defeats', () => {
+    const service = create();
+    const card = astronomical('m16', 'emission_nebula');
+    round(service, 'abandoned', 1, 'local', card, card);
+    expect(service.record().completedGames).toBe(0);
+
+    service.recordMatch({ matchId: 'cpu-win', result: 'win', gameMode: 'cpu' });
+    service.recordMatch({ matchId: 'multiplayer-loss', result: 'loss', gameMode: 'multiplayer' });
+    expect(service.record().completedGames).toBe(2);
+    expect(service.record().victories).toBe(1);
+  });
+
+  it('counts only local decisive round victories', () => {
+    const service = create();
+    const card = astronomical('m16', 'emission_nebula');
+    round(service, 'rounds', 1, 'local', card, card, false, 'multiplayer');
+    round(service, 'rounds', 2, 'opponent', card, card, false, 'multiplayer');
+    round(service, 'rounds', 3, null, effect('clouds', 'cancel_round'), card, true, 'multiplayer');
+    round(service, 'rounds', 4, null, card, card, false, 'multiplayer');
+    expect(service.record().roundsWon).toBe(1);
+  });
+
   it('only unlocks Against the Odds for a Hard CPU victory', () => {
     const service = create();
     service.recordMatch({ matchId: 'easy', result: 'win', gameMode: 'cpu', cpuDifficulty: 'easy' });
@@ -116,6 +138,10 @@ describe('AchievementService', () => {
     expect(unlocked(service, 'unstoppable')).toBeFalse();
     service.recordMatch({ matchId: '5', result: 'win', gameMode: 'cpu' });
     expect(unlocked(service, 'unstoppable')).toBeTrue();
+    expect(service.record().bestWinStreak).toBe(3);
+    service.recordMatch({ matchId: 'second-loss', result: 'loss', gameMode: 'cpu' });
+    expect(service.achievements().find((item) => item.id === 'unstoppable')?.current).toBe(0);
+    expect(service.record().bestWinStreak).toBe(3);
   });
 
   it('tracks five unique winning cards for each Hunter and ignores duplicates', () => {
@@ -234,6 +260,39 @@ describe('AchievementService', () => {
     localStorage.setItem('dsd-achievements', '{broken');
     service = create();
     expect(service.unlockedCount()).toBe(0);
+  });
+
+  it('migrates existing Achievement state without losing prior progress', () => {
+    localStorage.setItem(
+      'dsd-achievements',
+      JSON.stringify({
+        unlockedIds: ['first-victory'],
+        wins: 7,
+        winStreak: 2,
+        hunterCardIds: { nebula: ['m16'], galaxy: [], cluster: [] },
+        completedMatchIds: ['old-match'],
+        matches: {},
+      }),
+    );
+    const service = create();
+    expect(service.record().completedGames).toBe(0);
+    expect(service.record().victories).toBe(7);
+    expect(service.record().roundsWon).toBe(0);
+    expect(service.record().bestWinStreak).toBe(0);
+    expect(unlocked(service, 'first-victory')).toBeTrue();
+    expect(service.achievements().find((item) => item.id === 'nebula-hunter')?.current).toBe(1);
+  });
+
+  it('derives Record totals from Discovery and Achievement definitions', () => {
+    const service = create();
+    const discovery = TestBed.inject(DiscoveryService);
+    discovery.discover(astronomical(cardsData[0].id, cardsData[0].objectType), 'cpu');
+    service.syncDiscovery();
+    expect(service.record().objectsDiscovered).toBe(1);
+    expect(service.record().totalObjects).toBe(cardsData.length);
+    expect(service.record().achievementsUnlocked).toBe(1);
+    expect(service.record().totalAchievements).toBe(service.totalCount);
+    expect(service.record().totalObjects).not.toBe(cardsData.length + 4);
   });
 
   it('returns multiple fresh unlocks together for sequential notification queues', () => {

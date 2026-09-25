@@ -20,8 +20,11 @@ interface MatchTracker {
 
 interface AchievementState {
   readonly unlockedIds: readonly AchievementId[];
+  readonly completedGames: number;
   readonly wins: number;
+  readonly roundsWon: number;
   readonly winStreak: number;
+  readonly bestWinStreak: number;
   readonly hunterCardIds: Readonly<Record<ObjectMacroCategory, readonly string[]>>;
   readonly completedMatchIds: readonly string[];
   readonly matches: Readonly<Record<string, MatchTracker>>;
@@ -52,8 +55,11 @@ export interface MatchAchievementInput {
 
 const EMPTY_STATE: AchievementState = {
   unlockedIds: [],
+  completedGames: 0,
   wins: 0,
+  roundsWon: 0,
   winStreak: 0,
+  bestWinStreak: 0,
   hunterCardIds: { nebula: [], galaxy: [], cluster: [] },
   completedMatchIds: [],
   matches: {},
@@ -75,6 +81,16 @@ export class AchievementService {
   );
   readonly unlockedCount = computed(() => this.achievements().filter((item) => item.unlocked).length);
   readonly totalCount = ACHIEVEMENTS.length;
+  readonly record = computed(() => ({
+    completedGames: this.state().completedGames,
+    victories: this.state().wins,
+    roundsWon: this.state().roundsWon,
+    bestWinStreak: this.state().bestWinStreak,
+    objectsDiscovered: this.discovery.discoveredCount(),
+    totalObjects: this.discovery.totalCount,
+    achievementsUnlocked: this.unlockedCount(),
+    totalAchievements: this.totalCount,
+  }));
 
   syncDiscovery(gameMode?: DiscoveryGameMode): readonly AchievementId[] {
     return this.unlock(
@@ -115,6 +131,7 @@ export class AchievementService {
     };
     this.update({
       ...this.state(),
+      roundsWon: this.state().roundsWon + (won ? 1 : 0),
       hunterCardIds,
       matches: { ...this.state().matches, [input.matchId]: tracker },
     });
@@ -127,6 +144,7 @@ export class AchievementService {
     const won = input.result === 'win';
     const wins = state.wins + (won ? 1 : 0);
     const winStreak = won ? state.winStreak + 1 : input.result === 'loss' ? 0 : state.winStreak;
+    const bestWinStreak = Math.max(state.bestWinStreak, winStreak);
     const tracker = state.matches[input.matchId] ?? { processedRounds: [], outcomes: [], hadClouds: false };
     const candidates: AchievementId[] = [];
     if (wins >= 1) candidates.push('first-victory');
@@ -144,8 +162,10 @@ export class AchievementService {
     delete remainingMatches[input.matchId];
     this.update({
       ...state,
+      completedGames: state.completedGames + 1,
       wins,
       winStreak,
+      bestWinStreak,
       completedMatchIds: [...state.completedMatchIds.slice(-99), input.matchId],
       matches: remainingMatches,
     });
@@ -235,8 +255,11 @@ export class AchievementService {
       }
       return {
         unlockedIds: list(value.unlockedIds, validIds) as AchievementId[],
+        completedGames: this.nonNegativeInteger(value.completedGames),
         wins: Number.isInteger(value.wins) && (value.wins ?? -1) >= 0 ? value.wins! : 0,
+        roundsWon: this.nonNegativeInteger(value.roundsWon),
         winStreak: Number.isInteger(value.winStreak) && (value.winStreak ?? -1) >= 0 ? value.winStreak! : 0,
+        bestWinStreak: this.nonNegativeInteger(value.bestWinStreak),
         hunterCardIds: {
           nebula: list(value.hunterCardIds?.nebula),
           galaxy: list(value.hunterCardIds?.galaxy),
@@ -248,6 +271,10 @@ export class AchievementService {
     } catch {
       return EMPTY_STATE;
     }
+  }
+
+  private nonNegativeInteger(value: unknown): number {
+    return Number.isInteger(value) && (value as number) >= 0 ? (value as number) : 0;
   }
 
   private persist(state: AchievementState): void {
