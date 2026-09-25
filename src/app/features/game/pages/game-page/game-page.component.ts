@@ -135,7 +135,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const deadline = Date.now() + 5000;
+      const deadline = Date.now() + 10_000;
       const tick = (): void => {
         const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
         this.nextRoundSeconds.set(remaining);
