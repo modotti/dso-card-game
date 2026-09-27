@@ -1,0 +1,5 @@
+<div aria-hidden="true">
+  @for (_ of dots(); track $index) {
+    <i [class.active]="$index + 1 === current()"></i>
+  }
+</div>

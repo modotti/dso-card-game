@@ -11,11 +11,13 @@ import { DiscoveryService } from '../../../cards/data-access/discovery.service';
 import type { AttributeDefinition, CardAttributeValue, GameCard, RevealedCard } from '../../domain/game.models';
 import { GameFacade } from '../../state/game.facade';
 import { AttributePickerComponent } from '../../ui/attribute-picker/attribute-picker.component';
+import { CarouselDotsComponent } from '../../ui/carousel-dots/carousel-dots.component';
 import { GameCardComponent } from '../../ui/game-card/game-card.component';
+import { GameplayTipComponent } from '../../ui/gameplay-tip/gameplay-tip.component';
 
 @Component({
   selector: 'app-game-page',
-  imports: [AttributePickerComponent, GameCardComponent],
+  imports: [AttributePickerComponent, CarouselDotsComponent, GameCardComponent, GameplayTipComponent],
   providers: [GameFacade],
   templateUrl: './game-page.component.html',
   styleUrl: './game-page.component.scss',
@@ -38,6 +40,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   protected readonly nextRoundSeconds = signal(0);
   protected readonly rematchSeconds = signal(0);
   protected readonly showFinalModal = signal(false);
+  protected readonly showGameplayTips = signal(localStorage.getItem('dsd-gameplay-tips-seen') !== '1');
   protected readonly discoveryNotification = signal<(typeof cardsData)[number] | null>(null);
   protected readonly achievementNotification = signal<AchievementDefinition | null>(null);
   private readonly code = this.route.snapshot.paramMap.get('code') ?? '';
@@ -188,6 +191,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (this.showGameplayTips()) localStorage.setItem('dsd-gameplay-tips-seen', '1');
     void this.facade.connect(this.code);
     this.timer = setInterval(() => void this.updateTimer(), 250);
   }

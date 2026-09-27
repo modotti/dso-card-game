@@ -1,0 +1,37 @@
+:host {
+  display: none;
+}
+@media (max-width: 500px) {
+  :host {
+    display: block;
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: -8px;
+  }
+  i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+    opacity: 0.3;
+    transition:
+      width 180ms ease,
+      border-radius 180ms ease,
+      background 180ms ease,
+      opacity 180ms ease;
+  }
+  i.active {
+    width: 18px;
+    border-radius: 999px;
+    background: var(--cyan);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  i {
+    transition: none;
+  }
+}

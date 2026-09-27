@@ -55,6 +55,9 @@
         <p class="turn">{{ i18n.text(facade.isActivePlayer() ? 'game.yourTurn' : 'game.opponentTurn') }}</p>
         @if (facade.isActivePlayer()) {
           <h1>{{ i18n.text('game.chooseAttribute') }}</h1>
+          @if (showGameplayTips()) {
+            <app-gameplay-tip [text]="i18n.text('game.tip.chooseAttribute')" />
+          }
           <app-attribute-picker
             [attributes]="game.availableAttributes"
             [disabled]="busy()"
@@ -133,6 +136,10 @@
             {{ currentCardIndex() }} / {{ game.hand.length }}
           </span>
         </div>
+        @if (showGameplayTips() && game.round.status === 'choosing_cards' && !facade.hasSelected()) {
+          <app-gameplay-tip [text]="i18n.text('game.tip.selectCard')" />
+          <app-gameplay-tip [text]="i18n.text('game.tip.swipeCards')" [mobileOnly]="true" />
+        }
         <div class="hand" (scroll)="updateCarouselIndex($event)">
           @for (card of game.hand; track card.id) {
             <button
@@ -159,6 +166,7 @@
             </button>
           }
         </div>
+        <app-carousel-dots [total]="game.hand.length" [current]="currentCardIndex()" />
       </section>
     }
 
