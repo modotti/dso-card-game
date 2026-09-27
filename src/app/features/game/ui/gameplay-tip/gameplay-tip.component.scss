@@ -1,0 +1,47 @@
+:host {
+  display: block;
+}
+p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: fit-content;
+  max-width: min(100%, 520px);
+  margin: 18px auto 22px;
+  padding: 9px 13px;
+  border: 1px solid rgba(136, 116, 255, 0.34);
+  border-radius: 999px;
+  background: rgba(136, 116, 255, 0.08);
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  animation: tip-arrival 300ms ease-out both;
+}
+span {
+  flex: 0 0 auto;
+  color: #b49cff;
+}
+.mobile-only {
+  display: none;
+}
+@keyframes tip-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@media (max-width: 500px) {
+  p {
+    border-radius: 10px;
+    text-align: left;
+  }
+  .mobile-only {
+    display: flex;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  p {
+    animation: none;
+  }
+}

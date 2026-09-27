@@ -1,6 +1,8 @@
 :host {
   display: block;
   height: 100%;
+  animation: card-arrival 420ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 55ms);
 }
 .cosmic-card {
   position: relative;
@@ -11,7 +13,10 @@
   background: linear-gradient(155deg, #121c3a, #070b18);
   color: var(--text);
   box-shadow: 0 18px 55px rgba(0, 0, 0, 0.32);
-  transition: 0.2s;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
 }
 .cosmic-card--winner {
   border-color: #72f0b2;
@@ -19,6 +24,7 @@
     0 0 0 2px rgba(114, 240, 178, 0.2),
     0 0 42px rgba(70, 225, 157, 0.24),
     0 18px 55px rgba(0, 0, 0, 0.42);
+  animation: winner-glow 700ms ease-out both;
 }
 .winner-badge {
   position: absolute;
@@ -34,12 +40,14 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   box-shadow: 0 5px 24px rgba(70, 225, 157, 0.35);
+  animation: badge-arrival 360ms 220ms cubic-bezier(0.2, 0.8, 0.2, 1.2) both;
 }
 .cosmic-card--selected {
   border-color: var(--cyan);
   box-shadow:
     0 0 0 2px rgba(92, 225, 255, 0.12),
     0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: card-selected 280ms ease-out;
 }
 .image {
   width: 100%;
@@ -59,6 +67,11 @@
   height: 100%;
   object-fit: var(--card-image-object-fit, contain);
   display: block;
+  transition: transform 500ms ease;
+}
+:host-context(.card:hover) .image img,
+:host-context(.card.selected) .image img {
+  transform: scale(1.035);
 }
 .image span {
   position: absolute;
@@ -130,6 +143,7 @@ dd {
   font: 500 1.55rem var(--display);
   margin-top: 16px;
   text-align: right;
+  animation: value-arrival 380ms 180ms ease-out both;
 }
 .effect-description {
   display: grid;
@@ -148,6 +162,47 @@ dd {
   color: var(--muted);
   font-size: 0.76rem;
   line-height: 1.5;
+}
+@keyframes card-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+}
+@keyframes card-selected {
+  45% {
+    transform: scale(1.018);
+  }
+}
+@keyframes winner-glow {
+  40% {
+    transform: translateY(-5px) scale(1.015);
+    box-shadow: 0 0 54px rgba(70, 225, 157, 0.42);
+  }
+}
+@keyframes badge-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.8);
+  }
+}
+@keyframes value-arrival {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :host,
+  .cosmic-card,
+  .cosmic-card--winner,
+  .cosmic-card--selected,
+  .winner-badge,
+  .highlight,
+  .image img {
+    animation: none;
+    transition: none;
+  }
 }
 @media (max-width: 500px) {
   .content {
