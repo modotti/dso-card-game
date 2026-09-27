@@ -109,6 +109,7 @@
             [attribute]="game.round.attribute"
             [ownerLabel]="playerName(selection.playerId)"
             [winner]="selection.playerId === game.round.winnerId"
+            [style.--card-index]="$index"
           />
         }
       </div>
@@ -145,7 +146,12 @@
               "
               (click)="selectCard(card)"
             >
-              <app-game-card [card]="card" [attribute]="game.round.attribute" [selected]="selectedCard() === card.id" />
+              <app-game-card
+                [card]="card"
+                [attribute]="game.round.attribute"
+                [selected]="selectedCard() === card.id"
+                [style.--card-index]="$index"
+              />
               @if (selectedCard() === card.id && !facade.hasSelected()) {
                 <span class="card-confirm">
                   {{ busy() ? '…' : i18n.text('game.confirm') }}
