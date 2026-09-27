@@ -29,8 +29,8 @@
       <div class="score">
         <small>{{ i18n.text('game.score') }}</small>
         @for (player of game.players; track player.id) {
-          <span [class.me]="player.id === facade.playerId()"
-            >{{ player.displayName }} <b>{{ player.score }}</b></span
+          <span class="score__player" [class.score__player--me]="player.id === facade.playerId()"
+            ><span class="score__name">{{ player.displayName }}</span> <b>{{ player.score }}</b></span
           >
         }
       </div>
