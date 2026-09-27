@@ -1,0 +1,15 @@
+<div class="attributes">
+  @for (attribute of attributes(); track attribute.id) {
+    <button
+      type="button"
+      [class.selected]="selectedId() === attribute.id"
+      [disabled]="disabled()"
+      [attr.aria-busy]="selectedId() === attribute.id"
+      [style.--attribute-index]="$index"
+      (click)="attributeSelected.emit(attribute.id)"
+    >
+      <strong>{{ i18n.text(attribute.labelKey) }}</strong>
+      <span class="indicator" aria-hidden="true">{{ selectedId() === attribute.id ? '···' : '→' }}</span>
+    </button>
+  }
+</div>

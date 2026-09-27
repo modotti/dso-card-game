@@ -10,11 +10,12 @@ import { ACHIEVEMENTS, type AchievementDefinition } from '../../../achievements/
 import { DiscoveryService } from '../../../cards/data-access/discovery.service';
 import type { AttributeDefinition, CardAttributeValue, GameCard, RevealedCard } from '../../domain/game.models';
 import { GameFacade } from '../../state/game.facade';
+import { AttributePickerComponent } from '../../ui/attribute-picker/attribute-picker.component';
 import { GameCardComponent } from '../../ui/game-card/game-card.component';
 
 @Component({
   selector: 'app-game-page',
-  imports: [GameCardComponent],
+  imports: [AttributePickerComponent, GameCardComponent],
   providers: [GameFacade],
   templateUrl: './game-page.component.html',
   styleUrl: './game-page.component.scss',
@@ -30,6 +31,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   protected readonly selectedCard = signal<string | null>(null);
+  protected readonly selectedAttribute = signal<string | null>(null);
   protected readonly currentCardIndex = signal(1);
   protected readonly busy = signal(false);
   protected readonly secondsRemaining = signal(0);
@@ -197,7 +199,13 @@ export class GamePageComponent implements OnInit, OnDestroy {
     void this.facade.disconnect();
   }
   async chooseAttribute(value: string): Promise<void> {
-    await this.run(() => this.facade.chooseAttribute(value));
+    if (this.busy()) return;
+    this.selectedAttribute.set(value);
+    try {
+      await this.run(() => this.facade.chooseAttribute(value));
+    } finally {
+      this.selectedAttribute.set(null);
+    }
   }
   selectCard(card: GameCard): void {
     if (

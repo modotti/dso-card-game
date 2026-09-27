@@ -125,22 +125,6 @@
   letter-spacing: 0.2em;
   font-size: 0.65rem;
 }
-.attributes {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-top: 42px;
-}
-.attributes button {
-  padding: 26px 14px;
-  color: var(--text);
-  border: 1px solid var(--line);
-  background: rgba(9, 16, 35, 0.72);
-  cursor: pointer;
-}
-.attributes button:hover {
-  border-color: var(--cyan);
-}
 .hand {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -487,9 +471,6 @@
     width: calc(100% - 48px);
     padding-top: 30px;
   }
-  .attributes {
-    grid-template-columns: 1fr 1fr;
-  }
   .hand {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -571,14 +552,6 @@
   }
   .stage h1 {
     font-size: 1.8rem;
-  }
-  .attributes {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 28px;
-  }
-  .attributes button {
-    padding: 18px 12px;
   }
   .hand-area {
     margin-inline: -4px;

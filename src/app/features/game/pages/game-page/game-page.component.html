@@ -55,13 +55,12 @@
         <p class="turn">{{ i18n.text(facade.isActivePlayer() ? 'game.yourTurn' : 'game.opponentTurn') }}</p>
         @if (facade.isActivePlayer()) {
           <h1>{{ i18n.text('game.chooseAttribute') }}</h1>
-          <div class="attributes">
-            @for (attribute of game.availableAttributes; track attribute.id) {
-              <button [disabled]="busy()" (click)="chooseAttribute(attribute.id)">
-                {{ i18n.text(attribute.labelKey) }}
-              </button>
-            }
-          </div>
+          <app-attribute-picker
+            [attributes]="game.availableAttributes"
+            [disabled]="busy()"
+            [selectedId]="selectedAttribute()"
+            (attributeSelected)="chooseAttribute($event)"
+          />
         } @else {
           <h1>{{ i18n.text('game.waitAttribute') }}</h1>
           <div class="waiting-status" role="status">
