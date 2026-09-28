@@ -19,6 +19,7 @@
     @for (card of cards; track card.id; let index = $index) {
       <button
         class="catalog-card"
+        [class.catalog-card--framed]="discovery.isDiscovered(card.id)"
         [class.catalog-card--undiscovered]="!discovery.isDiscovered(card.id)"
         type="button"
         (click)="openCard(card)"
@@ -30,24 +31,10 @@
         [attr.aria-disabled]="!discovery.isDiscovered(card.id)"
       >
         <span class="catalog-card__number">{{ (index + 1).toString().padStart(2, '0') }}</span>
-        <span class="catalog-card__image">
-          @if (card.image && discovery.isDiscovered(card.id)) {
-            <img
-              [src]="card.image.asset"
-              [alt]="card.commonName"
-              [attr.loading]="index < 4 ? 'eager' : 'lazy'"
-              [attr.fetchpriority]="index === 0 ? 'high' : null"
-            />
-            <span class="catalog-card__credit">
-              <span>{{ card.image.collectionName }}</span>
-              <span>
-                {{ card.image.photographer }}
-                @if (card.image.handle) {
-                  · {{ card.image.handle }}
-                }
-              </span>
-            </span>
-          } @else {
+        @if (discovery.isDiscovered(card.id)) {
+          <app-game-card [card]="asGameCard(card)" [imagePriority]="index < 4" />
+        } @else {
+          <span class="catalog-card__image">
             <span class="undiscovered-visual" aria-hidden="true"><i></i><b>?</b></span>
             @if (card.image) {
               <span class="catalog-card__credit catalog-card__credit--locked">
@@ -60,19 +47,13 @@
                 </span>
               </span>
             }
-          }
-        </span>
-        <span class="catalog-card__body">
-          @if (discovery.isDiscovered(card.id)) {
-            <span class="catalog-card__meta">{{ card.catalogName }} · {{ card.constellation }}</span>
-            <strong>{{ card.commonName }}</strong>
-            <span class="catalog-card__type">{{ i18n.text('objectType.' + card.objectType) }}</span>
-          } @else {
+          </span>
+          <span class="catalog-card__body">
             <span class="catalog-card__meta">???</span>
             <strong>{{ i18n.text('catalog.discovery.undiscovered') }}</strong>
             <span class="catalog-card__type">{{ i18n.text('catalog.discovery.playToDiscover') }}</span>
-          }
-        </span>
+          </span>
+        }
         <span class="catalog-card__open" aria-hidden="true">↗</span>
       </button>
     }
@@ -94,7 +75,7 @@
     <div class="catalog-grid special-catalog__grid">
       @for (card of specialCards; track card.id; let index = $index) {
         <button
-          class="catalog-card catalog-card--special"
+          class="catalog-card catalog-card--framed catalog-card--special"
           type="button"
           (click)="openSpecialCard(card)"
           [attr.aria-label]="
@@ -102,14 +83,7 @@
           "
         >
           <span class="catalog-card__number">S{{ index + 1 }}</span>
-          <span class="catalog-card__image">
-            <img [src]="card.asset" [alt]="i18n.text('card.effect.' + card.effectKey + '.name')" loading="lazy" />
-          </span>
-          <span class="catalog-card__body">
-            <span class="catalog-card__meta">{{ i18n.text('catalog.special.card') }}</span>
-            <strong>{{ i18n.text('card.effect.' + card.effectKey + '.name') }}</strong>
-            <span class="catalog-card__type">{{ i18n.text('card.effect.' + card.effectKey + '.effect') }}</span>
-          </span>
+          <app-game-card [card]="asSpecialGameCard(card)" />
           <span class="catalog-card__open" aria-hidden="true">↗</span>
         </button>
       }

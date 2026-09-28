@@ -16,6 +16,17 @@ export class GameCardComponent {
   readonly winner = input(false);
   readonly imagePriority = input(false);
   protected readonly i18n = inject(TranslationService);
+
+  protected cardFamily(): 'galaxy' | 'emission' | 'cluster' | 'other' | 'effect' {
+    if (this.card().kind === 'effect') return 'effect';
+
+    const objectType = this.card().objectType;
+    if (objectType.endsWith('_galaxy')) return 'galaxy';
+    if (objectType === 'emission_nebula') return 'emission';
+    if (objectType.endsWith('_cluster')) return 'cluster';
+    return 'other';
+  }
+
   protected imageSource(): string {
     const specialImages: Readonly<Record<string, string>> = {
       cancel_round: '/assets/cards/clouds.jpg',
