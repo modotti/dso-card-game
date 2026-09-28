@@ -33,12 +33,33 @@ Production analytics uses the official Umami tracker through `AnalyticsService`.
 
 To enable analytics in production, create a Website in Umami and copy its **Website ID** into `environment.analytics.umamiWebsiteId` in `src/environments/environment.ts`. Keep `umamiHostUrl` as `https://cloud.umami.is` for Umami Cloud or replace it with the origin of a self-hosted instance. No Umami account token or API key belongs in the browser application.
 
+## Backoffice
+
+The private backoffice lives at `/backoffice` and uses passwordless Supabase Auth. Access is enforced by the `admin_users` allowlist, RLS, and restricted RPCs; knowing the URL is not enough to access submissions or their private Storage objects.
+
+To bootstrap an administrator:
+
+1. Apply all migrations, including `202609280002_photo_review_backoffice.sql`.
+2. Add the production and local `/backoffice` URLs to the Supabase Auth redirect allowlist.
+3. Create the administrator in **Authentication → Users**. Automatic user creation from the backoffice login is disabled.
+4. Copy that user's UUID and run this in the SQL editor:
+
+```sql
+insert into public.admin_users (user_id, label)
+values ('YOUR_AUTH_USER_UUID', 'Fernando');
+```
+
+5. Deploy the updated `submit-photo` Edge Function after the migration.
+
+New administrative areas should be added as children of the `backoffice` route and as entries in `AdminShellComponent`. Database access must still have its own RLS policy or admin-only RPC; the Angular route guard is only a user-experience layer.
+
 ## Current architecture
 
 - `core`: application-wide infrastructure such as auth, Supabase, analytics, and translations.
 - `features/home`: landing and low-friction room entry.
 - `features/lobby`: lobby domain, Supabase repository, state facade, and UI.
 - `features/cards`: pure card definition model and a small static JSON catalog.
+- `features/backoffice`: private administrative shell, authorization, and review tools.
 - `supabase/migrations`: authoritative database operations and RLS.
 
 Anonymous authentication is created only after the player confirms Create or Join. The display name is stored locally for the next visit. Realtime sends only persisted lobby membership/status changes; visual state remains local.

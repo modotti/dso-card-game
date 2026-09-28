@@ -157,6 +157,11 @@ Deno.serve(async (request) => {
       target_name: targetName,
       target_type: targetType,
       storage_path: storagePath,
+      original_filename: photo.name.slice(0, 255),
+      mime_type: photo.type,
+      file_size: photo.size,
+      image_width: dimensions.width,
+      image_height: dimensions.height,
       status: 'pending',
       terms_version: TERMS_VERSION,
     });

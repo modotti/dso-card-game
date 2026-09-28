@@ -1,0 +1,118 @@
+<header class="page-header">
+  <div>
+    <p class="eyebrow">Curadoria</p>
+    <h1>Submissões de fotos</h1>
+  </div>
+  <span class="count">{{ submissions().length }} resultado(s)</span>
+</header>
+
+<div class="filters" role="tablist" aria-label="Status da submissão">
+  <button type="button" [class.active]="status() === 'pending'" (click)="selectStatus('pending')">Pendentes</button>
+  <button type="button" [class.active]="status() === 'approved'" (click)="selectStatus('approved')">Aprovadas</button>
+  <button type="button" [class.active]="status() === 'rejected'" (click)="selectStatus('rejected')">Reprovadas</button>
+</div>
+
+@if (error()) {
+  <p class="message error" role="alert">Algo deu errado. Atualize a página e tente novamente.</p>
+}
+@if (loading()) {
+  <p class="message">Carregando submissões…</p>
+} @else if (empty()) {
+  <div class="empty">
+    <span>✦</span>
+    <h2>Nenhuma submissão aqui</h2>
+    <p>A fila está em dia.</p>
+  </div>
+} @else {
+  <div class="submission-grid">
+    @for (submission of submissions(); track submission.id) {
+      <article>
+        <button class="preview" type="button" (click)="open(submission)" aria-label="Ampliar foto">
+          @if (submission.previewUrl) {
+            <img [src]="submission.previewUrl" [alt]="submission.targetName" />
+          } @else {
+            <span>Preview indisponível</span>
+          }
+        </button>
+        <div class="card-body">
+          <p class="type">{{ submission.targetType.replaceAll('_', ' ') }}</p>
+          <h2>{{ submission.targetName }}</h2>
+          <p class="author">
+            {{ submission.photographerName }}
+            @if (submission.instagram) {
+              · {{ submission.instagram }}
+            }
+          </p>
+          <p class="date">{{ submission.createdAt | date: 'dd/MM/yyyy, HH:mm' }}</p>
+          <div class="actions">
+            <button type="button" (click)="download(submission)" [disabled]="actionId() === submission.id">
+              Baixar
+            </button>
+            <button class="primary" type="button" (click)="open(submission)">Revisar</button>
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+}
+
+@if (selected(); as submission) {
+  <div class="modal-backdrop" (click)="close()">
+    <section
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="review-title"
+      (click)="$event.stopPropagation()"
+    >
+      <button class="close" type="button" aria-label="Fechar" (click)="close()">×</button>
+      <div class="modal-image">
+        @if (submission.previewUrl) {
+          <img [src]="submission.previewUrl" [alt]="submission.targetName" />
+        }
+      </div>
+      <div class="modal-content">
+        <p class="type">{{ submission.targetType.replaceAll('_', ' ') }}</p>
+        <h2 id="review-title">{{ submission.targetName }}</h2>
+        <p class="author">
+          {{ submission.photographerName }}
+          @if (submission.instagram) {
+            · {{ submission.instagram }}
+          }
+        </p>
+        <dl>
+          <div>
+            <dt>Arquivo</dt>
+            <dd>{{ submission.originalFilename || '—' }}</dd>
+          </div>
+          <div>
+            <dt>Dimensões</dt>
+            <dd>{{ submission.imageWidth || '—' }} × {{ submission.imageHeight || '—' }}</dd>
+          </div>
+          <div>
+            <dt>Tamanho</dt>
+            <dd>{{ formatBytes(submission.fileSize) }}</dd>
+          </div>
+          <div>
+            <dt>Termos</dt>
+            <dd>{{ submission.termsVersion }}</dd>
+          </div>
+        </dl>
+        <label for="review-notes">Observações da revisão</label>
+        <textarea id="review-notes" maxlength="500" rows="3" [(ngModel)]="notes"></textarea>
+        <div class="modal-actions">
+          <button type="button" (click)="download(submission)">Baixar original</button>
+          @if (submission.status !== 'rejected') {
+            <button class="reject" type="button" (click)="review(submission, 'rejected')">Reprovar</button>
+          }
+          @if (submission.status !== 'approved') {
+            <button class="approve" type="button" (click)="review(submission, 'approved')">Aprovar</button>
+          }
+          @if (submission.status !== 'pending') {
+            <button type="button" (click)="review(submission, 'pending')">Voltar a pendente</button>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+}

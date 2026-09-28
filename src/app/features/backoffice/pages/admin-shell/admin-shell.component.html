@@ -1,0 +1,18 @@
+<div class="admin-shell">
+  <aside>
+    <a class="admin-brand" routerLink="/backoffice">
+      <span>DSD</span>
+      <strong>Backoffice</strong>
+    </a>
+    <nav aria-label="Navegação administrativa">
+      <a routerLink="/backoffice/submissions" routerLinkActive="active">
+        <span aria-hidden="true">✦</span> Submissões
+      </a>
+    </nav>
+    <div class="aside-footer">
+      <a routerLink="/">Ver site</a>
+      <button type="button" (click)="signOut()">Sair</button>
+    </div>
+  </aside>
+  <main><router-outlet /></main>
+</div>
