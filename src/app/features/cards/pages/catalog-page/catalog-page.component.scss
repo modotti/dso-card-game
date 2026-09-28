@@ -127,22 +127,6 @@ h1 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.catalog-card--special {
-  background: linear-gradient(145deg, rgba(24, 18, 49, 0.97), rgba(5, 9, 21, 0.98));
-  border-color: rgba(151, 120, 255, 0.25);
-}
-
-.catalog-card--special:hover {
-  border-color: rgba(151, 120, 255, 0.62);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.42),
-    0 0 40px rgba(151, 120, 255, 0.13);
-}
-
-.catalog-card--special .catalog-card__image::after {
-  background: linear-gradient(to top, rgba(10, 7, 27, 0.88), transparent 62%);
-}
-
 .catalog-card {
   position: relative;
   display: grid;
@@ -172,10 +156,65 @@ h1 {
     0 0 35px rgba(92, 225, 255, 0.08);
 }
 
+.catalog-card--framed {
+  display: block;
+  overflow: visible;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.catalog-card--framed:hover {
+  border-color: transparent;
+  box-shadow:
+    0 34px 85px rgba(0, 0, 0, 0.48),
+    0 0 42px rgba(92, 225, 255, 0.08);
+}
+
+.catalog-card--framed app-game-card {
+  display: block;
+  height: 100%;
+  min-height: 520px;
+}
+
+.special-catalog__grid .catalog-card--framed app-game-card {
+  min-height: 500px;
+}
+
+.catalog-card--framed .catalog-card__number {
+  top: -9px;
+  left: 18px;
+  padding: 5px 8px;
+  color: rgba(237, 244, 255, 0.78);
+  background: rgba(4, 8, 18, 0.9);
+  border: 1px solid rgba(128, 153, 206, 0.24);
+  border-radius: 20px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(8px);
+}
+
+.catalog-card--framed .catalog-card__open {
+  z-index: 4;
+  right: 17px;
+  bottom: 17px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: var(--text);
+  background: rgba(4, 8, 18, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
 .catalog-card--undiscovered {
   cursor: default;
   border-color: rgba(128, 153, 206, 0.12);
   background: linear-gradient(145deg, rgba(10, 16, 33, 0.98), rgba(3, 6, 14, 0.99));
+  border-radius: 18px;
 }
 
 .catalog-card--undiscovered:hover {

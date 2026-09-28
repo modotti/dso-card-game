@@ -141,6 +141,20 @@ export class CatalogPageComponent {
     };
   }
 
+  protected asSpecialGameCard(card: SpecialCatalogEntry): GameCard {
+    return {
+      id: card.id,
+      kind: 'effect',
+      effectKey: card.effectKey,
+      catalogName: this.i18n.text('catalog.special.card'),
+      commonName: this.i18n.text(`card.effect.${card.effectKey}.name`),
+      objectType: 'special_effect',
+      constellation: '',
+      image: null,
+      attributes: [],
+    };
+  }
+
   protected async shareCard(card: CatalogEntry): Promise<void> {
     const node = this.exportCard()?.nativeElement;
     if (!node || this.isExporting()) return;
