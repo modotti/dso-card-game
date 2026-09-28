@@ -1,0 +1,26 @@
+<section class="login-page">
+  <a class="back" routerLink="/">← Voltar ao site</a>
+  <div class="login-card">
+    <p class="eyebrow">Deep Sky Duels</p>
+    <h1>Backoffice</h1>
+    <p class="intro">Acesso restrito à administração e curadoria do projeto.</p>
+
+    @if (sent()) {
+      <div class="notice" role="status">
+        <strong>Link enviado.</strong>
+        <span>Abra o e-mail neste dispositivo para entrar.</span>
+      </div>
+    } @else {
+      <form (ngSubmit)="submit()">
+        <label for="admin-email">E-mail administrativo</label>
+        <input id="admin-email" name="email" type="email" autocomplete="email" required [(ngModel)]="email" />
+        <button type="submit" [disabled]="sending()">
+          {{ sending() ? 'Enviando…' : 'Enviar link de acesso' }}
+        </button>
+      </form>
+    }
+    @if (error()) {
+      <p class="error" role="alert">Não foi possível enviar o link. Tente novamente.</p>
+    }
+  </div>
+</section>

@@ -1,0 +1,112 @@
+.admin-shell {
+  width: min(1440px, calc(100% - 32px));
+  min-height: calc(100dvh - 150px);
+  margin: 20px auto 50px;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(4, 8, 20, 0.82);
+}
+aside {
+  padding: 26px 18px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  background: rgba(8, 14, 31, 0.8);
+}
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 8px 25px;
+  color: var(--text);
+  text-decoration: none;
+}
+.admin-brand span {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(92, 225, 255, 0.4);
+  border-radius: 10px;
+  color: var(--cyan);
+  font-size: 0.7rem;
+}
+.admin-brand strong {
+  font: 500 0.95rem var(--display);
+}
+nav {
+  display: grid;
+  gap: 5px;
+}
+nav a {
+  display: flex;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.84rem;
+}
+nav a:hover,
+nav a.active {
+  color: var(--text);
+  background: rgba(92, 225, 255, 0.08);
+}
+nav a.active {
+  color: var(--cyan);
+}
+.aside-footer {
+  margin-top: auto;
+  display: grid;
+  gap: 8px;
+  padding: 18px 8px 0;
+  border-top: 1px solid var(--line);
+}
+.aside-footer a,
+.aside-footer button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  text-align: left;
+  text-decoration: none;
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+main {
+  min-width: 0;
+  padding: 34px;
+}
+@media (max-width: 760px) {
+  .admin-shell {
+    width: calc(100% - 20px);
+    grid-template-columns: 1fr;
+  }
+  aside {
+    padding: 15px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .admin-brand {
+    padding-bottom: 12px;
+  }
+  nav {
+    display: flex;
+  }
+  .aside-footer {
+    position: absolute;
+    right: 28px;
+    top: 121px;
+    border: 0;
+  }
+  .aside-footer a {
+    display: none;
+  }
+  main {
+    padding: 22px 16px;
+  }
+}

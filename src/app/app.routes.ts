@@ -1,6 +1,31 @@
 import type { Routes } from '@angular/router';
+import { adminGuard } from './features/backoffice/guards/admin.guard';
 
 export const routes: Routes = [
+  {
+    path: 'backoffice/login',
+    loadComponent: () =>
+      import('./features/backoffice/pages/admin-login/admin-login.component').then((m) => m.AdminLoginComponent),
+    title: 'Backoffice · Deep Sky Duels',
+  },
+  {
+    path: 'backoffice',
+    canActivate: [adminGuard],
+    canActivateChild: [adminGuard],
+    loadComponent: () =>
+      import('./features/backoffice/pages/admin-shell/admin-shell.component').then((m) => m.AdminShellComponent),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'submissions' },
+      {
+        path: 'submissions',
+        loadComponent: () =>
+          import('./features/backoffice/pages/submissions/admin-submissions.component').then(
+            (m) => m.AdminSubmissionsComponent,
+          ),
+        title: 'Submissões · Backoffice',
+      },
+    ],
+  },
   {
     path: '',
     loadComponent: () => import('./features/home/pages/home-page/home-page.component').then((m) => m.HomePageComponent),
