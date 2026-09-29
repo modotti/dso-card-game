@@ -478,5 +478,101 @@
     "apparentSizeArcmin": 8,
     "physicalSizeLightYears": 4,
     "sourceUrl": "https://www.eso.org/public/images/eso1105a/"
+  },
+  {
+    "id": "ic4628",
+    "catalogName": "IC 4628",
+    "commonName": "Prawn Nebula",
+    "objectType": "emission_nebula",
+    "constellation": "Scorpius",
+    "distanceLightYears": 6000,
+    "apparentMagnitude": 7.3,
+    "apparentSizeArcmin": 90,
+    "physicalSizeLightYears": 250,
+    "sourceUrl": "https://science.nasa.gov/missions/hubble/hubble-catches-celestial-prawn-drifting-through-the-cosmic-deep/"
+  },
+  {
+    "id": "sh2-9",
+    "catalogName": "Sh 2-9",
+    "commonName": "Sh 2-9 Nebula",
+    "objectType": "emission_nebula",
+    "constellation": "Scorpius",
+    "distanceLightYears": 590,
+    "apparentMagnitude": 10,
+    "apparentSizeArcmin": 60,
+    "physicalSizeLightYears": 10,
+    "sourceUrl": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sh2-9"
+  },
+  {
+    "id": "c14",
+    "catalogName": "C14",
+    "commonName": "Double Cluster",
+    "objectType": "open_cluster",
+    "constellation": "Perseus",
+    "distanceLightYears": 7500,
+    "apparentMagnitude": 5.3,
+    "apparentSizeArcmin": 60,
+    "physicalSizeLightYears": 130,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-14/"
+  },
+  {
+    "id": "ic1396",
+    "catalogName": "IC 1396",
+    "commonName": "Elephant's Trunk Nebula",
+    "objectType": "emission_nebula",
+    "constellation": "Cepheus",
+    "distanceLightYears": 2450,
+    "apparentMagnitude": 3.5,
+    "apparentSizeArcmin": 170,
+    "physicalSizeLightYears": 100,
+    "sourceUrl": "https://science.nasa.gov/photojournal/dark-globule-in-ic-1396-irac/"
+  },
+  {
+    "id": "ldn1235",
+    "catalogName": "LDN 1235",
+    "commonName": "Dark Shark Nebula",
+    "objectType": "dark_nebula",
+    "constellation": "Cepheus",
+    "distanceLightYears": 650,
+    "apparentMagnitude": 10,
+    "apparentSizeArcmin": 160,
+    "physicalSizeLightYears": 30,
+    "sourceUrl": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=LDN+1235"
+  },
+  {
+    "id": "m13",
+    "catalogName": "M13",
+    "commonName": "Hercules Globular Cluster",
+    "objectType": "globular_cluster",
+    "constellation": "Hercules",
+    "distanceLightYears": 25000,
+    "apparentMagnitude": 5.8,
+    "apparentSizeArcmin": 16.6,
+    "physicalSizeLightYears": 145,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-13/"
+  },
+  {
+    "id": "m45",
+    "catalogName": "M45",
+    "commonName": "Pleiades",
+    "objectType": "open_cluster",
+    "constellation": "Taurus",
+    "distanceLightYears": 445,
+    "apparentMagnitude": 1.6,
+    "apparentSizeArcmin": 110,
+    "physicalSizeLightYears": 17,
+    "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-45/"
+  },
+  {
+    "id": "sh2-115",
+    "catalogName": "Sh 2-115",
+    "commonName": "Sh 2-115 Nebula",
+    "objectType": "emission_nebula",
+    "constellation": "Cygnus",
+    "distanceLightYears": 7500,
+    "apparentMagnitude": 10,
+    "apparentSizeArcmin": 60,
+    "physicalSizeLightYears": 130,
+    "sourceUrl": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sh2-115"
   }
 ]
