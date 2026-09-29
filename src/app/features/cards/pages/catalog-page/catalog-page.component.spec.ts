@@ -15,8 +15,27 @@ describe('CatalogPageComponent', () => {
     const fixture = TestBed.createComponent(CatalogPageComponent);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelectorAll('.catalog-card')).toHaveSize(44);
+    expect(fixture.nativeElement.querySelectorAll('.catalog-card')).toHaveSize(52);
     expect(fixture.nativeElement.querySelectorAll('.catalog-card--special')).toHaveSize(4);
+  });
+
+  it('lists First Light cards before Space Agencies cards', () => {
+    const fixture = TestBed.createComponent(CatalogPageComponent);
+    fixture.detectChanges();
+
+    const collections = Array.from(
+      fixture.nativeElement.querySelectorAll('.catalog-card__credit span:first-child') as NodeListOf<HTMLElement>,
+      (element) => element.textContent?.trim() ?? '',
+    );
+    const firstAgencyIndex = collections.indexOf('Space Agencies Collection');
+
+    expect(firstAgencyIndex).toBeGreaterThan(0);
+    expect(collections.slice(0, firstAgencyIndex)).toEqual(
+      collections.slice(0, firstAgencyIndex).map(() => 'First Light Collection'),
+    );
+    expect(collections.slice(firstAgencyIndex)).toEqual(
+      collections.slice(firstAgencyIndex).map(() => 'Space Agencies Collection'),
+    );
   });
 
   it('opens and closes the card details modal', () => {
@@ -53,10 +72,10 @@ describe('CatalogPageComponent', () => {
     const fixture = TestBed.createComponent(CatalogPageComponent);
     fixture.detectChanges();
 
-    expect(fixture.nativeElement.querySelector('.discovery-progress strong').textContent).toContain('1 / 40');
+    expect(fixture.nativeElement.querySelector('.discovery-progress strong').textContent).toContain('1 / 48');
     (fixture.nativeElement.querySelector('.discovery-progress button') as HTMLButtonElement).click();
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.discovery-progress strong').textContent).toContain('0 / 40');
+    expect(fixture.nativeElement.querySelector('.discovery-progress strong').textContent).toContain('0 / 48');
   });
 
   it('opens the special card details modal', () => {

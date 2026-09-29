@@ -49,10 +49,12 @@ export class CatalogPageComponent {
   protected readonly selectedSpecialCard = signal<SpecialCatalogEntry | null>(null);
   protected readonly isExporting = signal(false);
   protected readonly shareError = signal(false);
-  protected readonly cards: readonly CatalogEntry[] = cardsData.map((card) => {
-    const image = imageCredits.find((credit) => credit.cardId === card.id);
-    return { ...card, image: image ?? null };
-  });
+  protected readonly cards: readonly CatalogEntry[] = cardsData
+    .map((card) => {
+      const image = imageCredits.find((credit) => credit.cardId === card.id);
+      return { ...card, image: image ?? null };
+    })
+    .sort((left, right) => this.collectionOrder(left) - this.collectionOrder(right));
   protected readonly specialCards: readonly SpecialCatalogEntry[] = [
     { id: 'clouds', effectKey: 'cancel_round', asset: '/assets/cards/clouds.jpg' },
     {
@@ -139,6 +141,12 @@ export class CatalogPageComponent {
         : null,
       attributes,
     };
+  }
+
+  private collectionOrder(card: CatalogEntry): number {
+    if (card.image?.collectionName === 'First Light Collection') return 0;
+    if (card.image?.collectionName === 'Space Agencies Collection') return 1;
+    return 2;
   }
 
   protected asSpecialGameCard(card: SpecialCatalogEntry): GameCard {

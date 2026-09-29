@@ -184,14 +184,6 @@
     "handle": "@astro_scient"
   },
   {
-    "id": "eso-m104",
-    "cardId": "m104",
-    "collectionName": "Space Agencies Collection",
-    "asset": "/assets/cards/m104.jpg",
-    "photographer": "ESO/IDA/Danish 1.5 m/R. Gendler and J.-E. Ovaldsen",
-    "handle": ""
-  },
-  {
     "id": "eso-ngc1365",
     "cardId": "ngc1365",
     "collectionName": "Space Agencies Collection",
@@ -272,14 +264,6 @@
     "handle": ""
   },
   {
-    "id": "agency-ngc104",
-    "cardId": "ngc104",
-    "collectionName": "Space Agencies Collection",
-    "asset": "/assets/cards/ngc104.jpg",
-    "photographer": "ESO/M.-R. Cioni/VISTA Magellanic Cloud survey.",
-    "handle": ""
-  },
-  {
     "id": "agency-ngc4755",
     "cardId": "ngc4755",
     "collectionName": "Space Agencies Collection",
@@ -318,5 +302,85 @@
     "asset": "/assets/cards/m78.jpg",
     "photographer": "ESO/Igor Chekalin",
     "handle": ""
+  },
+  {
+    "id": "first-light-ic4628",
+    "cardId": "ic4628",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ic4628.jpg",
+    "photographer": "Felipe Temponi",
+    "handle": "@infusao.galactica"
+  },
+  {
+    "id": "first-light-ngc104",
+    "cardId": "ngc104",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ngc104.jpg",
+    "photographer": "André Irgang",
+    "handle": "@irganga"
+  },
+  {
+    "id": "first-light-sh2-9",
+    "cardId": "sh2-9",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/sh2-9.jpg",
+    "photographer": "Fernando Modotti",
+    "handle": "@luimodotti"
+  },
+  {
+    "id": "first-light-m104",
+    "cardId": "m104",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m104.jpg",
+    "photographer": "Rangel Meissner",
+    "handle": "@rangel_m_astrofotografia"
+  },
+  {
+    "id": "first-light-c14",
+    "cardId": "c14",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/c14.jpg",
+    "photographer": "Gabriel Zaccaria",
+    "handle": "@imaginastrum"
+  },
+  {
+    "id": "first-light-ic1396",
+    "cardId": "ic1396",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ic1396.jpg",
+    "photographer": "Gabriel Zaccaria",
+    "handle": "@imaginastrum"
+  },
+  {
+    "id": "first-light-ldn1235",
+    "cardId": "ldn1235",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/ldn1235.jpg",
+    "photographer": "Gabriel Zaccaria",
+    "handle": "@imaginastrum"
+  },
+  {
+    "id": "first-light-m13",
+    "cardId": "m13",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m13.jpg",
+    "photographer": "Gabriel Zaccaria",
+    "handle": "@imaginastrum"
+  },
+  {
+    "id": "first-light-m45",
+    "cardId": "m45",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/m45.jpg",
+    "photographer": "Gabriel Zaccaria",
+    "handle": "@imaginastrum"
+  },
+  {
+    "id": "first-light-sh2-115",
+    "cardId": "sh2-115",
+    "collectionName": "First Light Collection",
+    "asset": "/assets/cards/sh2-115.jpg",
+    "photographer": "Gabriel Zaccaria",
+    "handle": "@imaginastrum"
   }
 ]
