@@ -15,15 +15,23 @@
 
     @if (!intent()) {
       <div class="actions">
-        <button class="button button--primary" type="button" (click)="choose('create')">
-          {{ i18n.text('home.create') }} <span>↗</span>
-        </button>
-        <button class="button button--ghost" type="button" (click)="choose('join')">
-          {{ i18n.text('home.join') }}
-        </button>
-        <button class="button button--ghost button--cpu" type="button" (click)="choose('cpu')">
-          {{ i18n.text('home.cpu') }}
-        </button>
+        <div class="primary-action">
+          <button class="button button--primary button--cpu" type="button" (click)="choose('cpu')">
+            {{ i18n.text('home.cpu') }} <span>↗</span>
+          </button>
+          <p class="promise"><span></span>{{ i18n.text('home.fast') }}</p>
+        </div>
+        <div class="multiplayer">
+          <p class="multiplayer__label">{{ i18n.text('home.multiplayer') }}</p>
+          <div class="multiplayer-actions">
+            <button class="button button--ghost" type="button" (click)="choose('create')">
+              {{ i18n.text('home.create') }}
+            </button>
+            <button class="button button--ghost" type="button" (click)="choose('join')">
+              {{ i18n.text('home.join') }}
+            </button>
+          </div>
+        </div>
       </div>
     } @else {
       <form [formGroup]="form" (ngSubmit)="submit()" class="entry-form">
@@ -79,7 +87,6 @@
       </form>
     }
     <div class="home-footer">
-      <p class="promise"><span></span>{{ i18n.text('home.fast') }}</p>
       <button class="how-to-play" type="button" (click)="showHowToPlay.set(true)">
         {{ i18n.text('home.howToPlay') }}
       </button>

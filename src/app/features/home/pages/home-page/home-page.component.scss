@@ -105,12 +105,38 @@ h1 em {
   margin: 30px 0 34px;
 }
 
-.actions,
+.multiplayer-actions,
 .form-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.primary-action {
+  display: grid;
+  gap: 11px;
+}
+
+.multiplayer {
+  display: grid;
+  gap: 8px;
+}
+
+.multiplayer__label {
+  margin: 0;
+  color: #9da9c0;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .button {
@@ -148,8 +174,7 @@ h1 em {
 }
 
 .button--cpu {
-  border-color: rgba(92, 225, 255, 0.34);
-  color: var(--cyan);
+  min-width: 210px;
 }
 
 .button:disabled {
@@ -171,7 +196,7 @@ h1 em {
   display: flex;
   align-items: center;
   gap: 22px;
-  margin-top: 24px;
+  margin-top: 20px;
 }
 
 .how-to-play {
@@ -500,6 +525,15 @@ input:focus {
     flex-direction: column;
   }
 
+  .primary-action,
+  .multiplayer {
+    width: 100%;
+  }
+
+  .multiplayer-actions {
+    flex-direction: column;
+  }
+
   .form-actions {
     align-items: stretch;
     flex-direction: column-reverse;
@@ -507,6 +541,11 @@ input:focus {
 
   .button {
     width: 100%;
+  }
+
+  .promise {
+    justify-content: center;
+    text-align: center;
   }
 
   .entry-form {
