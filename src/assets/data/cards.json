@@ -9,6 +9,7 @@
     "apparentMagnitude": 6,
     "apparentSizeArcmin": 70,
     "physicalSizeLightYears": 70,
+    "educationalFacts": ["exploration.fact.card.m16", "exploration.fact.card.m16.2"],
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-16/"
   },
   {
@@ -33,6 +34,7 @@
     "apparentMagnitude": 3.7,
     "apparentSizeArcmin": 36.3,
     "physicalSizeLightYears": 450,
+    "educationalFacts": ["exploration.fact.card.ngc5139", "exploration.fact.card.ngc5139.2"],
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-caldwell-catalog/caldwell-80/"
   },
   {
@@ -153,6 +155,7 @@
     "apparentMagnitude": 3.44,
     "apparentSizeArcmin": 190,
     "physicalSizeLightYears": 152000,
+    "educationalFacts": ["exploration.fact.card.m31", "exploration.fact.card.m31.2"],
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-31/"
   },
   {
@@ -285,6 +288,7 @@
     "apparentMagnitude": 4,
     "apparentSizeArcmin": 85,
     "physicalSizeLightYears": 24,
+    "educationalFacts": ["exploration.fact.card.m42", "exploration.fact.card.m42.2"],
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-42/"
   },
   {
@@ -309,6 +313,7 @@
     "apparentMagnitude": 8,
     "apparentSizeArcmin": 8.51,
     "physicalSizeLightYears": 69000,
+    "educationalFacts": ["exploration.fact.card.m104", "exploration.fact.card.m104.2"],
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-104/"
   },
   {
@@ -405,6 +410,7 @@
     "apparentMagnitude": 7.6,
     "apparentSizeArcmin": 25,
     "physicalSizeLightYears": 2.9,
+    "educationalFacts": ["exploration.fact.card.ngc7293", "exploration.fact.card.ngc7293.2"],
     "sourceUrl": "https://science.nasa.gov/universe/exoplanets-or-stars-from-afar/the-helix-nebula-unraveling-at-the-seams/"
   },
   {
@@ -549,6 +555,7 @@
     "apparentMagnitude": 5.8,
     "apparentSizeArcmin": 16.6,
     "physicalSizeLightYears": 145,
+    "educationalFacts": ["exploration.fact.card.m13", "exploration.fact.card.m13.2"],
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-13/"
   },
   {
@@ -561,6 +568,7 @@
     "apparentMagnitude": 1.6,
     "apparentSizeArcmin": 110,
     "physicalSizeLightYears": 17,
+    "educationalFacts": ["exploration.fact.card.m45", "exploration.fact.card.m45.2"],
     "sourceUrl": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-45/"
   },
   {

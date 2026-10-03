@@ -33,6 +33,14 @@
         <span>{{ i18n.text('record.achievements') }}</span>
       </article>
     </div>
+    <article class="exploration-record">
+      <div aria-hidden="true">✦</div>
+      <span>
+        <small>{{ i18n.text('exploration.mode') }}</small>
+        <b>{{ i18n.text('record.bestExplorationStreak') }}</b>
+      </span>
+      <strong>{{ explorationProgress.bestStreak() }}</strong>
+    </article>
   </section>
 
   <header class="achievements-hero">

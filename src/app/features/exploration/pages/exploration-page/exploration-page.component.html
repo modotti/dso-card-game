@@ -1,0 +1,74 @@
+<main class="exploration">
+  @if (status() === 'complete') {
+    <section class="completion">
+      <p class="eyebrow">{{ i18n.text('exploration.mode') }}</p>
+      <h1>{{ i18n.text('exploration.complete') }}</h1>
+      <p>{{ i18n.text('exploration.reached').replace('{count}', streak().toString()) }}</p>
+      <strong>{{ i18n.text('exploration.best').replace('{count}', progress.bestStreak().toString()) }}</strong>
+      <button type="button" (click)="restart()">{{ i18n.text('exploration.again') }} <span>↗</span></button>
+      <a routerLink="/">← {{ i18n.text('game.home') }}</a>
+    </section>
+  } @else {
+    <header class="exploration__header">
+      <a routerLink="/">← {{ i18n.text('game.home') }}</a>
+      <p>
+        {{ i18n.text('exploration.streak') }}: <strong>{{ streak() }}</strong>
+      </p>
+    </header>
+
+    <section class="round-intro">
+      <p class="eyebrow">{{ i18n.text('exploration.mode') }}</p>
+      <h1>{{ i18n.text(attributeKey()) }}</h1>
+      <p>{{ i18n.text(attributeKey() + '.description') }}</p>
+      <strong [class.lower-rule]="round().attribute === 'apparent_magnitude'">{{ i18n.text(ruleKey()) }}</strong>
+      <h2>{{ i18n.text(questionKey()) }}</h2>
+    </section>
+
+    <section class="cards" [class.cards--revealed]="status() === 'revealed'">
+      @for (card of round().cards; track card.id; let first = $first) {
+        <article
+          class="card-choice"
+          [class.card-choice--chosen]="choiceId() === card.id"
+          [class.card-choice--wrong]="status() === 'revealed' && choiceId() === card.id && !result()?.isCorrect"
+        >
+          <app-game-card
+            [card]="card"
+            [attribute]="round().attribute"
+            [selected]="choiceId() === card.id"
+            [winner]="winner(card)"
+            [revealAttributes]="status() === 'revealed'"
+            [imagePriority]="first"
+          />
+          @if (status() === 'choosing') {
+            <button class="choose-label" type="button" (click)="choose(card)">
+              {{ i18n.text('exploration.choose') }}
+            </button>
+          }
+        </article>
+      }
+    </section>
+
+    @if (status() === 'revealed'; as revealed) {
+      <section #roundResult class="reveal" tabindex="-1" aria-live="polite">
+        <h2 [class.incorrect]="!result()?.isCorrect">
+          {{
+            i18n.text(
+              result()?.isTie
+                ? 'exploration.tie'
+                : result()?.isCorrect
+                  ? 'exploration.correct'
+                  : 'exploration.incorrect'
+            )
+          }}
+        </h2>
+        @if (comparison()) {
+          <p class="comparison">{{ comparison() }}</p>
+        }
+        <p class="fact"><span>✦</span>{{ i18n.text(factKey()) }}</p>
+        <button type="button" (click)="next()">
+          {{ i18n.text(result()?.isCorrect ? 'exploration.next' : 'exploration.seeResult') }} <span>↗</span>
+        </button>
+      </section>
+    }
+  }
+</main>

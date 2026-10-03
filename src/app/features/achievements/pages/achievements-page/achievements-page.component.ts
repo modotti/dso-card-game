@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslationService } from '../../../../core/i18n/translation.service';
+import { ExplorationProgressService } from '../../../exploration/data-access/exploration-progress.service';
 import { AchievementService } from '../../data-access/achievement.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AchievementService } from '../../data-access/achievement.service';
 export class AchievementsPageComponent {
   protected readonly i18n = inject(TranslationService);
   protected readonly achievements = inject(AchievementService);
+  protected readonly explorationProgress = inject(ExplorationProgressService);
 
   constructor() {
     this.achievements.syncDiscovery();

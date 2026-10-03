@@ -93,15 +93,21 @@
           <span>{{ effectText('description') }}</span>
         </div>
       } @else {
-        <dl>
-          @for (item of card().attributes; track item.id) {
-            <div [class.attribute--highlighted]="item.id === attribute()">
-              <dt>{{ i18n.text(item.labelKey) }}</dt>
-              <dd>{{ item.isApproximate && item.value !== null ? '≈ ' : '' }}{{ format(item) }}</dd>
-            </div>
-          }
-        </dl>
-        @if (attribute()) {
+        @if (revealAttributes()) {
+          <dl>
+            @for (item of card().attributes; track item.id) {
+              <div [class.attribute--highlighted]="item.id === attribute()">
+                <dt>{{ i18n.text(item.labelKey) }}</dt>
+                <dd>{{ item.isApproximate && item.value !== null ? '≈ ' : '' }}{{ format(item) }}</dd>
+              </div>
+            }
+          </dl>
+        } @else {
+          <div class="attributes-concealed" [attr.aria-label]="i18n.text('exploration.valuesHidden')">
+            <span>✦</span>{{ i18n.text('exploration.valuesHidden') }}
+          </div>
+        }
+        @if (attribute() && revealAttributes()) {
           <strong class="highlight">{{ highlightedValue() }}</strong>
         }
       }

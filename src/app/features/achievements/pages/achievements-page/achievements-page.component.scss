@@ -41,6 +41,50 @@
   text-align: center;
   text-transform: uppercase;
 }
+.exploration-record {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  margin-top: 16px;
+  padding: 20px 26px;
+  overflow: hidden;
+  border: 1px solid rgba(169, 149, 243, 0.34);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 0 50%, rgba(169, 149, 243, 0.16), transparent 35%),
+    linear-gradient(120deg, rgba(15, 17, 42, 0.98), rgba(5, 12, 25, 0.99));
+}
+.exploration-record > div {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: #a995f3;
+  border: 1px solid rgba(169, 149, 243, 0.32);
+  border-radius: 50%;
+  background: rgba(169, 149, 243, 0.08);
+  font-size: 1.15rem;
+}
+.exploration-record span {
+  display: grid;
+  gap: 5px;
+}
+.exploration-record small {
+  color: #a995f3;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.exploration-record b {
+  font: 450 clamp(1rem, 2vw, 1.3rem) var(--display);
+}
+.exploration-record > strong {
+  color: var(--cyan);
+  font: 300 clamp(2.4rem, 5vw, 3.5rem) / 1 var(--display);
+  text-shadow: 0 0 24px rgba(92, 225, 255, 0.24);
+}
 .achievements-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -201,6 +245,11 @@ h2 {
   .record-grid article {
     min-height: 125px;
     padding: 18px 10px;
+  }
+  .exploration-record {
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+    padding: 17px;
   }
   .achievement-total {
     justify-items: start;

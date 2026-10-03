@@ -29,6 +29,7 @@ export interface GameCard {
   readonly constellation: string;
   readonly image: GameCardImage | null;
   readonly attributes: readonly CardAttributeValue[];
+  readonly educationalFacts?: readonly string[];
 }
 export interface GamePlayer {
   readonly id: string;

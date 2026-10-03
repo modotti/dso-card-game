@@ -14,6 +14,7 @@ const EN = {
   'record.victories': 'Victories',
   'record.roundsWon': 'Rounds Won',
   'record.bestWinStreak': 'Best Win Streak',
+  'record.bestExplorationStreak': 'Best Exploration Streak',
   'record.objectsDiscovered': 'Objects Discovered',
   'record.achievements': 'Achievements',
   'achievements.eyebrow': 'Explorer milestones',
@@ -289,6 +290,130 @@ const EN = {
   'attribute.apparentSize': 'Apparent size',
   'attribute.physicalSize': 'Physical size',
   'attribute.notApplicable': 'N/A',
+  'home.duelMode': 'Duel Mode',
+  'home.duelDescription': 'Compete through astronomical attributes, strategy and special cards.',
+  'home.explorationMode': 'Exploration Mode',
+  'home.explorationDescription':
+    'A solo journey to learn about deep-sky objects and build your longest discovery streak.',
+  'home.explore': 'Start exploring',
+  'exploration.mode': 'Exploration Mode',
+  'exploration.streak': 'Streak',
+  'exploration.valuesHidden': 'Values hidden until your choice',
+  'exploration.choose': 'Choose this object',
+  'exploration.correct': 'Correct!',
+  'exploration.incorrect': 'Not this time',
+  'exploration.tie': 'A cosmic tie!',
+  'exploration.next': 'Next comparison',
+  'exploration.seeResult': 'See final result',
+  'exploration.complete': 'Exploration complete',
+  'exploration.reached': 'You reached {count} discoveries.',
+  'exploration.best': 'Best streak: {count}',
+  'exploration.again': 'Explore again',
+  'exploration.rule.higher': 'Higher is better',
+  'exploration.rule.lower': 'Lower is better',
+  'exploration.attribute.distance_light_years': 'Distance',
+  'exploration.attribute.distance_light_years.description':
+    'Distance tells us how far an object is from Earth and is usually measured in light-years.',
+  'exploration.attribute.apparent_magnitude': 'Apparent magnitude',
+  'exploration.attribute.apparent_magnitude.description':
+    'Apparent magnitude describes how bright an object looks from Earth.',
+  'exploration.attribute.apparent_size_arcmin': 'Apparent size',
+  'exploration.attribute.apparent_size_arcmin.description':
+    'Apparent size measures how much space an object occupies in our sky.',
+  'exploration.attribute.physical_size_light_years': 'Physical size',
+  'exploration.attribute.physical_size_light_years.description':
+    'Physical size estimates an object’s true dimensions in space.',
+  'exploration.question.distance_light_years': 'Which object is farther away?',
+  'exploration.question.apparent_magnitude': 'Which object appears brighter?',
+  'exploration.question.apparent_size_arcmin': 'Which object looks larger in the sky?',
+  'exploration.question.physical_size_light_years': 'Which object is physically larger?',
+  'exploration.fact.attribute.distance_light_years': 'A light-year is the distance light travels during one year.',
+  'exploration.fact.attribute.apparent_magnitude':
+    'The magnitude scale runs backward: the lower the number, the brighter an object appears.',
+  'exploration.fact.attribute.apparent_size_arcmin':
+    'Apparent size does not necessarily reveal an object’s true physical size.',
+  'exploration.fact.attribute.physical_size_light_years':
+    'Objects that look similar in the sky can have dramatically different physical dimensions.',
+  'exploration.fact.card.m31': 'Andromeda is the nearest large galaxy to the Milky Way.',
+  'exploration.fact.card.m16': 'The Pillars of Creation are an active star-forming region inside the Eagle Nebula.',
+  'exploration.fact.card.m42': 'The Orion Nebula is one of the closest large stellar nurseries to Earth.',
+  'exploration.fact.card.ngc5139':
+    'Omega Centauri contains millions of stars and can be seen without a telescope under dark skies.',
+  'exploration.fact.type.emission_nebula': 'Emission nebulae glow when nearby stars energize their gas.',
+  'exploration.fact.type.spiral_galaxy': 'Spiral galaxies contain rotating disks of stars, gas and dust.',
+  'exploration.fact.type.globular_cluster': 'Globular clusters are dense, ancient swarms of stars.',
+  'exploration.fact.type.open_cluster': 'Open clusters are loose families of stars born from the same cloud.',
+  'exploration.fact.contextual.distance_light_years.spiral_galaxy':
+    'Galaxies are so distant that their light can take millions of years to reach us.',
+  'exploration.fact.contextual.physical_size_light_years.globular_cluster':
+    'Globular clusters pack enormous numbers of stars into a roughly spherical region.',
+  'exploration.fact.contextual.apparent_size_arcmin.m31':
+    'Andromeda is extremely distant, yet its visible disk spans about six full-Moon diameters across our sky.',
+  'exploration.fact.card.m31.2': 'The light we see from Andromeda today began its journey about 2.5 million years ago.',
+  'exploration.fact.card.m16.2':
+    'The tallest of the famous Pillars of Creation stretches roughly four light-years from base to tip.',
+  'exploration.fact.card.m42.2':
+    'Four massive young stars called the Trapezium illuminate and sculpt the heart of the Orion Nebula.',
+  'exploration.fact.card.ngc5139.2':
+    'Omega Centauri is the largest and brightest globular cluster orbiting the Milky Way.',
+  'exploration.fact.card.m45':
+    'The Pleiades contain more than a thousand stars, although only a handful dominate the naked-eye view.',
+  'exploration.fact.card.m45.2':
+    'The blue haze around the Pleiades is dust reflecting the light of the cluster’s hot stars.',
+  'exploration.fact.card.ngc7293':
+    'The Helix is the glowing envelope expelled by a dying, Sun-like star; a white dwarf remains at its center.',
+  'exploration.fact.card.ngc7293.2':
+    'Although the Helix looks like a ring or eye, its gas forms a complex tunnel-like structure pointed toward us.',
+  'exploration.fact.card.m104':
+    'The Sombrero Galaxy is seen nearly edge-on, making its thick lane of dust look like the brim of a hat.',
+  'exploration.fact.card.m104.2':
+    'The Sombrero hosts nearly 2,000 globular clusters—about ten times the Milky Way’s total.',
+  'exploration.fact.card.m13': 'More than 100,000 stars orbit together inside the Hercules Cluster.',
+  'exploration.fact.card.m13.2':
+    'Near M13’s core, stars are packed about one hundred times more densely than around our Sun.',
+  'exploration.fact.type.emission_nebula.2':
+    'The colors of an emission nebula trace gases such as hydrogen, oxygen and sulfur energized by young stars.',
+  'exploration.fact.type.reflection_nebula':
+    'Reflection nebulae do not produce their own visible light; their dust scatters light from nearby stars.',
+  'exploration.fact.type.reflection_nebula.2':
+    'Many reflection nebulae look blue because small dust grains scatter shorter wavelengths efficiently.',
+  'exploration.fact.type.dark_nebula':
+    'Dark nebulae are cold clouds of gas and dust seen in silhouette against brighter stars or glowing gas.',
+  'exploration.fact.type.dark_nebula.2':
+    'Behind their opaque appearance, dense regions of dark nebulae can collapse and form new stars.',
+  'exploration.fact.type.planetary_nebula':
+    'Despite their name, planetary nebulae have nothing to do with planets: they are shells shed by dying stars.',
+  'exploration.fact.type.planetary_nebula.2':
+    'A hot white dwarf at the center lights up the expanding gas of a planetary nebula.',
+  'exploration.fact.type.supernova_remnant':
+    'A supernova remnant is expanding debris and shock waves left after a star explodes.',
+  'exploration.fact.type.supernova_remnant.2':
+    'Supernova remnants spread elements forged inside stars through interstellar space.',
+  'exploration.fact.type.cometary_globule':
+    'Cometary globules are compact clouds whose bright rims and long tails are sculpted by nearby massive stars.',
+  'exploration.fact.type.cometary_globule.2':
+    'Their name describes their comet-like shape; cometary globules are much larger interstellar clouds.',
+  'exploration.fact.type.spiral_galaxy.2':
+    'Spiral arms are rich in gas and dust, so they often stand out as sites of new star formation.',
+  'exploration.fact.type.elliptical_galaxy':
+    'Elliptical galaxies have smooth, rounded shapes and are dominated by older stellar populations.',
+  'exploration.fact.type.elliptical_galaxy.2':
+    'With little cold gas compared with spirals, many elliptical galaxies form relatively few new stars.',
+  'exploration.fact.type.irregular_galaxy':
+    'Irregular galaxies lack the ordered disk of a spiral and the smooth shape of an elliptical galaxy.',
+  'exploration.fact.type.irregular_galaxy.2':
+    'Gravity from neighboring galaxies can distort a galaxy and help produce an irregular shape.',
+  'exploration.fact.type.globular_cluster.2':
+    'Most globular clusters orbit in a galaxy’s halo and preserve some of its oldest surviving stars.',
+  'exploration.fact.type.open_cluster.2':
+    'Open clusters slowly disperse as their stars interact with the gravity of the galaxy around them.',
+  'exploration.comparison.distance_light_years': '{winner} is approximately {ratio}× farther from Earth than {loser}.',
+  'exploration.comparison.apparent_magnitude':
+    'The magnitude values of {winner} and {loser} differ by approximately {ratio}×.',
+  'exploration.comparison.apparent_size_arcmin':
+    '{winner} appears approximately {ratio}× larger in the sky than {loser}.',
+  'exploration.comparison.physical_size_light_years':
+    '{winner} is physically approximately {ratio}× larger than {loser}.',
 } as const;
 export type TranslationKey = keyof typeof EN;
 const PT: Record<TranslationKey, string> = {
@@ -304,6 +429,7 @@ const PT: Record<TranslationKey, string> = {
   'record.victories': 'Vitórias',
   'record.roundsWon': 'Rodadas Vencidas',
   'record.bestWinStreak': 'Melhor Sequência de Vitórias',
+  'record.bestExplorationStreak': 'Melhor Sequência de Exploração',
   'record.objectsDiscovered': 'Objetos Descobertos',
   'record.achievements': 'Conquistas',
   'achievements.eyebrow': 'Marcos do explorador',
@@ -579,6 +705,133 @@ const PT: Record<TranslationKey, string> = {
   'attribute.apparentSize': 'Tamanho aparente',
   'attribute.physicalSize': 'Tamanho físico',
   'attribute.notApplicable': 'N/A',
+  'home.duelMode': 'Modo Duelo',
+  'home.duelDescription': 'Compita usando atributos astronômicos, estratégia e cartas especiais.',
+  'home.explorationMode': 'Modo Exploração',
+  'home.explorationDescription':
+    'Uma jornada solo para aprender sobre objetos do céu profundo e alcançar sua maior sequência.',
+  'home.explore': 'Começar a explorar',
+  'exploration.mode': 'Modo Exploração',
+  'exploration.streak': 'Sequência',
+  'exploration.valuesHidden': 'Valores ocultos até sua escolha',
+  'exploration.choose': 'Escolher este objeto',
+  'exploration.correct': 'Correto!',
+  'exploration.incorrect': 'Não foi desta vez',
+  'exploration.tie': 'Empate cósmico!',
+  'exploration.next': 'Próxima comparação',
+  'exploration.seeResult': 'Ver resultado final',
+  'exploration.complete': 'Fim da exploração',
+  'exploration.reached': 'Você chegou a {count} descobertas.',
+  'exploration.best': 'Melhor sequência: {count}',
+  'exploration.again': 'Explorar novamente',
+  'exploration.rule.higher': 'Quanto maior, melhor',
+  'exploration.rule.lower': 'Quanto menor, melhor',
+  'exploration.attribute.distance_light_years': 'Distância',
+  'exploration.attribute.distance_light_years.description':
+    'A distância indica o quanto um objeto está afastado da Terra e normalmente é medida em anos-luz.',
+  'exploration.attribute.apparent_magnitude': 'Magnitude aparente',
+  'exploration.attribute.apparent_magnitude.description':
+    'A magnitude aparente descreve o brilho de um objeto visto da Terra.',
+  'exploration.attribute.apparent_size_arcmin': 'Tamanho aparente',
+  'exploration.attribute.apparent_size_arcmin.description':
+    'O tamanho aparente mede quanto espaço um objeto ocupa no nosso céu.',
+  'exploration.attribute.physical_size_light_years': 'Tamanho físico',
+  'exploration.attribute.physical_size_light_years.description':
+    'O tamanho físico estima as dimensões reais de um objeto no espaço.',
+  'exploration.question.distance_light_years': 'Qual objeto está mais distante?',
+  'exploration.question.apparent_magnitude': 'Qual objeto parece mais brilhante?',
+  'exploration.question.apparent_size_arcmin': 'Qual objeto parece maior no céu?',
+  'exploration.question.physical_size_light_years': 'Qual objeto é fisicamente maior?',
+  'exploration.fact.attribute.distance_light_years': 'Um ano-luz é a distância que a luz percorre durante um ano.',
+  'exploration.fact.attribute.apparent_magnitude':
+    'A escala de magnitude funciona ao contrário: quanto menor o número, mais brilhante o objeto parece.',
+  'exploration.fact.attribute.apparent_size_arcmin':
+    'O tamanho aparente não revela necessariamente o tamanho físico real de um objeto.',
+  'exploration.fact.attribute.physical_size_light_years':
+    'Objetos que parecem semelhantes no céu podem possuir dimensões físicas muito diferentes.',
+  'exploration.fact.card.m31': 'Andrômeda é a grande galáxia mais próxima da Via Láctea.',
+  'exploration.fact.card.m16':
+    'Os Pilares da Criação são uma região ativa de formação estelar dentro da Nebulosa da Águia.',
+  'exploration.fact.card.m42': 'A Nebulosa de Órion é um dos grandes berçários estelares mais próximos da Terra.',
+  'exploration.fact.card.ngc5139':
+    'Ômega Centauri contém milhões de estrelas e pode ser visto a olho nu em céus escuros.',
+  'exploration.fact.type.emission_nebula': 'Nebulosas de emissão brilham quando estrelas próximas energizam seu gás.',
+  'exploration.fact.type.spiral_galaxy': 'Galáxias espirais possuem discos rotativos de estrelas, gás e poeira.',
+  'exploration.fact.type.globular_cluster': 'Aglomerados globulares são enxames densos e antigos de estrelas.',
+  'exploration.fact.type.open_cluster':
+    'Aglomerados abertos são famílias dispersas de estrelas nascidas da mesma nuvem.',
+  'exploration.fact.contextual.distance_light_years.spiral_galaxy':
+    'Galáxias são tão distantes que sua luz pode levar milhões de anos para chegar até nós.',
+  'exploration.fact.contextual.physical_size_light_years.globular_cluster':
+    'Aglomerados globulares reúnem enormes quantidades de estrelas em uma região aproximadamente esférica.',
+  'exploration.fact.contextual.apparent_size_arcmin.m31':
+    'Andrômeda está extremamente distante, mas seu disco visível ocupa cerca de seis diâmetros da Lua cheia no nosso céu.',
+  'exploration.fact.card.m31.2':
+    'A luz que vemos hoje de Andrômeda iniciou sua viagem há cerca de 2,5 milhões de anos.',
+  'exploration.fact.card.m16.2':
+    'O mais alto dos famosos Pilares da Criação mede aproximadamente quatro anos-luz da base ao topo.',
+  'exploration.fact.card.m42.2':
+    'Quatro estrelas jovens e massivas, chamadas Trapézio, iluminam e esculpem o coração da Nebulosa de Órion.',
+  'exploration.fact.card.ngc5139.2':
+    'Ômega Centauri é o maior e mais brilhante aglomerado globular que orbita a Via Láctea.',
+  'exploration.fact.card.m45':
+    'As Plêiades contêm mais de mil estrelas, embora apenas algumas dominem a visão a olho nu.',
+  'exploration.fact.card.m45.2':
+    'O brilho azulado ao redor das Plêiades é poeira refletindo a luz das estrelas quentes do aglomerado.',
+  'exploration.fact.card.ngc7293':
+    'A Hélice é o invólucro brilhante expelido por uma estrela semelhante ao Sol; uma anã branca permanece no centro.',
+  'exploration.fact.card.ngc7293.2':
+    'Embora pareça um anel ou olho, o gás da Hélice forma uma estrutura complexa semelhante a um túnel apontado para nós.',
+  'exploration.fact.card.m104':
+    'A Galáxia do Sombrero é vista quase de perfil, fazendo sua espessa faixa de poeira parecer a aba de um chapéu.',
+  'exploration.fact.card.m104.2':
+    'A Galáxia do Sombrero abriga quase 2.000 aglomerados globulares—cerca de dez vezes o total da Via Láctea.',
+  'exploration.fact.card.m13': 'Mais de 100 mil estrelas orbitam juntas dentro do Aglomerado de Hércules.',
+  'exploration.fact.card.m13.2':
+    'Perto do núcleo de M13, as estrelas ficam cerca de cem vezes mais concentradas que na vizinhança do Sol.',
+  'exploration.fact.type.emission_nebula.2':
+    'As cores de uma nebulosa de emissão revelam gases como hidrogênio, oxigênio e enxofre energizados por estrelas jovens.',
+  'exploration.fact.type.reflection_nebula':
+    'Nebulosas de reflexão não produzem luz visível própria; sua poeira espalha a luz de estrelas próximas.',
+  'exploration.fact.type.reflection_nebula.2':
+    'Muitas nebulosas de reflexão parecem azuis porque pequenos grãos de poeira espalham ondas curtas com eficiência.',
+  'exploration.fact.type.dark_nebula':
+    'Nebulosas escuras são nuvens frias de gás e poeira vistas em silhueta contra estrelas ou gases brilhantes.',
+  'exploration.fact.type.dark_nebula.2':
+    'Por trás da aparência opaca, regiões densas de nebulosas escuras podem colapsar e formar novas estrelas.',
+  'exploration.fact.type.planetary_nebula':
+    'Apesar do nome, nebulosas planetárias não têm relação com planetas: são camadas expelidas por estrelas no fim da vida.',
+  'exploration.fact.type.planetary_nebula.2':
+    'Uma anã branca quente no centro ilumina o gás em expansão de uma nebulosa planetária.',
+  'exploration.fact.type.supernova_remnant':
+    'Um remanescente de supernova é formado por detritos e ondas de choque em expansão após a explosão de uma estrela.',
+  'exploration.fact.type.supernova_remnant.2':
+    'Remanescentes de supernova espalham pelo espaço interestelar elementos produzidos dentro das estrelas.',
+  'exploration.fact.type.cometary_globule':
+    'Glóbulos cometários são nuvens compactas cujas bordas brilhantes e caudas são esculpidas por estrelas massivas próximas.',
+  'exploration.fact.type.cometary_globule.2':
+    'O nome descreve o formato de cometa; glóbulos cometários são nuvens interestelares muito maiores.',
+  'exploration.fact.type.spiral_galaxy.2':
+    'Braços espirais são ricos em gás e poeira e por isso costumam se destacar como regiões de formação estelar.',
+  'exploration.fact.type.elliptical_galaxy':
+    'Galáxias elípticas têm formas suaves e arredondadas e são dominadas por populações estelares antigas.',
+  'exploration.fact.type.elliptical_galaxy.2':
+    'Com pouco gás frio em comparação às espirais, muitas galáxias elípticas formam relativamente poucas estrelas novas.',
+  'exploration.fact.type.irregular_galaxy':
+    'Galáxias irregulares não possuem o disco organizado de uma espiral nem a forma suave de uma galáxia elíptica.',
+  'exploration.fact.type.irregular_galaxy.2':
+    'A gravidade de galáxias vizinhas pode deformar uma galáxia e ajudar a produzir uma forma irregular.',
+  'exploration.fact.type.globular_cluster.2':
+    'A maioria dos aglomerados globulares orbita no halo de uma galáxia e preserva algumas de suas estrelas mais antigas.',
+  'exploration.fact.type.open_cluster.2':
+    'Aglomerados abertos se dispersam lentamente conforme suas estrelas interagem com a gravidade da galáxia ao redor.',
+  'exploration.comparison.distance_light_years':
+    '{winner} está aproximadamente {ratio}× mais distante da Terra que {loser}.',
+  'exploration.comparison.apparent_magnitude':
+    'Os valores de magnitude de {winner} e {loser} diferem em aproximadamente {ratio}×.',
+  'exploration.comparison.apparent_size_arcmin': '{winner} parece aproximadamente {ratio}× maior no céu que {loser}.',
+  'exploration.comparison.physical_size_light_years':
+    '{winner} é fisicamente aproximadamente {ratio}× maior que {loser}.',
 };
 
 @Injectable({ providedIn: 'root' })
