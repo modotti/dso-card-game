@@ -26,10 +26,13 @@
 
     <section class="cards" [class.cards--revealed]="status() === 'revealed'">
       @for (card of round().cards; track card.id; let first = $first) {
-        <article
+        <button
           class="card-choice"
+          type="button"
+          [disabled]="status() !== 'choosing'"
           [class.card-choice--chosen]="choiceId() === card.id"
           [class.card-choice--wrong]="status() === 'revealed' && choiceId() === card.id && !result()?.isCorrect"
+          (click)="choose(card)"
         >
           <app-game-card
             [card]="card"
@@ -40,11 +43,9 @@
             [imagePriority]="first"
           />
           @if (status() === 'choosing') {
-            <button class="choose-label" type="button" (click)="choose(card)">
-              {{ i18n.text('exploration.choose') }}
-            </button>
+            <span class="choose-label">{{ i18n.text('exploration.choose') }}</span>
           }
-        </article>
+        </button>
       }
     </section>
 

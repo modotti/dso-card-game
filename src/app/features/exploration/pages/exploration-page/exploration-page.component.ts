@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  afterNextRender,
+  computed,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import type { ElementRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import cardsData from '../../../../../assets/data/cards.json';
@@ -110,6 +118,7 @@ export class ExplorationPageComponent {
   constructor() {
     this.revealDiscoveries();
     this.analytics.track('exploration_started');
+    afterNextRender(() => this.scrollToRoundIntro());
   }
 
   protected choose(card: GameCard): void {
@@ -147,11 +156,7 @@ export class ExplorationPageComponent {
     this.factKey.set('');
     this.status.set('choosing');
     this.revealDiscoveries();
-    requestAnimationFrame(() => {
-      const intro = this.roundIntro()?.nativeElement;
-      intro?.focus({ preventScroll: true });
-      intro?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    requestAnimationFrame(() => this.scrollToRoundIntro());
   }
 
   protected restart(): void {
@@ -164,6 +169,7 @@ export class ExplorationPageComponent {
     this.status.set('choosing');
     this.revealDiscoveries();
     this.analytics.track('exploration_started');
+    requestAnimationFrame(() => this.scrollToRoundIntro());
   }
 
   protected winner(card: GameCard): boolean {
@@ -172,6 +178,12 @@ export class ExplorationPageComponent {
 
   private revealDiscoveries(): void {
     this.discovery.discoverRevealed(this.round().cards, 'exploration');
+  }
+
+  private scrollToRoundIntro(): void {
+    const intro = this.roundIntro()?.nativeElement;
+    intro?.focus({ preventScroll: true });
+    intro?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   private comparisonText(): string {

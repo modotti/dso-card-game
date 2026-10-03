@@ -83,9 +83,26 @@
   grid-template-rows: minmax(0, 1fr) auto;
   gap: 12px;
   min-width: 0;
+  padding: 0;
+  color: inherit;
+  text-align: inherit;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   transition:
     transform 0.2s ease,
     filter 0.2s ease;
+}
+.card-choice:not(:disabled):hover {
+  transform: translateY(-4px);
+}
+.card-choice:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 5px;
+  border-radius: 18px;
+}
+.card-choice:disabled {
+  cursor: default;
 }
 .card-choice--wrong {
   filter: saturate(0.55);
@@ -109,12 +126,7 @@
     box-shadow 0.2s ease;
 }
 .choose-label:hover {
-  transform: translateY(-2px);
   box-shadow: 0 10px 34px rgba(92, 225, 255, 0.42);
-}
-.choose-label:focus-visible {
-  outline: 2px solid #fff;
-  outline-offset: 3px;
 }
 .reveal {
   width: min(720px, 100%);
