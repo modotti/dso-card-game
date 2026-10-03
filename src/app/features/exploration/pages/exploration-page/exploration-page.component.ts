@@ -105,6 +105,7 @@ export class ExplorationPageComponent {
   );
   protected readonly comparison = computed(() => this.comparisonText());
   private readonly resultPanel = viewChild<ElementRef<HTMLElement>>('roundResult');
+  private readonly roundIntro = viewChild<ElementRef<HTMLElement>>('roundIntro');
 
   constructor() {
     this.revealDiscoveries();
@@ -146,6 +147,11 @@ export class ExplorationPageComponent {
     this.factKey.set('');
     this.status.set('choosing');
     this.revealDiscoveries();
+    requestAnimationFrame(() => {
+      const intro = this.roundIntro()?.nativeElement;
+      intro?.focus({ preventScroll: true });
+      intro?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
   protected restart(): void {
