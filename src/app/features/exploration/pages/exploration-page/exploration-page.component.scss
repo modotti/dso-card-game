@@ -1,0 +1,205 @@
+:host {
+  display: block;
+}
+.exploration {
+  width: min(1080px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 70px;
+}
+.exploration__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.exploration__header a,
+.completion a {
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-decoration: none;
+}
+.exploration__header p {
+  margin: 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+.exploration__header strong {
+  color: var(--cyan);
+  font-size: 1.1rem;
+}
+.round-intro {
+  max-width: 740px;
+  margin: 32px auto 26px;
+  text-align: center;
+}
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--cyan);
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.round-intro h1,
+.completion h1 {
+  margin: 0;
+  font: 400 clamp(2.5rem, 6vw, 4.6rem)/1 var(--display);
+  letter-spacing: -0.03em;
+}
+.round-intro > p:not(.eyebrow) {
+  max-width: 610px;
+  margin: 14px auto 10px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.round-intro > strong {
+  display: inline-block;
+  padding: 7px 13px;
+  color: #72f0b2;
+  border: 1px solid rgba(114, 240, 178, 0.35);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.round-intro > strong.lower-rule {
+  color: #ffd27d;
+  border-color: rgba(255, 210, 125, 0.45);
+}
+.round-intro h2 {
+  margin: 22px 0 0;
+  font: 400 clamp(1.3rem, 3vw, 2rem) var(--display);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 330px));
+  justify-content: center;
+  gap: clamp(16px, 5vw, 54px);
+}
+.card-choice {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 12px;
+  min-width: 0;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+.card-choice--wrong {
+  filter: saturate(0.55);
+}
+.choose-label {
+  justify-self: center;
+  min-height: 44px;
+  padding: 9px 22px;
+  border: 0;
+  color: #051016;
+  background: var(--cyan);
+  border-radius: 3px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 30px rgba(92, 225, 255, 0.3);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.choose-label:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 34px rgba(92, 225, 255, 0.42);
+}
+.choose-label:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.reveal {
+  width: min(720px, 100%);
+  margin: 28px auto 0;
+  padding: 24px;
+  text-align: center;
+  border: 1px solid rgba(114, 240, 178, 0.25);
+  border-radius: 12px;
+  background: rgba(7, 16, 31, 0.86);
+  scroll-margin: 24px;
+  outline: none;
+}
+.reveal h2 {
+  margin: 0;
+  color: #72f0b2;
+  font: 500 2rem var(--display);
+}
+.reveal h2.incorrect {
+  color: #ff8d91;
+}
+.comparison {
+  color: var(--text);
+}
+.fact {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.fact span {
+  color: var(--cyan);
+}
+.reveal button,
+.completion button {
+  min-height: 50px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(115deg, var(--cyan), #adf3ff);
+  color: #051016;
+  font: 700 0.7rem var(--body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.reveal button span,
+.completion button span {
+  margin-left: 18px;
+}
+.completion {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  min-height: 65dvh;
+  align-content: center;
+  text-align: center;
+}
+.completion p:not(.eyebrow) {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.completion strong {
+  color: var(--cyan);
+  font: 400 1.4rem var(--display);
+}
+@media (max-width: 680px) {
+  .exploration {
+    width: min(100% - 20px, 520px);
+    padding-top: 18px;
+  }
+  .round-intro {
+    margin-top: 24px;
+  }
+  .cards {
+    gap: 8px;
+  }
+  .card-choice {
+    transform-origin: top center;
+  }
+  .choose-label {
+    width: 100%;
+    padding: 7px 6px;
+  }
+  .reveal {
+    box-sizing: border-box;
+    padding: 20px 14px;
+  }
+}

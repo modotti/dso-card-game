@@ -19,4 +19,13 @@ describe('AchievementsPageComponent', () => {
     expect(native.querySelectorAll('.record-grid article')).toHaveSize(6);
     expect(native.querySelectorAll('.achievement-card')).toHaveSize(18);
   });
+
+  it('shows the locally persisted best exploration streak', () => {
+    localStorage.setItem('dsd-exploration-best-streak', '12');
+    const fixture = TestBed.createComponent(AchievementsPageComponent);
+    fixture.detectChanges();
+    const record = fixture.nativeElement.querySelector('.exploration-record') as HTMLElement;
+    expect(record.textContent).toContain('Best Exploration Streak');
+    expect(record.querySelector(':scope > strong')?.textContent).toContain('12');
+  });
 });

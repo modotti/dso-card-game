@@ -16,5 +16,6 @@ export interface CardDefinition {
   readonly constellation: string;
   readonly images: readonly CardImageReference[];
   readonly attributes: Readonly<Record<string, number>>;
+  readonly educationalFacts?: readonly string[];
   readonly sourceUrl: string;
 }

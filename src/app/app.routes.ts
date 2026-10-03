@@ -48,6 +48,14 @@ export const routes: Routes = [
     title: 'Game · Deep Sky Duels',
   },
   {
+    path: 'explorar',
+    loadComponent: () =>
+      import('./features/exploration/pages/exploration-page/exploration-page.component').then(
+        (m) => m.ExplorationPageComponent,
+      ),
+    title: 'Exploration Mode · Deep Sky Duels',
+  },
+  {
     path: 'catalogo',
     loadComponent: () =>
       import('./features/cards/pages/catalog-page/catalog-page.component').then((m) => m.CatalogPageComponent),

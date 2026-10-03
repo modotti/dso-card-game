@@ -298,6 +298,20 @@ dd {
   border-radius: 4px;
   background: rgba(var(--family-rgb), 0.07);
 }
+.attributes-concealed {
+  display: grid;
+  place-items: center;
+  min-height: 118px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.attributes-concealed span {
+  color: var(--family);
+  font-size: 1.35rem;
+}
 .effect-description strong {
   color: var(--family);
   font: 600 0.92rem var(--display);

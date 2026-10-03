@@ -55,5 +55,7 @@ describe('HomePageComponent game actions', () => {
     expect(secondaryActions[0].textContent).toContain('Create match');
     expect(secondaryActions[1].textContent).toContain('Join with code');
     expect(actions.querySelector('.promise')?.textContent).toContain('Quick 1–2 minute matches. No signup required.');
+    expect(fixture.nativeElement.querySelector('.mode-card--duel')?.textContent).toContain('Duel Mode');
+    expect(fixture.nativeElement.querySelector('.mode-card--exploration')?.textContent).toContain('Exploration Mode');
   });
 });

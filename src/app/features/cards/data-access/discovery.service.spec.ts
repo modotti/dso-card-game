@@ -26,6 +26,13 @@ describe('DiscoveryService', () => {
     expect(analytics.track).toHaveBeenCalledTimes(1);
   });
 
+  it('shares discoveries with exploration without duplicating them', () => {
+    const service = create();
+    expect(service.discover(card(), 'exploration')).toBeTrue();
+    expect(service.discover(card(), 'cpu')).toBeFalse();
+    expect(service.discoveredCardIds()).toEqual(['m16']);
+  });
+
   it('restores valid unique IDs and ignores invalid storage data', () => {
     localStorage.setItem('dsd-discovered-card-ids', JSON.stringify(['m16', 'm16', 'future-or-invalid']));
     expect(create().discoveredCardIds()).toEqual(['m16']);

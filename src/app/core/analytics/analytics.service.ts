@@ -13,7 +13,10 @@ export type AnalyticsEvent =
   | 'game_abandoned'
   | 'card_discovered'
   | 'catalog_completed'
-  | 'achievement_unlocked';
+  | 'achievement_unlocked'
+  | 'exploration_started'
+  | 'exploration_round_completed'
+  | 'exploration_completed';
 
 export type AnalyticsProperties = Readonly<Record<string, string | number | boolean | null | undefined>>;
 
@@ -74,6 +77,9 @@ const allowedProperties: Readonly<Record<AnalyticsEvent, readonly string[]>> = {
   card_discovered: ['card_id', 'object_type', 'game_mode'],
   catalog_completed: [],
   achievement_unlocked: ['achievement_id', 'game_mode'],
+  exploration_started: [],
+  exploration_round_completed: ['streak', 'result', 'attribute'],
+  exploration_completed: ['streak'],
 };
 
 @Injectable({ providedIn: 'root' })

@@ -4,7 +4,7 @@ import { AnalyticsService } from '../../../core/analytics/analytics.service';
 
 const STORAGE_KEY = 'dsd-discovered-card-ids';
 
-export type DiscoveryGameMode = 'cpu' | 'multiplayer';
+export type DiscoveryGameMode = 'cpu' | 'multiplayer' | 'exploration';
 
 export interface DiscoverableCard {
   readonly id: string;

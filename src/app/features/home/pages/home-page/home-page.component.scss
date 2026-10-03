@@ -120,6 +120,85 @@ h1 em {
   gap: 12px;
 }
 
+.game-modes {
+  display: grid;
+  gap: 14px;
+  max-width: 560px;
+}
+.mode-card {
+  border: 1px solid rgba(128, 153, 206, 0.2);
+  border-radius: 10px;
+}
+.mode-card--duel {
+  padding: 20px;
+  background: linear-gradient(145deg, rgba(11, 21, 43, 0.96), rgba(4, 8, 18, 0.98));
+}
+.mode-card--duel header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.mode-card small {
+  color: var(--cyan);
+  font: 600 0.58rem var(--body);
+  letter-spacing: 0.14em;
+}
+.mode-card h2 {
+  margin: 0;
+  font: 500 1.25rem var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.mode-card header p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+.mode-card--exploration {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 18px 20px;
+  color: var(--text);
+  text-decoration: none;
+  background: linear-gradient(120deg, rgba(169, 149, 243, 0.12), rgba(92, 225, 255, 0.04));
+  border-color: rgba(169, 149, 243, 0.34);
+  transition: 0.2s ease;
+}
+.mode-card--exploration:hover {
+  transform: translateY(-2px);
+  border-color: rgba(92, 225, 255, 0.55);
+}
+.mode-card--exploration > span {
+  display: grid;
+  gap: 6px;
+}
+.mode-card--exploration strong {
+  font: 500 1.15rem var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.mode-card--exploration em {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-style: normal;
+  line-height: 1.5;
+}
+.mode-card--exploration b {
+  margin-top: 4px;
+  color: var(--cyan);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.mode-card--exploration i {
+  margin-left: 12px;
+  font-style: normal;
+  font-size: 1rem;
+}
+
 .primary-action {
   display: grid;
   gap: 11px;
